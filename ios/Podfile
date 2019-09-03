@@ -27,6 +27,7 @@ target 'WordTail' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   
+
   # Required by RNFirebase
   pod 'Firebase/Core', '~> 6.3.0'
   # add the Firebase pod for Google Analytics
@@ -35,8 +36,6 @@ target 'WordTail' do
   # https://firebase.google.com/docs/ios/setup#available-pods
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
-
-  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
 
   target 'WordTailTests' do
     inherit! :search_paths
