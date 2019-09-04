@@ -37,6 +37,8 @@ target 'WordTail' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
 
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+
   target 'WordTailTests' do
     inherit! :search_paths
     # Pods for testing

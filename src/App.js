@@ -17,7 +17,16 @@ import { SafeWrapper, CenterView } from './components/UI/Containers/Containers';
 import LoginPage from './pages/LoginPage';
 import Logout from './components/auth/logout/Logout'
 import HomePage from './pages/HomePage';
-
+import { ThemeProvider, colors } from 'react-native-elements';
+import { Platform } from 'react-native';
+const theme = {
+  colors: {
+    ...Platform.select({
+      default: colors.platform.android,
+      ios: colors.platform.ios,
+    }),
+  },
+};
 const App = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setLoading] = useState(true);
@@ -33,20 +42,17 @@ const App = () => {
     };
   }, [])
   return (
-    <Fragment>
+    <ThemeProvider theme={theme}>
       <SafeWrapper>
         <View>
           {!isLoading
             ? !user
               ? <LoginPage />
-              : <>
-                <Logout />
-                <HomePage />
-              </>
+              : <HomePage user={user} />
             : <CenterView><Text>Loading...</Text></CenterView>}
         </View>
       </SafeWrapper>
-    </Fragment>
+    </ThemeProvider>
   );
 };
 
