@@ -8,3 +8,7 @@ export const CenterView = styled.View`
     justify-content: center;
     align-items: center;
 `;
+
+export const PaddingView = styled.View`
+    padding: ${({ padding }) => (padding)}px;
+`;

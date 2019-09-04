@@ -1,17 +1,16 @@
 import React from 'react';
 import { facebookLogin } from '../AuthFunctions';
-
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import { LoginButton } from '../../UI/controls/buttons/Buttons';
 
 const FacebookLogin = () => {
     return (
-        <Icon.Button
+        <LoginButton
             name="facebook"
             backgroundColor="#3b5998"
             onPress={facebookLogin}
         >
-            Login with Facebook
-      </Icon.Button>
+            Continue with Facebook
+      </LoginButton>
     )
 }
 

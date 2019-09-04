@@ -1,13 +1,16 @@
 import React from 'react';
-import { Button } from 'react-native';
 import { anonymousLogin } from '../AuthFunctions';
+import { LoginButton } from '../../UI/controls/buttons/Buttons';
 
 const AnonymousLogin = () => {
     return (
-        <Button
-            title="Login as guest"
+        <LoginButton
+            name="user-secret"
+            backgroundColor="#4e4e4e"
             onPress={anonymousLogin}
-            accessibilityLabel="Click here to login as a guest" />
+        >
+            Continue as guest
+      </LoginButton>
     )
 }
 

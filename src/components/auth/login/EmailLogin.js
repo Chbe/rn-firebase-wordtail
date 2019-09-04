@@ -1,16 +1,20 @@
 import React from 'react';
-import { Button } from 'react-native';
 import { emailLogin } from '../AuthFunctions';
+import { LoginButton } from '../../UI/controls/buttons/Buttons';
 
 const EmailLogin = () => {
     return (
-        <Button
-            title="Login with email"
+        <LoginButton
+            name="envelope"
+            backgroundColor="#ff8c0f"
+            accessibilityLabel="Click here to login with email"
             onPress={(ev) => {
                 ev.preventDefault();
                 emailLogin("test@test.se", "123456789");
             }}
-            accessibilityLabel="Click here to login with email" />
+        >
+            Login with email
+      </LoginButton>
     )
 }
 

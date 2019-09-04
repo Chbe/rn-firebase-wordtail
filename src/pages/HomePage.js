@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import GamesList from '../components/games/GamesList';
 import { Header } from 'react-native-elements';
 import GenerateExampleGames from '../test/GenerateExampleGames';
+import Logout from '../components/auth/logout/Logout'
 
 const HomePage = ({ user }) => {
     const [userUid, setUid] = useState('');
@@ -21,6 +22,7 @@ const HomePage = ({ user }) => {
                 rightComponent={{ icon: 'home', color: '#fff' }}
             />
             <View>
+                <Logout />
                 <GamesList uid={userUid} />
             </View>
             {/* <GenerateExampleGames /> */}
