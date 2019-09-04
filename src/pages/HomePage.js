@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import GamesList from '../components/games/GamesList';
 import { Header } from 'react-native-elements';
+import GenerateExampleGames from '../test/GenerateExampleGames';
 
 const HomePage = ({ user }) => {
     const [userUid, setUid] = useState('');
@@ -19,7 +20,10 @@ const HomePage = ({ user }) => {
                 centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
                 rightComponent={{ icon: 'home', color: '#fff' }}
             />
-            <GamesList uid={userUid} />
+            <View>
+                <GamesList uid={userUid} />
+            </View>
+            {/* <GenerateExampleGames /> */}
         </>
     )
 }
