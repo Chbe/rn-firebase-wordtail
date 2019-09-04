@@ -14,8 +14,9 @@ import {
 
 import firebase from 'react-native-firebase';
 import { SafeWrapper, CenterView } from './src/components/UI/Containers/Containers';
-import Login from './src/pages/Login';
+import LoginPage from './src/pages/LoginPage';
 import Logout from './src/components/auth/logout/Logout'
+import HomePage from './src/pages/HomePage';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -37,10 +38,10 @@ const App = () => {
         <View>
           {!isLoading
             ? !user
-              ? <Login />
+              ? <LoginPage />
               : <>
                 <Logout />
-                <Text>{JSON.stringify(user)}</Text>
+                <HomePage />
               </>
             : <CenterView><Text>Loading...</Text></CenterView>}
         </View>
