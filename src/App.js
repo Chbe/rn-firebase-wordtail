@@ -13,10 +13,10 @@ import {
 } from 'react-native';
 
 import firebase from 'react-native-firebase';
-import { SafeWrapper, CenterView } from './src/components/UI/Containers/Containers';
-import LoginPage from './src/pages/LoginPage';
-import Logout from './src/components/auth/logout/Logout'
-import HomePage from './src/pages/HomePage';
+import { SafeWrapper, CenterView } from './components/UI/Containers/Containers';
+import LoginPage from './pages/LoginPage';
+import Logout from './components/auth/logout/Logout'
+import HomePage from './pages/HomePage';
 
 const App = () => {
   const [user, setUser] = useState(null);
