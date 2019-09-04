@@ -70,7 +70,9 @@ const GamesList = ({ uid }) => {
                 title={item.title}
                 subtitle={item.status}
                 leftAvatar={{
-                    source: item.status === 'active' && { uri: item.players.find(p => p.uid === item.activePlayer).photoURL },
+                    source: item.status === 'active' 
+                    ? { uri: item.players.find(p => p.uid === item.activePlayer).photoURL }
+                    : null,
                     title: item.title[0]
                 }}
             />}

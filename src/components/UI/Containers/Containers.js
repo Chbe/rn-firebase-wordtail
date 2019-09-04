@@ -10,5 +10,5 @@ export const CenterView = styled.View`
 `;
 
 export const PaddingView = styled.View`
-    padding: ${({ padding }) => (padding)}px;
+    padding: ${({ padding }) => (padding ? padding : 10)}px;
 `;
