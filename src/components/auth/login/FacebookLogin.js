@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-native';
-import { facebookLogin } from './LoginFunctions';
+import { facebookLogin } from '../AuthFunctions';
 
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-native';
-import { emailLogin } from './LoginFunctions';
+import { emailLogin } from '../AuthFunctions';
 
 const EmailLogin = () => {
     return (

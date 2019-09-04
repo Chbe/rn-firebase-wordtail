@@ -1,6 +1,10 @@
 import firebase from 'react-native-firebase';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 
+export const logout = () => {
+    firebase.auth().signOut();
+}
+
 // Calling the following function will open the FB login dialogue:
 export const facebookLogin = async () => {
     try {

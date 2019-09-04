@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-native';
-import { anonymousLogin } from './LoginFunctions';
+import { anonymousLogin } from '../AuthFunctions';
 
 const AnonymousLogin = () => {
     return (

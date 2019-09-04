@@ -9,17 +9,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import {
   Text,
-  Button,
   View
 } from 'react-native';
 
 import firebase from 'react-native-firebase';
 import { SafeWrapper, CenterView } from './src/components/UI/Containers/Containers';
 import Login from './src/pages/Login';
-
-const logout = () => {
-  firebase.auth().signOut();
-}
+import Logout from './src/components/auth/logout/Logout'
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -43,7 +39,7 @@ const App = () => {
             ? !user
               ? <Login />
               : <>
-                <Button title="Sign out" accessibilityLabel="Sign out" onPress={logout} />
+                <Logout />
                 <Text>{JSON.stringify(user)}</Text>
               </>
             : <CenterView><Text>Loading...</Text></CenterView>}
