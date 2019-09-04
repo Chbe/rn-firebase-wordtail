@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, SectionList } from 'react-native';
 import ActiveGameCard from './game-cards/ActiveGameCard';
 import firebase from 'react-native-firebase';
-import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
-import LinearGradient from 'react-native-linear-gradient'; // Only if no expo
 import { ListItem } from 'react-native-elements';
 
 const renderInviteCard = ({ item }) => {
