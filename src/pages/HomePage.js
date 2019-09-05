@@ -5,16 +5,17 @@ import GenerateExampleGames from '../test/GenerateExampleGames';
 import Logout from '../components/auth/logout/Logout'
 import { PaddingView } from '../components/UI/Containers/Containers'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import firebase from 'react-native-firebase';
 
-const HomePage = ({ user }) => {
-    const [userUid, setUid] = useState('');
+const HomePage = ({ navigation }) => {
+    const [user, setUser] = useState('');
 
     useEffect(() => {
-        setUid(user.uid);
+        const user = firebase.auth().currentUser;
+        setUser(user);
         return () => {
-
         };
-    }, [user])
+    }, [])
     return (
         <>
             <Header
@@ -23,8 +24,8 @@ const HomePage = ({ user }) => {
                 rightComponent={<Icon color="#fff" size={24} name={'plus-circle'} regular />}
             />
             <PaddingView>
-                <Logout />
-                <GamesList uid={userUid} />
+                <Logout navigation={navigation} />
+                <GamesList uid={user.uid} />
             </PaddingView>
             {/* <GenerateExampleGames /> */}
         </>

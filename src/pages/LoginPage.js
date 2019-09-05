@@ -4,17 +4,17 @@ import EmailLogin from '../components/auth/login/EmailLogin';
 import FacebookLogin from '../components/auth/login/FacebookLogin';
 import AnonymousLogin from '../components/auth/login/AnonymousLogin';
 
-const Login = () => {
+const Login = ({ navigation }) => {
     return (
         <CenterView>
             <PaddingView padding={5}>
-                <EmailLogin />
-            </PaddingView> 
-            <PaddingView padding={5}>
-                <FacebookLogin />
+                <EmailLogin navigation={navigation} />
             </PaddingView>
             <PaddingView padding={5}>
-                <AnonymousLogin />
+                <FacebookLogin navigation={navigation} />
+            </PaddingView>
+            <PaddingView padding={5}>
+                <AnonymousLogin navigation={navigation} />
             </PaddingView>
         </CenterView>
     )

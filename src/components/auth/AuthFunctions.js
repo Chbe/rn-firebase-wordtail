@@ -12,7 +12,8 @@ export const facebookLogin = async () => {
 
         if (result.isCancelled) {
             // handle this however suites the flow of your app
-            throw new Error('User cancelled request');
+            console.warn('User cancelled request');
+            return null;
         }
 
         console.log(`Login success with permissions: ${result.grantedPermissions.toString()}`);
@@ -22,26 +23,28 @@ export const facebookLogin = async () => {
 
         if (!data) {
             // handle this however suites the flow of your app
-            throw new Error('Something went wrong obtaining the users access token');
+            console.error('Something went wrong obtaining the users access token');
+            return null;
         }
 
         // create a new firebase credential with the token
         const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
 
         // login with credential
-        firebase.auth().signInWithCredential(credential);
-        // const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
+        const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
 
-        // console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()))
+        return firebaseUserCredential;
     } catch (e) {
         console.error(e);
     }
 }
 
 export const anonymousLogin = async () => {
-    firebase.auth().signInAnonymously();
+    const firebaseUserCredential = await firebase.auth().signInAnonymously();
+    return firebaseUserCredential;
 }
 
 export const emailLogin = async (email, password) => {
-    firebase.auth().signInWithEmailAndPassword(email, password);
+    const firebaseUserCredential = firebase.auth().signInWithEmailAndPassword(email, password);
+    return firebaseUserCredential;
 }
