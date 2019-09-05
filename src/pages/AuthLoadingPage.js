@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, ActivityIndicator, StatusBar } from 'react-native'
+import { View, ActivityIndicator, StatusBar, SafeAreaView } from 'react-native'
 import firebase from 'react-native-firebase';
 import { Text } from 'react-native-elements';
 import { CenterView } from '../components/UI/Containers/Containers';
@@ -15,9 +15,11 @@ const AuthLoadingPage = ({ navigation }) => {
         };
     }, [])
     return (
-        <CenterView>
-            <ActivityIndicator size="large" color="#0000ff" />
-        </CenterView>
+        <SafeAreaView>
+            <CenterView>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </CenterView>
+        </SafeAreaView>
     )
 }
 
