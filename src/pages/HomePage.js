@@ -6,18 +6,19 @@ import Logout from '../components/auth/logout/Logout'
 import { PaddingView } from '../components/UI/Containers/Containers'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import firebase from 'react-native-firebase';
+import { SafeAreaView } from 'react-native';
 
 const HomePage = ({ navigation }) => {
     const [user, setUser] = useState('');
 
     useEffect(() => {
-        const user = firebase.auth().currentUser;
-        setUser(user);
+        const { currentUser } = firebase.auth();
+        setUser(currentUser);
         return () => {
         };
     }, [])
     return (
-        <>
+        <SafeAreaView>
             <Header
                 leftComponent={<Icon color="#fff" size={24} name={'user'} regular />}
                 centerComponent={{ text: 'Word Tail', style: { color: '#fff' } }}
@@ -28,7 +29,7 @@ const HomePage = ({ navigation }) => {
                 <GamesList uid={user.uid} />
             </PaddingView>
             {/* <GenerateExampleGames /> */}
-        </>
+        </SafeAreaView>
     )
 }
 
