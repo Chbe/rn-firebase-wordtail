@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, SectionList } from 'react-native';
-import ActiveGameCard from './game-cards/ActiveGameCard';
+import { SectionList } from 'react-native';
 import firebase from 'react-native-firebase';
 import { ListItem } from 'react-native-elements';
-
-const renderInviteCard = ({ item }) => {
-    return <ActiveGameCard game={item} />
-}
-const renderActiveGameCard = ({ item }) => {
-    return <ActiveGameCard game={item} />
-}
-const renderFinishedCard = ({ item }) => {
-    return <ActiveGameCard game={item} />
-}
+import SectionHeader from './SectionHeader';
+import SectionSubtitle from './SectionSubtitle';
 
 const GamesList = ({ uid }) => {
     const [games, setGames] = useState([]);
-    const [loading, setIsLoading] = useState(true);
 
     const onCollectionUpdate = (querySnapshot) => {
         const todos = [];
@@ -29,10 +19,9 @@ const GamesList = ({ uid }) => {
             });
         });
         setGames(todos);
-        setIsLoading(false);
     }
     useEffect(() => {
-        const ref = firebase.firestore().collection('games')
+        const ref = firebase.firestore().collection('games');
         const sub = ref.onSnapshot(onCollectionUpdate)
         return () => {
             sub();
@@ -60,23 +49,27 @@ const GamesList = ({ uid }) => {
     }
 
     return (
-        !loading && <SectionList
+        <SectionList
             sections={[
-                { title: 'Invites', data: invites() },
-                { title: 'Active', data: active() },
-                { title: 'Finished', data: finished() }
+                { type: 'invite', data: invites() },
+                { type: 'active', data: active() },
+                { type: 'finished', data: finished() }
             ]}
             renderItem={({ item }) => <ListItem
                 title={item.title}
-                subtitle={item.status}
+                subtitle={<SectionSubtitle item={item} />}
+                bottomDivider
+                chevron
                 leftAvatar={{
-                    source: item.status === 'active' 
-                    ? { uri: item.players.find(p => p.uid === item.activePlayer).photoURL }
-                    : null,
+                    source: item.status === 'active'
+                        ? { uri: item.players.find(p => p.uid === item.activePlayer).photoURL }
+                        : null,
                     title: item.title[0]
                 }}
             />}
-            renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
+            renderSectionHeader={({ section }) => (section.data.length
+                ? <SectionHeader section={section} />
+                : null)}
             keyExtractor={(item, index) => index}
         />
     )

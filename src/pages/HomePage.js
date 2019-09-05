@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import GamesList from '../components/games/GamesList';
+import GamesList from '../components/games/game-list/GamesList';
 import { Header } from 'react-native-elements';
 import GenerateExampleGames from '../test/GenerateExampleGames';
 import Logout from '../components/auth/logout/Logout'
