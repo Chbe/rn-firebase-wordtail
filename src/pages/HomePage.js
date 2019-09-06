@@ -11,6 +11,10 @@ import { SafeAreaView } from 'react-native';
 const HomePage = ({ navigation }) => {
     const [user, setUser] = useState('');
 
+    const handleNavigation = () => {
+        navigation.navigate('Profile', { uid: user.uid });
+    }
+
     useEffect(() => {
         const { currentUser } = firebase.auth();
         setUser(currentUser);
@@ -20,7 +24,13 @@ const HomePage = ({ navigation }) => {
     return (
         <SafeAreaView>
             <Header
-                leftComponent={<Icon color="#fff" size={24} name={'user'} regular />}
+                leftComponent={
+                    <Icon
+                        color="#fff"
+                        size={24}
+                        name={'user'}
+                        regular
+                        onPress={handleNavigation} />}
                 centerComponent={{ text: 'Word Tail', style: { color: '#fff' } }}
                 rightComponent={<Icon color="#fff" size={24} name={'plus-circle'} regular />}
             />

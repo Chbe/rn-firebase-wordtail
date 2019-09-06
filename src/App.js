@@ -14,8 +14,9 @@ import { Transition } from 'react-native-reanimated';
 import AuthLoadingPage from './pages/AuthLoadingPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import ProfilePage from './pages/ProfilePage';
 
-const AppStack = createStackNavigator({ Home: HomePage });
+const AppStack = createStackNavigator({ Home: HomePage, Profile: ProfilePage });
 const AuthStack = createStackNavigator({ Login: LoginPage });
 
 const AppNavigator = createAnimatedSwitchNavigator(
