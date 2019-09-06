@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native'
-import { Text } from 'react-native-elements'
+import { SafeAreaView, View } from 'react-native'
+import { Text, Card, Avatar, Image } from 'react-native-elements'
 import Logout from '../components/auth/logout/Logout'
+import { CenterView } from '../components/UI/Containers/Containers'
 
 const ProfilePage = ({ navigation }) => {
     const [user, setUser] = useState({});
@@ -14,13 +15,25 @@ const ProfilePage = ({ navigation }) => {
     return (
         <SafeAreaView>
             <Logout navigation={navigation} />
-            <Text>Hello ProfilePage, {user.uid}</Text>
+            <View>
+                <Card title="title">
+                    <View>
+                        <Avatar
+                            source={{
+                                uri:
+                                    'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+                            }}
+                            showEditButton
+                        />
+                    </View>
+                </Card>
+            </View>
         </SafeAreaView>
     )
 }
 
 ProfilePage.navigationOptions = {
     title: 'Profile',
-  };
+};
 
 export default ProfilePage
