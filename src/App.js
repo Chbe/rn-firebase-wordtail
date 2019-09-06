@@ -15,6 +15,7 @@ import AuthLoadingPage from './pages/AuthLoadingPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
+import NavigationService from './services/navigation/NavigationService';
 
 const AppStack = createStackNavigator({ Home: HomePage, Profile: ProfilePage });
 
@@ -48,4 +49,7 @@ const AppNavigator = createAnimatedSwitchNavigator(
 
 const App = createAppContainer(AppNavigator);
 
-export default App;
+export default () =>
+  <App ref={navigatorRef => {
+    NavigationService.setTopLevelNavigator(navigatorRef);
+  }} />;

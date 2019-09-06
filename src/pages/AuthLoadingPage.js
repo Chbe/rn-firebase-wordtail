@@ -5,15 +5,11 @@ import { Text } from 'react-native-elements';
 import { CenterView } from '../components/UI/Containers/Containers';
 
 const AuthLoadingPage = ({ navigation }) => {
-    useEffect(() => {
-        const unsubscriber = firebase.auth().onAuthStateChanged((user) => {
-            navigation.navigate(user ? 'App' : 'Auth');
-        });
-        return () => {
-            if (unsubscriber)
-                unsubscriber();
-        };
-    }, [])
+    const unsubscriber = firebase.auth().onAuthStateChanged((user) => {
+        if (unsubscriber)
+            unsubscriber();
+        navigation.navigate(user ? 'App' : 'Auth');
+    });
     return (
         <SafeAreaView>
             <CenterView>
