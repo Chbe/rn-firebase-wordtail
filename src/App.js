@@ -16,9 +16,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 
-const AppStack = createStackNavigator({ Home: HomePage, Profile: ProfilePage }, {
-  headerMode: 'none'
-});
+const AppStack = createStackNavigator({ Home: HomePage, Profile: ProfilePage });
 
 const AuthStack = createStackNavigator({ Login: LoginPage }, {
   headerMode: 'none'
