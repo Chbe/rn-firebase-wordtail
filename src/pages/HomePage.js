@@ -18,10 +18,10 @@ const HomePage = (props) => {
     }, [])
     return (
         <SafeAreaView>
+            {/* <GenerateExampleGames /> */}
             <PaddingView style={{ height: '100%' }}>
                 <GamesList uid={user.uid} />
             </PaddingView>
-            {/* <GenerateExampleGames /> */}
         </SafeAreaView>
     )
 }

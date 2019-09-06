@@ -32,6 +32,8 @@ export const facebookLogin = async () => {
 
         // login with credential
         const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
+        updateUserData(firebaseUserCredential.user);
+
 
         return firebaseUserCredential;
     } catch (e) {
@@ -47,4 +49,11 @@ export const anonymousLogin = async () => {
 export const emailLogin = async (email, password) => {
     const firebaseUserCredential = firebase.auth().signInWithEmailAndPassword(email, password);
     return firebaseUserCredential;
+}
+
+const updateUserData = (userData) => {
+    const { displayName, email, photoURL, uid } = userData;
+    firebase.firestore().collection('users').doc(uid).set({
+        displayName, email, photoURL, uid
+    }, { merge: true });
 }

@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, View } from 'react-native'
-import { Text, Card, Avatar, Image } from 'react-native-elements'
+import { Text, Card, Avatar, Image, Input } from 'react-native-elements'
 import Logout from '../components/auth/logout/Logout'
 import { CenterView } from '../components/UI/Containers/Containers'
+import firebase, { RNFirebase } from 'react-native-firebase'
 
 const ProfilePage = ({ navigation }) => {
     const [user, setUser] = useState({});
+    const [displayName, setDisplayName] = useState('');
+    const [email, setEmail] = useState('');
     useEffect(() => {
-        const { uid } = navigation.state.params;
+        const { currentUser } = firebase.auth();
+        setUser(currentUser);
+        setDisplayName(currentUser.displayName);
+        setEmail(currentUser.email);
         return () => {
             //
         };
@@ -19,12 +25,16 @@ const ProfilePage = ({ navigation }) => {
                 <Card title="title">
                     <View>
                         <Avatar
-                            source={{
-                                uri:
-                                    'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-                            }}
+                            size='large'
+                            rounded
+                            title={user.displayName && user.displayName[0]}
+                            source={user.photoURL
+                                ? { uri: user.photoURL }
+                                : null}
                             showEditButton
                         />
+                        <Input placeholder={displayName} />
+                        <Input placeholder={email} />
                     </View>
                 </Card>
             </View>

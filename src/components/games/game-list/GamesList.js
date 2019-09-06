@@ -42,12 +42,6 @@ const GamesList = ({ uid }) => {
         return games.filter(game => game.status === 'completed');
     }
 
-    const getAvatar = (game) => {
-        return game.status === 'active'
-            ? game.players.find(p => p.uid === game.activePlayer).photoURL
-            : game.title[0]
-    }
-
     return (
         <SectionList
             sections={[
