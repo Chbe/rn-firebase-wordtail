@@ -16,8 +16,13 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 
-const AppStack = createStackNavigator({ Home: HomePage, Profile: ProfilePage });
-const AuthStack = createStackNavigator({ Login: LoginPage });
+const AppStack = createStackNavigator({ Home: HomePage, Profile: ProfilePage }, {
+  headerMode: 'none'
+});
+
+const AuthStack = createStackNavigator({ Login: LoginPage }, {
+  headerMode: 'none'
+});
 
 const AppNavigator = createAnimatedSwitchNavigator(
   {
@@ -41,7 +46,8 @@ const AppNavigator = createAnimatedSwitchNavigator(
       </Transition.Together>
     ),
   }
-)
+);
+
 const App = createAppContainer(AppNavigator);
 
 export default App;

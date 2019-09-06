@@ -34,7 +34,7 @@ const HomePage = ({ navigation }) => {
                 centerComponent={{ text: 'Word Tail', style: { color: '#fff' } }}
                 rightComponent={<Icon color="#fff" size={24} name={'plus-circle'} regular />}
             />
-            <PaddingView>
+            <PaddingView style={{height: '100%'}}>
                 <Logout navigation={navigation} />
                 <GamesList uid={user.uid} />
             </PaddingView>
