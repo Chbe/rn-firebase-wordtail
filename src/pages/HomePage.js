@@ -7,7 +7,7 @@ import firebase from 'react-native-firebase';
 import { SafeAreaView } from 'react-native';
 import NavigationService from '../services/navigation/NavigationService'
 
-const HomePage = (props) => {
+const HomePage = ({ navigation }) => {
     const [user, setUser] = useState('');
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const HomePage = (props) => {
         <SafeAreaView>
             {/* <GenerateExampleGames /> */}
             <PaddingView style={{ height: '100%' }}>
-                <GamesList uid={user.uid} />
+                <GamesList navigation={navigation} uid={user.uid} />
             </PaddingView>
         </SafeAreaView>
     )

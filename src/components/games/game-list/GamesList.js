@@ -5,7 +5,7 @@ import { ListItem } from 'react-native-elements';
 import SectionHeader from './SectionHeader';
 import SectionSubtitle from './SectionSubtitle';
 
-const GamesList = ({ uid }) => {
+const GamesList = ({ navigation, uid }) => {
     const [games, setGames] = useState([]);
 
     const onCollectionUpdate = (querySnapshot) => {
@@ -49,6 +49,10 @@ const GamesList = ({ uid }) => {
         return games.filter(game => game.status === 'completed');
     }
 
+    const goToGame = (item) => {
+        navigation.navigate('Game', { game: item })
+    }
+
     return (
         <SectionList
             sections={[
@@ -66,6 +70,10 @@ const GamesList = ({ uid }) => {
                         ? { uri: item.players.find(p => p.uid === item.activePlayer).photoURL }
                         : null,
                     title: item.title[0]
+                }}
+                onPress={(ev) => {
+                    // TODO: save game state so game page can
+                    goToGame(item);
                 }}
             />}
             renderSectionHeader={({ section }) => (section.data.length
