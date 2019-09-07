@@ -21,7 +21,14 @@ const GamesList = ({ uid }) => {
         setGames(todos);
     }
     useEffect(() => {
-        const ref = firebase.firestore().collection('games');
+        const uid = firebase.auth().currentUser.uid;
+        const ref = firebase.firestore().collection('games')
+            .where('playersUid',
+                'array-contains',
+                uid)
+            .orderBy('status', 'asc')
+            .orderBy('lastUpdated', 'desc')
+            .limit(5);
         const sub = ref.onSnapshot(onCollectionUpdate)
         return () => {
             sub();

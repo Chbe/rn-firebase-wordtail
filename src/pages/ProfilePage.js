@@ -9,13 +9,35 @@ import { Avatar } from 'react-native-elements'
 
 const ProfilePage = ({ navigation }) => {
     const [user, setUser] = useState({});
-    const [displayName, setDisplayName] = useState('');
-    const [email, setEmail] = useState('');
+
+    const [displayName, setDisplayName] = useState(null);
+    const [displayNameInput, setDisplayNameInput] = useState(null);
+    const manageDisplayName = (val) => {
+        if (!!val) {
+        } else {
+            setDisplayName(user.displayName);
+        }
+    }
+
+    const [email, setEmail] = useState(null);
+    const [emailInput, setEmailInput] = useState(null);
+    const manageEmail = (val) => {
+        if (!!val) {
+            setEmail(val);
+        } else {
+            setEmail(user.email);
+        }
+        setEmailInput(null);
+    }
     useEffect(() => {
         const { currentUser } = firebase.auth();
         setUser(currentUser);
-        setDisplayName(currentUser.displayName);
-        setEmail(currentUser.email);
+        setDisplayName(currentUser.isAnonymous ?
+            'Mysterious User' :
+            currentUser.displayName);
+        setEmail(currentUser.isAnonymous ?
+            'Mysterious Email' :
+            currentUser.email)
         return () => {
             //
         };
@@ -38,8 +60,15 @@ const ProfilePage = ({ navigation }) => {
                     </View>
                     <Form>
                         <Item floatingLabel>
-                            <Label>{displayName}</Label>
-                            <Input />
+                            <Label>{user.displayName}</Label>
+                            <Input value={displayNameInput} onEndEditing={(ev) => {
+                                manageDisplayName(ev.nativeEvent.text);
+                            }}
+                                // onFocus={() => {
+                                //     if (displayName !== user.displayName)
+                                //         setDisplayNameInput(displayName)
+                                // }} 
+                                />
                         </Item>
                         <Item floatingLabel last>
                             <Label>{email}</Label>
