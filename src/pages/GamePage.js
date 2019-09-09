@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Content, Text } from 'native-base'
+import { SafeAreaView } from 'react-native'
+import LetterBox from '../components/games/in-game/letter/LetterBox'
+import { CenterView } from '../components/UI/Containers/Containers'
 
 const GamePage = ({ navigation }) => {
-    const [game, setGame] = useState({});
+    const [id, setId] = useState('');
+    const [letters, setLetters] = useState([]);
     useEffect(() => {
-        setGame(navigation.getParam('game'));
+        const idParam = navigation.getParam('gameId', '');
+        const lettersParam = navigation.getParam('letters', []);
+        setId(idParam);
+        setLetters(lettersParam);
         return () => {
-            //
+
         };
     }, [])
     return (
-        <Container>
-            <Content>
-                <Text>{game.title}</Text>
-            </Content>
-        </Container>
+        <SafeAreaView>
+            <CenterView>
+                <LetterBox letters={['A', 'B']} />
+            </CenterView>
+        </SafeAreaView>
     )
 }
 

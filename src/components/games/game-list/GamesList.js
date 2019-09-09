@@ -50,7 +50,10 @@ const GamesList = ({ navigation, uid }) => {
     }
 
     const goToGame = (item) => {
-        navigation.navigate('Game', { game: item })
+        navigation.navigate('Game', {
+            gameId: item.key,
+            letters: item.letters
+        })
     }
 
     return (
