@@ -1,57 +1,65 @@
-import React, { useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import { View, Animated } from 'react-native'
 
-const LetterBox = ({ letters }) => {
-    const [fadeValue] = useState(new Animated.Value(0));
-    const [doAnimate, setDoAnimate] = useState(true);
-    const [letter, setLetter] = useState('');
-    const [letterIndex, setLetterIndex] = useState(-1);
+const Letter = ({ letter, scale }) => (
+    <Animated.Text
+        style={{
+            opacity: scale,
+            fontSize: scale.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 50]
+            })
+        }}
+    >
+        {letter}
+    </Animated.Text>
+);
 
-    const _startNewPulse = () => {
-        var newIndex = letterIndex + 1;
-        setLetterIndex(newIndex);
-        if (doAnimate && newIndex < letters.length) {
-            setLetter(letters[newIndex]);
-            console.log('newLetter', letter, letterIndex)
-            animateIteration();
+export default class LetterBox extends Component {
+    scale = new Animated.Value(0);
+    state = {
+        doAnimate: true,
+        letter: '',
+        letterIndex: -1,
+        letters: []
+    }
+
+    componentDidUpdate() {
+        if (!this.state.letters.length) {
+            this.setState({ letters: this.props.letters });
+            setTimeout(() => this.pulse(), 500);
         }
     }
 
-    const animateIteration = () => {
+    startNewPulse = () => {
+        var newIndex = this.state.letterIndex + 1;
+        this.setState({ letterIndex: newIndex });
+        if (this.state.doAnimate && newIndex < this.state.letters.length) {
+            this.setState({ letter: this.state.letters[newIndex] });
+            this.pulse();
+        }
+    }
+
+    pulse = () => {
         Animated.sequence([
-            Animated.timing(fadeValue, { toValue: 1, duration: 1000 }),
-            Animated.timing(fadeValue, { toValue: 0, duration: 1000 }),
+            Animated.timing(this.scale, { toValue: 1, duration: 500 }),
+            Animated.timing(this.scale, { toValue: 0, duration: 700 }),
         ]).start(() => {
-            if (doAnimate)
-                _startNewPulse();
+            if (this.state.doAnimate)
+                this.startNewPulse();
         });
     };
 
-    useEffect(() => {
-        if (letters.length) {
-            console.log(letters, letters.length);
-            _startNewPulse();
-        }
-        return () => {
-            setDoAnimate(false);
-            fadeValue.stopAnimation();
-        };
-    }, [letters])
-    return (
-        <View>
-            <Animated.Text
-                style={{
-                    opacity: fadeValue,
-                    fontSize: fadeValue.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, 50]
-                    })
-                }}
-            >
-                {letter}
-            </Animated.Text>
-        </View>
-    )
-}
+    componentWillUnmount() {
+        this.scale.stopAnimation();
+        this.setState({ doAnimate: false });
+    }
 
-export default LetterBox
+    render() {
+        return (
+            <View>
+                <Letter letter={this.state.letter} scale={this.scale} />
+            </View>
+        );
+    }
+}
