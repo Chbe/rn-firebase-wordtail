@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
 import { View, Animated } from 'react-native'
+import { CenterView } from '../../../UI/Containers/Containers';
+import styled from 'styled-components'
+
+const Wrapper = styled(CenterView)`
+    border: 5px solid grey;
+    border-radius: 15px;
+    width: 150;
+    height: 150;
+`;
 
 const Letter = ({ letter, scale }) => (
     <Animated.Text
         style={{
+            color: 'grey',
             opacity: scale,
             fontSize: scale.interpolate({
                 inputRange: [0, 1],
-                outputRange: [0, 50]
+                outputRange: [0, 100]
             })
         }}
     >
@@ -57,9 +67,9 @@ export default class LetterBox extends Component {
 
     render() {
         return (
-            <View>
+            <Wrapper>
                 <Letter letter={this.state.letter} scale={this.scale} />
-            </View>
+            </Wrapper>
         );
     }
 }
