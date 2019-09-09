@@ -18,7 +18,7 @@ const GamePage = ({ navigation }) => {
     return (
         <SafeAreaView>
             <CenterView>
-                <LetterBox letters={['A', 'B']} />
+                <LetterBox letters={letters} />
             </CenterView>
         </SafeAreaView>
     )

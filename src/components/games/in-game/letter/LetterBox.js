@@ -7,16 +7,17 @@ const LetterBox = ({ letters }) => {
     const [letter, setLetter] = useState('');
     const [letterIndex, setLetterIndex] = useState(-1);
 
-    _startNewPulse = () => {
-        const newIndex = letterIndex + 1;
+    const _startNewPulse = () => {
+        var newIndex = letterIndex + 1;
         setLetterIndex(newIndex);
         if (doAnimate && newIndex < letters.length) {
             setLetter(letters[newIndex]);
-            _pulse();
+            console.log('newLetter', letter, letterIndex)
+            animateIteration();
         }
     }
 
-    const _pulse = () => {
+    const animateIteration = () => {
         Animated.sequence([
             Animated.timing(fadeValue, { toValue: 1, duration: 1000 }),
             Animated.timing(fadeValue, { toValue: 0, duration: 1000 }),
@@ -28,7 +29,7 @@ const LetterBox = ({ letters }) => {
 
     useEffect(() => {
         if (letters.length) {
-            console.warn(letters)
+            console.log(letters, letters.length);
             _startNewPulse();
         }
         return () => {
