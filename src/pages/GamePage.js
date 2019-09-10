@@ -5,7 +5,7 @@ import Keyboard from '../components/game/in-game/keyboard/Keyboard'
 import styled from 'styled-components'
 import { View } from 'react-native'
 import { Button, Icon, Text } from 'native-base'
-import { GameContext, GameStore } from '../stores/GameStore'
+import { GameContext, GameStore, useGameContext } from '../stores/GameStore'
 
 const Wrapper = styled(CenterView)`
     justify-content: space-between;
@@ -19,7 +19,7 @@ const ActionsWrapper = styled.View`
 `;
 
 const GamePage = ({ navigation }) => {
-    const { state, actions } = GameStore()
+    const { state, actions } = GameStore();
 
     const [id, setId] = useState('');
     const [letters, setLetters] = useState([]);
@@ -28,6 +28,9 @@ const GamePage = ({ navigation }) => {
         const lettersParam = navigation.getParam('letters', []);
         setId(idParam);
         setLetters(lettersParam);
+        if (!lettersParam) {
+            actions.enablePlay();
+        }
         return () => {
 
         };

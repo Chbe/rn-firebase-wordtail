@@ -1,13 +1,12 @@
 import React from 'react';
-import { CenterView, PaddingView } from '../components/UI/Containers/Containers';
+import { CenterView, PaddingView, SafeWrapper } from '../components/UI/Containers/Containers';
 import EmailLogin from '../components/auth/login/EmailLogin';
 import FacebookLogin from '../components/auth/login/FacebookLogin';
 import AnonymousLogin from '../components/auth/login/AnonymousLogin';
-import { SafeAreaView } from 'react-native';
 
 const Login = ({ navigation }) => {
     return (
-        <SafeAreaView>
+        <SafeWrapper>
             <CenterView>
                 <PaddingView padding={5}>
                     <EmailLogin navigation={navigation} />
@@ -19,7 +18,7 @@ const Login = ({ navigation }) => {
                     <AnonymousLogin navigation={navigation} />
                 </PaddingView>
             </CenterView>
-        </SafeAreaView>
+        </SafeWrapper>
     )
 }
 

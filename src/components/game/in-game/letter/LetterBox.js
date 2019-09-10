@@ -14,7 +14,7 @@ const Wrapper = styled(CenterView)`
 
 const LetterBox = ({ letters = [] }) => {
     const [doAnimation, setDoAnimation] = useState(false);
-    const [chooseLetter, setChooseLetter] = useState(false);
+    const [chooseLetter, setChooseLetter] = useState(true);
     const { state, actions } = useGameContext();
     let intervalHandler;
     let timeoutHandler;
@@ -43,6 +43,7 @@ const LetterBox = ({ letters = [] }) => {
 
     useEffect(() => {
         if (letters.length) {
+            setChooseLetter(false);
             startAnimation();
         }
         return () => {

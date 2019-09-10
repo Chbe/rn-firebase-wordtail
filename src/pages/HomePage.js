@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import GamesList from '../components/game/game-list/GamesList';
 import GenerateExampleGames from '../test/GenerateExampleGames';
-import { PaddingView } from '../components/UI/Containers/Containers'
+import { PaddingView, SafeWrapper } from '../components/UI/Containers/Containers'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import firebase from 'react-native-firebase';
-import { SafeAreaView } from 'react-native';
 import NavigationService from '../services/navigation/NavigationService'
 
 const HomePage = ({ navigation }) => {
@@ -17,12 +16,12 @@ const HomePage = ({ navigation }) => {
         };
     }, [])
     return (
-        <SafeAreaView>
+        <SafeWrapper>
             {/* <GenerateExampleGames /> */}
             <PaddingView style={{ height: '100%' }}>
                 <GamesList navigation={navigation} uid={user.uid} />
             </PaddingView>
-        </SafeAreaView>
+        </SafeWrapper>
     )
 }
 

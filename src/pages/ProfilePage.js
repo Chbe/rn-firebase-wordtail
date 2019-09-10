@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, View } from 'react-native'
+import { View } from 'react-native'
 // import { Text, Card, Avatar, Image, Input } from 'react-native-elements'
 import Logout from '../components/auth/logout/Logout'
-import { CenterView } from '../components/UI/Containers/Containers'
+import { CenterView, SafeWrapper } from '../components/UI/Containers/Containers'
 import firebase, { RNFirebase } from 'react-native-firebase'
 import { Content, Form, Item, Input, Label, Container } from 'native-base'
 import { Avatar } from 'react-native-elements'
@@ -43,7 +43,7 @@ const ProfilePage = ({ navigation }) => {
         };
     }, [])
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeWrapper style={{ flex: 1 }}>
             <Container>
                 <Logout navigation={navigation} />
                 <Content>
@@ -64,11 +64,11 @@ const ProfilePage = ({ navigation }) => {
                             <Input value={displayNameInput} onEndEditing={(ev) => {
                                 manageDisplayName(ev.nativeEvent.text);
                             }}
-                                // onFocus={() => {
-                                //     if (displayName !== user.displayName)
-                                //         setDisplayNameInput(displayName)
-                                // }} 
-                                />
+                            // onFocus={() => {
+                            //     if (displayName !== user.displayName)
+                            //         setDisplayNameInput(displayName)
+                            // }} 
+                            />
                         </Item>
                         <Item floatingLabel last>
                             <Label>{email}</Label>
@@ -77,7 +77,7 @@ const ProfilePage = ({ navigation }) => {
                     </Form>
                 </Content>
             </Container>
-        </SafeAreaView>
+        </SafeWrapper>
     )
 }
 
