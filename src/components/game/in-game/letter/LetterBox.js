@@ -16,16 +16,18 @@ const LetterBox = ({ letters = [] }) => {
     const [doAnimation, setDoAnimation] = useState(false);
     const [chooseLetter, setChooseLetter] = useState(false);
     const { state, actions } = useGameContext();
+    let intervalHandler;
+    let timeoutHandler;
 
     const startAnimation = () => {
         var letterIndex = 0;
-        const handler = setInterval(() => {
+        intervalHandler = setInterval(() => {
             animateLetter(letters[letterIndex]);
             setDoAnimation(false);
             letterIndex++;
             if (letterIndex >= letters.length) {
-                clearInterval(handler);
-                setTimeout(() => {
+                clearInterval(intervalHandler);
+                timeoutHandler = setTimeout(() => {
                     actions.setLetter('');
                     setChooseLetter(true);
                     actions.enablePlay();
@@ -44,7 +46,10 @@ const LetterBox = ({ letters = [] }) => {
             startAnimation();
         }
         return () => {
-
+            if (intervalHandler)
+                clearInterval(intervalHandler);
+            if (timeoutHandler)
+                clearTimeout(timeoutHandler);
         };
     }, [letters])
     return (

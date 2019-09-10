@@ -10,6 +10,7 @@ export const useAnimation = ({ doAnimation }) => {
             Animated.timing(animation, { toValue: 1, duration: 500 }),
             Animated.timing(animation, { toValue: 0, duration: 700 }),
         ]).start();
+        return () => animation.stopAnimation();
     }, [doAnimation]);
 
     return animation;

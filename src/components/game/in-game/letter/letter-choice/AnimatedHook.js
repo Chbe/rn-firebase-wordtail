@@ -7,6 +7,7 @@ export const useAnimation = ({ letter }) => {
         console.log(`Choosen letter animation:`, letter);
         Animated.timing(animation, { toValue: 1, duration: 2000 })
             .start();
+        return () => animation.stopAnimation();
     }, [letter]);
 
     return animation;
