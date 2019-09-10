@@ -6,7 +6,10 @@ const GameContext = createContext({})
  */
 
 const GameStore = () => {
-    const initialState = { letter: '' }
+    const initialState = {
+        letter: '',
+        enablePlay: false
+    }
 
     // Manage the state using React.useState()
     const [state, setState] = useState(initialState)
@@ -24,6 +27,12 @@ const GameStore = () => {
 const getActions = setState => ({
     setLetter: (payload) => {
         setState(state => ({ ...state, letter: payload }))
+    },
+    enablePlay: () => {
+        setState(state => ({ ...state, enablePlay: true }))
+    },
+    disablePlay: () => {
+        setState(state => ({ ...state, enablePlay: false }))
     }
 })
 

@@ -13,19 +13,16 @@ const KeyContainer = styled.TouchableOpacity`
 
 const KeyText = styled.Text`
     font-size: 30;
+    color: ${({ enablePlay }) => (enablePlay ? 'black' : 'grey')}
 `;
 
-const keypress = (key) => {
-    console.log('Pressed', key);
-}
-
 const Key = ({ name }) => {
-    const { actions } = useGameContext();
+    const { state, actions } = useGameContext();
     return (
-        <KeyContainer onPress={() => {
-            actions.setLetter(name)
+        <KeyContainer disabled={!state.enablePlay} onPress={() => {
+            state.enablePlay && actions.setLetter(name)
         }}>
-            <KeyText>{name}</KeyText>
+            <KeyText enablePlay={state.enablePlay}>{name}</KeyText>
         </KeyContainer>
     )
 }

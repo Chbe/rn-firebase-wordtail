@@ -28,6 +28,7 @@ const LetterBox = ({ letters = [] }) => {
                 setTimeout(() => {
                     actions.setLetter('');
                     setChooseLetter(true);
+                    actions.enablePlay();
                 }, 1200);
             }
         }, 1200);
