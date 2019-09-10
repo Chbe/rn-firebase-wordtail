@@ -43,7 +43,7 @@ const ProfilePage = ({ navigation }) => {
         };
     }, [])
     return (
-        <SafeWrapper style={{ flex: 1 }}>
+        <SafeWrapper>
             <Container>
                 <Logout navigation={navigation} />
                 <Content>
