@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { View } from 'react-native';
+import { useGameContext } from '../../../../stores/GameStore'
 
 const KeyContainer = styled.TouchableOpacity`
     align-items: center;
@@ -12,16 +13,16 @@ const KeyContainer = styled.TouchableOpacity`
 
 const KeyText = styled.Text`
     font-size: 30;
+    color: ${({ enablePlay }) => (enablePlay ? 'black' : 'grey')}
 `;
 
-const keypress = (key) => {
-    console.log('Pressed', key);
-}
-
 const Key = ({ name }) => {
+    const { state, actions } = useGameContext();
     return (
-        <KeyContainer onPress={() => keypress(name)}>
-            <KeyText>{name}</KeyText>
+        <KeyContainer disabled={!state.enablePlay} onPress={() => {
+            state.enablePlay && actions.setLetter(name)
+        }}>
+            <KeyText enablePlay={state.enablePlay}>{name}</KeyText>
         </KeyContainer>
     )
 }
