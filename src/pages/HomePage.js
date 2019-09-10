@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import GamesList from '../components/games/game-list/GamesList';
+import GamesList from '../components/game/game-list/GamesList';
 import GenerateExampleGames from '../test/GenerateExampleGames';
 import { PaddingView } from '../components/UI/Containers/Containers'
 import Icon from 'react-native-vector-icons/FontAwesome5';
