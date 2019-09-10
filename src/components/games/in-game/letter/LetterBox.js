@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
-import { View, Animated } from 'react-native'
-import { CenterView } from '../../../UI/Containers/Containers';
+import React, { useEffect, useState } from 'react'
+import AnimatedLetter from './letter-presentation/AnimatedLetter';
 import styled from 'styled-components'
+import { CenterView } from '../../../UI/Containers/Containers';
+import { useGameContext } from '../../../../stores/GameStore';
+import ChoosenLetter from './letter-choice/AnimatedLetter';
 
 const Wrapper = styled(CenterView)`
     border: 5px solid grey;
@@ -10,66 +12,47 @@ const Wrapper = styled(CenterView)`
     height: 150;
 `;
 
-const Letter = ({ letter, scale }) => (
-    <Animated.Text
-        style={{
-            color: 'grey',
-            opacity: scale,
-            fontSize: scale.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0, 100]
-            })
-        }}
-    >
-        {letter}
-    </Animated.Text>
-);
+const LetterBox = ({ letters = [] }) => {
+    const [doAnimation, setDoAnimation] = useState(false);
+    const [chooseLetter, setChooseLetter] = useState(false);
+    const { state, actions } = useGameContext();
 
-export default class LetterBox extends Component {
-    scale = new Animated.Value(0);
-    state = {
-        doAnimate: true,
-        letter: '',
-        letterIndex: -1,
-        letters: []
+    const startAnimation = () => {
+        var letterIndex = 0;
+        const handler = setInterval(() => {
+            animateLetter(letters[letterIndex]);
+            setDoAnimation(false);
+            letterIndex++;
+            if (letterIndex >= letters.length) {
+                clearInterval(handler);
+                setTimeout(() => {
+                    actions.setLetter('');
+                    setChooseLetter(true);
+                }, 1200);
+            }
+        }, 1200);
     }
 
-    componentDidUpdate() {
-        if (!this.state.letters.length) {
-            this.setState({ letters: this.props.letters });
-            setTimeout(() => this.pulse(), 500);
+    const animateLetter = (letter) => {
+        actions.setLetter(letter);
+        setDoAnimation(true);
+    }
+
+    useEffect(() => {
+        if (letters.length) {
+            startAnimation();
         }
-    }
+        return () => {
 
-    startNewPulse = () => {
-        var newIndex = this.state.letterIndex + 1;
-        this.setState({ letterIndex: newIndex });
-        if (this.state.doAnimate && newIndex < this.state.letters.length) {
-            this.setState({ letter: this.state.letters[newIndex] });
-            this.pulse();
-        }
-    }
-
-    pulse = () => {
-        Animated.sequence([
-            Animated.timing(this.scale, { toValue: 1, duration: 500 }),
-            Animated.timing(this.scale, { toValue: 0, duration: 700 }),
-        ]).start(() => {
-            if (this.state.doAnimate)
-                this.startNewPulse();
-        });
-    };
-
-    componentWillUnmount() {
-        this.scale.stopAnimation();
-        this.setState({ doAnimate: false });
-    }
-
-    render() {
-        return (
-            <Wrapper>
-                <Letter letter={this.state.letter} scale={this.scale} />
-            </Wrapper>
-        );
-    }
+        };
+    }, [letters])
+    return (
+        <Wrapper>
+            {!chooseLetter
+                ? <AnimatedLetter letter={state.letter} doAnimation={doAnimation} />
+                : <ChoosenLetter letter={state.letter} />}
+        </Wrapper>
+    )
 }
+
+export default LetterBox

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { View } from 'react-native';
+import { useGameContext } from '../../../../stores/GameStore'
 
 const KeyContainer = styled.TouchableOpacity`
     align-items: center;
@@ -19,8 +20,11 @@ const keypress = (key) => {
 }
 
 const Key = ({ name }) => {
+    const { actions } = useGameContext();
     return (
-        <KeyContainer onPress={() => keypress(name)}>
+        <KeyContainer onPress={() => {
+            actions.setLetter(name)
+        }}>
             <KeyText>{name}</KeyText>
         </KeyContainer>
     )
