@@ -43,7 +43,8 @@ HomePage.navigationOptions = {
                 color="#000"
                 size={24}
                 name={'plus-circle'}
-                regular />
+                regular
+                onPress={() => NavigationService.navigate('CreateGame')} />
         </PaddingView>
     )
 };
