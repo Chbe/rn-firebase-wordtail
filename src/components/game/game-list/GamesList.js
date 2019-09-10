@@ -56,13 +56,28 @@ const GamesList = ({ navigation, uid }) => {
         })
     }
 
+    const renderSections = () => {
+        let sections = [];
+        const invitesArr = invites();
+        const activeArr = active();
+        const finishedArr = finished();
+
+        if (invitesArr.length) {
+            sections.push({ type: 'invite', data: invitesArr });
+        }
+        if (activeArr.length) {
+            sections.push({ type: 'active', data: activeArr });
+        }
+        if (finishedArr.length) {
+            sections.push({ type: 'finished', data: finishedArr });
+        }
+
+        return sections;
+    }
+
     return (
         <SectionList
-            sections={[
-                { type: 'invite', data: invites() },
-                { type: 'active', data: active() },
-                { type: 'finished', data: finished() }
-            ]}
+            sections={renderSections()}
             renderItem={({ item }) => <ListItem
                 title={item.title}
                 subtitle={<SectionSubtitle item={item} />}
