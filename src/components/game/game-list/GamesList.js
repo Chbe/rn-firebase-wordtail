@@ -27,8 +27,8 @@ const GamesList = ({ navigation, uid }) => {
                 'array-contains',
                 uid)
             .orderBy('status', 'asc')
-            .orderBy('lastUpdated', 'desc')
-            .limit(5);
+            .orderBy('lastUpdated', 'desc');
+            // .limit(5);
         const sub = ref.onSnapshot(onCollectionUpdate)
         return () => {
             sub();

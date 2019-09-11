@@ -33,8 +33,7 @@ HomePage.navigationOptions = {
                 size={24}
                 name={'user'}
                 regular
-                onPress={() => NavigationService.navigate('Profile',
-                    { uid: firebase.auth().currentUser.uid })} />
+                onPress={() => NavigationService.navigate('Profile')} />
         </PaddingView>
     ),
     headerRight: (
@@ -44,7 +43,8 @@ HomePage.navigationOptions = {
                 size={24}
                 name={'plus-circle'}
                 regular
-                onPress={() => NavigationService.navigate('CreateGame')} />
+                onPress={() => NavigationService.navigate('CreateGame',
+                    { uid: firebase.auth().currentUser.uid })} />
         </PaddingView>
     )
 };
