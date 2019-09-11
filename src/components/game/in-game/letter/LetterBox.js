@@ -47,6 +47,7 @@ const LetterBox = ({ letters = [] }) => {
             startAnimation();
         }
         return () => {
+            actions.clear();
             if (intervalHandler)
                 clearInterval(intervalHandler);
             if (timeoutHandler)

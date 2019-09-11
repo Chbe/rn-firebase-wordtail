@@ -1,15 +1,16 @@
 import { useState, useContext, useMemo, createContext } from 'react'
 
+const initialState = {
+    letter: '',
+    enablePlay: false
+}
+
 const GameContext = createContext({})
 /**
  * Our custom React hook to manage state
  */
 
 const GameStore = () => {
-    const initialState = {
-        letter: '',
-        enablePlay: false
-    }
 
     // Manage the state using React.useState()
     const [state, setState] = useState(initialState)
@@ -25,6 +26,9 @@ const GameStore = () => {
 // It's a bit like Redux's dispatch(), but as individual
 // functions.
 const getActions = setState => ({
+    clear: () => {
+        setState({ ...state, initialState })
+    },
     setLetter: (payload) => {
         setState(state => ({ ...state, letter: payload }))
     },

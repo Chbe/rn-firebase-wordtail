@@ -32,7 +32,7 @@ const CreateGameStore = () => {
 // functions.
 const getActions = setState => ({
     clear: () => {
-        setState({ ...initialState })
+        setState(state => ({ ...state, ...initialState }))
     },
     setTitle: (payload) => {
         setState(state => ({ ...state, title: payload }))
