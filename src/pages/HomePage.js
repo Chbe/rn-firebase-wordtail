@@ -20,7 +20,6 @@ const HomePage = ({ navigation, theme }) => {
     }, [])
     return (
         <SafeWrapper>
-            <StatusBar barStyle={theme.barStyle} />
             {/* <GenerateExampleGames /> */}
             <PaddingView style={{ height: '100%' }}>
                 <GamesList navigation={navigation} uid={user.uid} />

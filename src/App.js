@@ -26,6 +26,7 @@ import { getTheme } from './core/Themes'
 import ComponentsPage from './test/ComponentsPage';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import { PaddingView } from './components/UI/Containers/Containers';
+import { StatusBar } from 'react-native';
 
 const theme = getTheme();
 const defaultNavigationOptions = {
@@ -108,6 +109,7 @@ const App = createAppContainer(AppNavigator);
 
 export default () =>
   <ThemeProvider theme={theme}>
+    <StatusBar backgroundColor={theme.colors.primary} barStyle={theme.barStyle} />
     <App ref={navigatorRef => {
       NavigationService.setTopLevelNavigator(navigatorRef);
     }} />
