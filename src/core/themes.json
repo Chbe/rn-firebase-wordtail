@@ -1,6 +1,7 @@
 [
     {
         "key": "red",
+        "barStyle": "light-content",
         "colors": {
             "primary": "#da2555",
             "primary-disabled": "rgba(218, 37, 85, 0.5)",
