@@ -3,39 +3,17 @@ import { View } from 'react-native'
 import Logout from '../components/auth/logout/Logout'
 import { CenterView, SafeWrapper, PaddingView } from '../components/UI/Containers/Containers'
 import firebase from 'react-native-firebase'
-import { Avatar, Input, Icon } from 'react-native-elements'
+import { Avatar, Input, Icon, withTheme } from 'react-native-elements'
+import { TextField } from 'react-native-material-textfield';
 
-const ProfilePage = ({ navigation }) => {
+const ProfilePage = ({ navigation, theme }) => {
     const [user, setUser] = useState({});
+    const [displayNameInputValue, setDisplayNameInputValue] = useState('');
+    const [emailInputValue, setEmailInputValue] = useState('');
 
-    const [displayName, setDisplayName] = useState(null);
-    const [displayNameInput, setDisplayNameInput] = useState(null);
-    const manageDisplayName = (val) => {
-        if (!!val) {
-        } else {
-            setDisplayName(user.displayName);
-        }
-    }
-
-    const [email, setEmail] = useState(null);
-    const [emailInput, setEmailInput] = useState(null);
-    const manageEmail = (val) => {
-        if (!!val) {
-            setEmail(val);
-        } else {
-            setEmail(user.email);
-        }
-        setEmailInput(null);
-    }
     useEffect(() => {
         const { currentUser } = firebase.auth();
         setUser(currentUser);
-        setDisplayName(currentUser.isAnonymous ?
-            'Mysterious User' :
-            currentUser.displayName);
-        setEmail(currentUser.isAnonymous ?
-            'Mysterious Email' :
-            currentUser.email)
         return () => {
             //
         };
@@ -56,30 +34,17 @@ const ProfilePage = ({ navigation }) => {
                     />
                 </View>
                 <View>
-                    <Input
-                        placeholder={displayName}
-                        onEndEditing={(ev) => {
-                            manageDisplayName(ev.nativeEvent.text);
-                        }}
-                        leftIcon={
-                            <Icon
-                                type='font-awesome'
-                                name='user'
-                                size={24}
-                                color='black'
-                            />
-                        }
+                    <TextField
+                        tintColor={theme.colors.primary}
+                        label={user.displayName ? user.displayName : 'Anonymous Name'}
+                        value={displayNameInputValue}
+                        onChangeText={(name) => setDisplayNameInputValue(name)}
                     />
-                    <Input
-                        placeholder={email}
-                        leftIcon={
-                            <Icon
-                                type='font-awesome'
-                                name='envelope'
-                                size={24}
-                                color='black'
-                            />
-                        }
+                    <TextField
+                        tintColor={theme.colors.primary}
+                        label={user.email ? user.email : 'Anonymous Email'}
+                        value={emailInputValue}
+                        onChangeText={(email) => setEmailInputValue(email)}
                     />
                 </View>
             </PaddingView>
@@ -91,4 +56,4 @@ ProfilePage.navigationOptions = {
     title: 'Profile',
 };
 
-export default ProfilePage
+export default withTheme(ProfilePage)
