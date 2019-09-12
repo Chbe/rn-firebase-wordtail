@@ -24,6 +24,8 @@ import { getTheme } from './core/Themes'
 
 // test
 import ComponentsPage from './test/ComponentsPage';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import { PaddingView } from './components/UI/Containers/Containers';
 
 const theme = getTheme();
 const defaultNavigationOptions = {
@@ -44,7 +46,29 @@ const defaultNavigationOptions = {
 };
 
 const AppStack = createStackNavigator({
-  Home: HomePage,
+  Home: {
+    screen: HomePage,
+    navigationOptions: {
+      headerLeft: (
+        <PaddingView>
+          <FontAwesome5Icon
+            color={theme.barStyle === 'light-content' ? '#fff' : '#000'}
+            size={24}
+            name='user'
+            onPress={() => NavigationService.navigate('Profile')} />
+        </PaddingView>
+      ),
+      headerRight: (
+        <PaddingView>
+          <FontAwesome5Icon
+            color={theme.barStyle === 'light-content' ? '#fff' : '#000'}
+            size={24}
+            name='plus-circle'
+            onPress={() => NavigationService.navigate('CreateGame')} />
+        </PaddingView>
+      )
+    }
+  },
   Profile: ProfilePage,
   Game: GamePage,
   CreateGame: CreateGamePage

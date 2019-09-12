@@ -20,7 +20,7 @@ const HomePage = ({ navigation, theme }) => {
     }, [])
     return (
         <SafeWrapper>
-            {/* <StatusBar barStyle={theme.barStyle} /> */}
+            <StatusBar barStyle={theme.barStyle} />
             {/* <GenerateExampleGames /> */}
             <PaddingView style={{ height: '100%' }}>
                 <GamesList navigation={navigation} uid={user.uid} />
@@ -29,26 +29,4 @@ const HomePage = ({ navigation, theme }) => {
     )
 }
 
-HomePage.navigationOptions = {
-    headerLeft: (
-        <PaddingView>
-            <FontAwesome5Icon
-                color="white"
-                size={24}
-                name='user'
-                onPress={() => NavigationService.navigate('Profile')} />
-        </PaddingView>
-    ),
-    headerRight: (
-        <PaddingView>
-            <FontAwesome5Icon
-                color="white"
-                size={24}
-                name='plus-circle'
-                onPress={() => NavigationService.navigate('CreateGame',
-                    { uid: firebase.auth().currentUser.uid })} />
-        </PaddingView>
-    )
-};
-
-export default HomePage
+export default withTheme(HomePage)
