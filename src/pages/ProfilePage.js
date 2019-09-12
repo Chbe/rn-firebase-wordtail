@@ -4,7 +4,7 @@ import Logout from '../components/auth/logout/Logout'
 import { CenterView, SafeWrapper, PaddingView } from '../components/UI/Containers/Containers'
 import firebase from 'react-native-firebase'
 import { Avatar, Input, Icon, withTheme } from 'react-native-elements'
-import TextField from '../components/UI/controls/inputs/FloatingInput';
+import TextField from '../components/UI/controls/inputs//floating/FloatingInput';
 
 const ProfilePage = ({ navigation, theme }) => {
     const [user, setUser] = useState({});
