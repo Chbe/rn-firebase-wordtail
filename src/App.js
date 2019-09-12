@@ -18,11 +18,13 @@ import ProfilePage from './pages/ProfilePage';
 import NavigationService from './services/navigation/NavigationService';
 import GamePage from './pages/GamePage';
 import CreateGamePage from './pages/CreateGamePage';
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'react-native-elements'
+import { getThemeByName } from './core/Themes'
 
 
 // test
 import ComponentsPage from './test/ComponentsPage';
+
 
 
 const AppStack = createStackNavigator({
@@ -62,30 +64,8 @@ const AppNavigator = createAnimatedSwitchNavigator(
 
 const App = createAppContainer(AppNavigator);
 
-const theme = {
-  colors: {
-    primary: '#da2555',
-    'primary-disabled': 'rgba(218, 37, 85, 0.5)',
-    info: '#282131',
-    'info-disabled': 'rgba(40, 33, 49, 0.5)',
-    success: '#6ea96a',
-    'success-disabled': 'rgba(110, 169, 106, 0.5)',
-    warning: '#eb9932',
-    'warning-disabled': 'rgba(235, 153, 50, 0.5)',
-    danger: '#f44336',
-    'danger-disabled': 'rgba(244, 67, 54, 0.5)',
-    light: '#fff',
-    'light-disabled': 'rgba(255, 255, 255, 0.5)',
-    dark: '#000',
-    'dark-disabled': 'rgba(0, 0, 0, 0.5)',
-  },
-  padding: '12px',
-  borderRadius: 10,
-  fontSize: 18
-}
-
 export default () =>
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={getThemeByName()}>
     <App ref={navigatorRef => {
       NavigationService.setTopLevelNavigator(navigatorRef);
     }} />
