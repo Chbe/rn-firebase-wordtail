@@ -4,7 +4,7 @@
         "barStyle": "light-content",
         "colors": {
             "primary": "#da2555",
-            "info": "#282131",
+            "info": "#78909c",
             "success": "#6ea96a",
             "warning": "#eb9932",
             "danger": "#f44336",
@@ -36,7 +36,7 @@
         "barStyle": "dark-content",
         "colors": {
             "primary": "#fbc02d",
-            "info": "#607d8b",
+            "info": "#90a4ae",
             "success": "#6ea96a",
             "warning": "#eb9932",
             "danger": "#f44336",
