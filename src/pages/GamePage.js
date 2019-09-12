@@ -4,8 +4,9 @@ import { CenterView, SafeWrapper } from '../components/UI/Containers/Containers'
 import Keyboard from '../components/game/in-game/keyboard/Keyboard'
 import styled from 'styled-components'
 import { View } from 'react-native'
-import { Button, Icon, Text } from 'native-base'
 import { GameContext, GameStore, useGameContext } from '../stores/GameStore'
+import { Button, Icon } from 'react-native-elements'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const Wrapper = styled(CenterView)`
     justify-content: space-between;
@@ -44,18 +45,39 @@ const GamePage = ({ navigation }) => {
 
                     <LetterBox letters={letters} />
                     <ActionsWrapper>
-                        <Button iconLeft success>
-                            <Icon name='send' />
-                            <Text>Send</Text>
-                        </Button>
-                        <Button iconLeft primary>
-                            <Icon name='glasses' />
-                            <Text>Bust</Text>
-                        </Button>
-                        <Button iconLeft warning>
-                            <Icon name='eye' />
-                            <Text>Call</Text>
-                        </Button>
+                        <Button
+                            icon={
+                                <FontAwesome5
+                                    name="paper-plane"
+                                    size={15}
+                                    color="white"
+                                    style={{ marginRight: 5 }}
+                                />
+                            }
+                            title="Send"
+                        />
+                        <Button
+                            icon={
+                                <FontAwesome5
+                                    name="glasses"
+                                    size={15}
+                                    color="white"
+                                    style={{ marginRight: 5 }}
+                                />
+                            }
+                            title="Bust"
+                        />
+                        <Button
+                            icon={
+                                <FontAwesome5
+                                    name='eye'
+                                    size={15}
+                                    color="white"
+                                    style={{ marginRight: 5 }}
+                                />
+                            }
+                            title="Call"
+                        />
                     </ActionsWrapper>
                     <View>
                         <Keyboard />

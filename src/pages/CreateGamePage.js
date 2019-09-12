@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { SafeWrapper, PaddingView } from '../components/UI/Containers/Containers';
-import { Item, Label, Input, Text, Container, Content, } from 'native-base';
 import ListOfUsers from '../components/ListOfUsers'
 import styled from 'styled-components'
 import { CreateGameContext, CreateGameStore, useCreateGameContext } from '../stores/CreateGameStore'
-import { Button } from 'react-native';
+import { View } from 'react-native';
 import firebase from 'react-native-firebase';
+import { Input, Button } from 'react-native-elements';
 
 const CreateGamePage = ({ navigation }) => {
     const { state, actions } = CreateGameStore();
@@ -26,26 +26,24 @@ const CreateGamePage = ({ navigation }) => {
     return (
         <CreateGameContext.Provider value={{ state, actions }}>
             <SafeWrapper>
-                <Container>
-                    <Content>
-                        <PaddingView>
-                            <Item floatingLabel>
-                                <Label>Game title...</Label>
-                                <Input
-                                    onEndEditing={(ev) => actions.setTitle(ev.nativeEvent.text)}
-                                />
-                            </Item>
-                            <ListOfUsers />
-                            <Button
-                                title="Create game"
-                                disabled={!gameCanBeCreated()}
-                                onPress={() => {
-                                    createGame();
-                                }}
-                            />
-                        </PaddingView>
-                    </Content>
-                </Container>
+                <PaddingView>
+                    <View>
+                        <Input
+                            placeholder='Game title...'
+                            leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
+                            onEndEditing={(ev) => actions.setTitle(ev.nativeEvent.text)}
+                        />
+                    </View>
+                    <ListOfUsers />
+                    <Button
+                        solid
+                        title="Create game"
+                        disabled={!gameCanBeCreated()}
+                        onPress={() => {
+                            createGame();
+                        }}
+                    />
+                </PaddingView>
             </SafeWrapper >
         </CreateGameContext.Provider>
     )

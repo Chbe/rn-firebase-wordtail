@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-// import { Text, Card, Avatar, Image, Input } from 'react-native-elements'
 import Logout from '../components/auth/logout/Logout'
-import { CenterView, SafeWrapper } from '../components/UI/Containers/Containers'
-import firebase, { RNFirebase } from 'react-native-firebase'
-import { Content, Form, Item, Input, Label, Container } from 'native-base'
-import { Avatar } from 'react-native-elements'
+import { CenterView, SafeWrapper, PaddingView } from '../components/UI/Containers/Containers'
+import firebase from 'react-native-firebase'
+import { Avatar, Input, Icon } from 'react-native-elements'
 
 const ProfilePage = ({ navigation }) => {
     const [user, setUser] = useState({});
@@ -44,39 +42,47 @@ const ProfilePage = ({ navigation }) => {
     }, [])
     return (
         <SafeWrapper>
-            <Container>
-                <Logout navigation={navigation} />
-                <Content>
-                    <View>
-                        <Avatar
-                            size='large'
-                            rounded
-                            title={user.displayName && user.displayName[0]}
-                            source={user.photoURL
-                                ? { uri: user.photoURL }
-                                : null}
-                            showEditButton
-                        />
-                    </View>
-                    <Form>
-                        <Item floatingLabel>
-                            <Label>{user.displayName}</Label>
-                            <Input value={displayNameInput} onEndEditing={(ev) => {
-                                manageDisplayName(ev.nativeEvent.text);
-                            }}
-                            // onFocus={() => {
-                            //     if (displayName !== user.displayName)
-                            //         setDisplayNameInput(displayName)
-                            // }} 
+            <Logout navigation={navigation} />
+            <PaddingView>
+                <View>
+                    <Avatar
+                        size='large'
+                        rounded
+                        title={user.displayName && user.displayName[0]}
+                        source={user.photoURL
+                            ? { uri: user.photoURL }
+                            : null}
+                        showEditButton
+                    />
+                </View>
+                <View>
+                    <Input
+                        placeholder={displayName}
+                        onEndEditing={(ev) => {
+                            manageDisplayName(ev.nativeEvent.text);
+                        }}
+                        leftIcon={
+                            <Icon
+                                type='font-awesome'
+                                name='user'
+                                size={24}
+                                color='black'
                             />
-                        </Item>
-                        <Item floatingLabel last>
-                            <Label>{email}</Label>
-                            <Input />
-                        </Item>
-                    </Form>
-                </Content>
-            </Container>
+                        }
+                    />
+                    <Input
+                        placeholder={email}
+                        leftIcon={
+                            <Icon
+                                type='font-awesome'
+                                name='envelope'
+                                size={24}
+                                color='black'
+                            />
+                        }
+                    />
+                </View>
+            </PaddingView>
         </SafeWrapper>
     )
 }

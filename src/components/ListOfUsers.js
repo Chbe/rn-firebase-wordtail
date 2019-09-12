@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useReducer } from 'react'
 import firebase from 'react-native-firebase';
-import { Avatar } from 'react-native-elements';
+import { Avatar, ListItem } from 'react-native-elements';
 import { useCreateGameContext } from '../stores/CreateGameStore';
-import { List, ListItem, Left, Body, Right, Button, Text } from 'native-base';
+import { FlatList } from 'react-native';
 
 const ListOfUsers = () => {
     const { state, actions } = useCreateGameContext();
@@ -63,28 +63,26 @@ const ListOfUsers = () => {
 
     const keyExtractor = (item, index) => index.toString();
 
+    const renderItem = ({ item }) => (
+        <ListItem
+            title={item.displayName}
+            subtitle={userIsInvited(item.uid) ? 'Invited' : 'Not invited'}
+            leftAvatar={{
+                source: item.photoURL && { uri: item.photoURL },
+                title: item.displayName[0]
+            }}
+            bottomDivider
+            onPress={() => toggleInvite(item)}
+        />
+    )
+
+
     return (
-        <List>
-            {friends.map(user =>
-                <ListItem key={keyExtractor} thumbnail>
-                    <Left>
-                        <Avatar rounded
-                            source={user.photoURL ? {
-                                uri: user.photoURL
-                            }
-                                : null}
-                            title={user.photoURL ? null : user.displayName[0]} />
-                    </Left>
-                    <Body>
-                        <Text>{user.displayName}</Text>
-                    </Body>
-                    <Right>
-                        <Button transparent onPress={() => toggleInvite(user)}>
-                            <Text>{userIsInvited(user.uid) ? 'Invited' : 'Not invited'}</Text>
-                        </Button>
-                    </Right>
-                </ListItem>)}
-        </List>
+        <FlatList
+            keyExtractor={keyExtractor}
+            data={friends}
+            renderItem={renderItem}
+        />
     )
 }
 

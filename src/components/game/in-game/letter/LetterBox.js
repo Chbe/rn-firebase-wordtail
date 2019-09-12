@@ -47,7 +47,8 @@ const LetterBox = ({ letters = [] }) => {
             startAnimation();
         }
         return () => {
-            actions.clear();
+            // Why dafaq does this line make GamePage crash...?
+            // actions.clear();
             if (intervalHandler)
                 clearInterval(intervalHandler);
             if (timeoutHandler)
