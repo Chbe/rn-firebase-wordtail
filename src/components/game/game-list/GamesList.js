@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { SectionList } from 'react-native';
 import firebase from 'react-native-firebase';
-import { ListItem } from 'react-native-elements';
+import { ListItem, Button, withTheme } from 'react-native-elements';
 import SectionHeader from './SectionHeader';
 import SectionSubtitle from './SectionSubtitle';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
-const GamesList = ({ navigation, uid }) => {
+const GamesList = ({ navigation, uid, theme }) => {
     const [games, setGames] = useState([]);
 
     const onCollectionUpdate = (querySnapshot) => {
@@ -28,7 +29,7 @@ const GamesList = ({ navigation, uid }) => {
                 uid)
             .orderBy('status', 'asc')
             .orderBy('lastUpdated', 'desc');
-            // .limit(5);
+        // .limit(5);
         const sub = ref.onSnapshot(onCollectionUpdate)
         return () => {
             sub();
@@ -82,7 +83,12 @@ const GamesList = ({ navigation, uid }) => {
                 title={item.title}
                 subtitle={<SectionSubtitle item={item} />}
                 bottomDivider
-                chevron
+                chevron={
+                    <FontAwesome5Icon
+                        name="arrow-right"
+                        size={15}
+                        color={theme.colors.primary}
+                    />}
                 leftAvatar={{
                     source: item.status === 'active'
                         ? { uri: item.players.find(p => p.uid === item.activePlayer).photoURL }
@@ -102,4 +108,4 @@ const GamesList = ({ navigation, uid }) => {
     )
 }
 
-export default GamesList
+export default withTheme(GamesList)
