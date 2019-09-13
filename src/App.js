@@ -55,7 +55,7 @@ const AppStack = createStackNavigator({
           <FontAwesome5Icon
             color={theme.barStyle === 'light-content' ? '#fff' : '#000'}
             size={24}
-            name='user'
+            name='user-cog'
             onPress={() => NavigationService.navigate('Profile')} />
         </PaddingView>
       ),
