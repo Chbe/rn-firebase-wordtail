@@ -14,7 +14,7 @@ import { Transition } from 'react-native-reanimated';
 import AuthLoadingPage from './pages/AuthLoadingPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
-import ProfilePage from './pages/ProfilePage';
+import AdministrationPage from './pages/AdministrationPage';
 import NavigationService from './services/navigation/NavigationService';
 import GamePage from './pages/GamePage';
 import CreateGamePage from './pages/CreateGamePage';
@@ -56,7 +56,7 @@ const AppStack = createStackNavigator({
             color={theme.barStyle === 'light-content' ? '#fff' : '#000'}
             size={24}
             name='user-cog'
-            onPress={() => NavigationService.navigate('Profile')} />
+            onPress={() => NavigationService.navigate('Administration')} />
         </PaddingView>
       ),
       headerRight: (
@@ -70,7 +70,7 @@ const AppStack = createStackNavigator({
       )
     }
   },
-  Profile: ProfilePage,
+  Administration: AdministrationPage,
   Game: GamePage,
   CreateGame: CreateGamePage
 }, {

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { SafeWrapper, PaddingView } from '../components/UI/Containers/Containers';
+import TextField from '../components/UI/controls/inputs/floating/FloatingInput'
 import ListOfUsers from '../components/ListOfUsers'
-import styled from 'styled-components'
 import { CreateGameContext, CreateGameStore, useCreateGameContext } from '../stores/CreateGameStore'
 import { View } from 'react-native';
 import firebase from 'react-native-firebase';
-import { Input, Button } from 'react-native-elements';
+import { Input, Button, withTheme } from 'react-native-elements';
 
-const CreateGamePage = ({ navigation }) => {
+const CreateGamePage = ({ navigation, theme }) => {
     const { state, actions } = CreateGameStore();
 
     const createGame = async () => {
@@ -28,10 +28,10 @@ const CreateGamePage = ({ navigation }) => {
             <SafeWrapper>
                 <PaddingView>
                     <View>
-                        <Input
-                            placeholder='Game title...'
-                            leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
-                            onEndEditing={(ev) => actions.setTitle(ev.nativeEvent.text)}
+                        <TextField
+                            tintColor={theme.colors.primary}
+                            label='Game title'
+                            onChangeText={(title) => actions.setTitle(title)}
                         />
                     </View>
                     <ListOfUsers />
@@ -49,4 +49,4 @@ const CreateGamePage = ({ navigation }) => {
     )
 }
 
-export default CreateGamePage
+export default withTheme(CreateGamePage)

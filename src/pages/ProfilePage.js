@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { View, SegmentedControlIOS, FlatList, Text } from 'react-native'
+import { View } from 'react-native'
 import Logout from '../components/auth/logout/Logout'
-import { CenterView, SafeWrapper, PaddingView } from '../components/UI/Containers/Containers'
+import { CenterView } from '../components/UI/Containers/Containers'
 import firebase from 'react-native-firebase'
-import { Avatar, withTheme, CheckBox } from 'react-native-elements'
+import { Avatar, withTheme } from 'react-native-elements'
 import TextField from '../components/UI/controls/inputs//floating/FloatingInput';
-import { themes } from '../core/Themes'
+
 
 const ProfilePage = ({ navigation, theme }) => {
     const [user, setUser] = useState({});
     const [displayNameInputValue, setDisplayNameInputValue] = useState('');
     const [emailInputValue, setEmailInputValue] = useState('');
-
-    const [segmentIndex, setSegmentIndex] = useState(0);
-    const [choosenTheme, setChoosenTheme] = useState(theme.key);
 
     useEffect(() => {
         const { currentUser } = firebase.auth();
@@ -23,70 +20,34 @@ const ProfilePage = ({ navigation, theme }) => {
         };
     }, [])
     return (
-        <SafeWrapper>
-            <PaddingView>
-                <SegmentedControlIOS
-                    values={['Profile', 'App settings']}
-                    selectedIndex={segmentIndex}
-                    tintColor={theme.colors.primary}
-                    onChange={(event) => {
-                        setSegmentIndex(event.nativeEvent.selectedSegmentIndex);
-                    }}
+        <View>
+            <CenterView style={{ paddingTop: 10 }}>
+                <Avatar
+                    size='large'
+                    rounded
+                    title={user.displayName && user.displayName[0]}
+                    source={user.photoURL
+                        ? { uri: user.photoURL }
+                        : null}
+                    showEditButton
                 />
-                {segmentIndex === 0
-                    ?
-                    <>
-                        <CenterView style={{ paddingTop: 10 }}>
-                            <Avatar
-                                size='large'
-                                rounded
-                                title={user.displayName && user.displayName[0]}
-                                source={user.photoURL
-                                    ? { uri: user.photoURL }
-                                    : null}
-                                showEditButton
-                            />
-                        </CenterView>
-                        <View>
-                            <TextField
-                                tintColor={theme.colors.primary}
-                                label={user.displayName ? user.displayName : 'Anonymous Name'}
-                                value={displayNameInputValue}
-                                onChangeText={(name) => setDisplayNameInputValue(name)}
-                            />
-                            <TextField
-                                tintColor={theme.colors.primary}
-                                label={user.email ? user.email : 'Anonymous Email'}
-                                value={emailInputValue}
-                                onChangeText={(email) => setEmailInputValue(email)}
-                            />
-                        </View>
-                        <Logout navigation={navigation} />
-                    </>
-                    : <>
-                        <FlatList
-                            ListHeaderComponent={<PaddingView>
-                                <Text>App appearence</Text>
-                            </PaddingView>}
-                            data={themes}
-                            renderItem={({ item }) => <CheckBox
-                                containerStyle={{
-                                    backgroundColor: item.colors.primary
-                                }}
-                                textStyle={{
-                                    color: item.colors.info
-                                }}
-                                title={item.key}
-                                checked={item.key === choosenTheme}
-                                checkedColor={item.colors.info}
-                                onPress={() => setChoosenTheme(item.key)}
-                            />}
-                            keyExtractor={item => item.key}
-                        />
-                    </>
-                }
-            </PaddingView>
-        </SafeWrapper>
+            </CenterView>
+            <View>
+                <TextField
+                    tintColor={theme.colors.primary}
+                    label={user.displayName ? user.displayName : 'Anonymous Name'}
+                    value={displayNameInputValue}
+                    onChangeText={(name) => setDisplayNameInputValue(name)}
+                />
+                <TextField
+                    tintColor={theme.colors.primary}
+                    label={user.email ? user.email : 'Anonymous Email'}
+                    value={emailInputValue}
+                    onChangeText={(email) => setEmailInputValue(email)}
+                />
+            </View>
+            <Logout navigation={navigation} />
+        </View>
     )
 }
 
