@@ -12,15 +12,15 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		20A21798B2D6F1EE96DF18BE /* libPods-WordTail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0EC22E5D5AAAD78CFF1B35B /* libPods-WordTail.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* WordTailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* WordTailTests.m */; };
-		A3969F6072AB56D99BF2E7CB /* libPods-WordTail-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99FE526F18889A41089C62C9 /* libPods-WordTail-tvOS.a */; };
+		36DA6EDACDA331E3B2B96FE4 /* libPods-WordTail-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 212D691CFCDB2515291558CA /* libPods-WordTail-tvOSTests.a */; };
+		41C737C371D3786EC6034807 /* libPods-WordTail-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE02AF08C7B135FC540EDBA2 /* libPods-WordTail-tvOS.a */; };
 		B06B017D231F049C006686DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B06B017C231F049C006686DC /* GoogleService-Info.plist */; };
-		EEF61525EA95C305C7A10C3B /* libPods-WordTailTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 827880D4EA003871778B5B4C /* libPods-WordTailTests.a */; };
-		F89EA0EF9FAB472FE7020F90 /* libPods-WordTail-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD19A295D147759AD7D86BF5 /* libPods-WordTail-tvOSTests.a */; };
+		E6B427316B7CCE587A83107C /* libPods-WordTail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7540D46265F4CEC062AC7A /* libPods-WordTail.a */; };
+		FFE86AF6F13C685281B11643 /* libPods-WordTailTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38918694FA19F9D169A14A9B /* libPods-WordTailTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +46,8 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* WordTailTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordTailTests.m; sourceTree = "<group>"; };
 		016EA98A086A40B3A496CD1F /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		095EC7369F77502A4A671CBC /* Pods-WordTailTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTailTests.release.xcconfig"; path = "Target Support Files/Pods-WordTailTests/Pods-WordTailTests.release.xcconfig"; sourceTree = "<group>"; };
+		0A7540D46265F4CEC062AC7A /* libPods-WordTail.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WordTail.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D666C23D4DD46CDB9EE0E0A /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		103064A74A2640C3A1EB5D03 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		10D72A3D4C8148F5B4E22C96 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -59,39 +61,37 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = WordTail/main.m; sourceTree = "<group>"; };
 		15839D4F803E4FF1A1A3CC86 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		1F71C6F223904F61B99A5D82 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
-		2309CD1CC381C5D170BC1908 /* Pods-WordTail-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-WordTail-tvOSTests/Pods-WordTail-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		212D691CFCDB2515291558CA /* libPods-WordTail-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WordTail-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		25C0EE2C56E24B57AA8DFF99 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		2CF4298382A73C0BE6091145 /* Pods-WordTail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail.debug.xcconfig"; path = "Target Support Files/Pods-WordTail/Pods-WordTail.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* WordTail-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WordTail-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* WordTail-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WordTail-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EB43DD29C009CE8EF43E595 /* Pods-WordTailTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTailTests.release.xcconfig"; path = "Target Support Files/Pods-WordTailTests/Pods-WordTailTests.release.xcconfig"; sourceTree = "<group>"; };
-		40D228951E6AE2926A0DAE3B /* Pods-WordTail-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-WordTail-tvOS/Pods-WordTail-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		477F63B2161A35391EF32BF9 /* Pods-WordTail-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail-tvOS.release.xcconfig"; path = "Target Support Files/Pods-WordTail-tvOS/Pods-WordTail-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		3222254939F6FA65210AEE5C /* Pods-WordTail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail.release.xcconfig"; path = "Target Support Files/Pods-WordTail/Pods-WordTail.release.xcconfig"; sourceTree = "<group>"; };
+		38918694FA19F9D169A14A9B /* libPods-WordTailTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WordTailTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AA825BB6034C179EC0910B /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		494553F0F6A14EA4B8C8AA4B /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		4DDCECD521274F93B87411D6 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		623326266B814F77A4D9928B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		6CB0D8961BAEF1F9C7F9EBAC /* Pods-WordTailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTailTests.debug.xcconfig"; path = "Target Support Files/Pods-WordTailTests/Pods-WordTailTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6620B1CAD7371856D96ACEA6 /* Pods-WordTail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail.debug.xcconfig"; path = "Target Support Files/Pods-WordTail/Pods-WordTail.debug.xcconfig"; sourceTree = "<group>"; };
+		781E1FA4D406DD7F7DBE526A /* Pods-WordTail-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail-tvOS.release.xcconfig"; path = "Target Support Files/Pods-WordTail-tvOS/Pods-WordTail-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		7A51B4363D6F435E87CEBE8F /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		7C68D830E24A42849C626A07 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		827880D4EA003871778B5B4C /* libPods-WordTailTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WordTailTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82F5D9887A5B460DBB9D8564 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		882A904907F2A9320D04D798 /* Pods-WordTail-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-WordTail-tvOSTests/Pods-WordTail-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		92BF859D0357421E8B47A29D /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
-		99FE526F18889A41089C62C9 /* libPods-WordTail-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WordTail-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4EE8234BF9F494DBD8976C6 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		A6BCC3D03EDA4FB1A6ACA44F /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		A7EEA78FEF9D4DBA933DF055 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		A7F8E7F37C004BDAAFAD18DF /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		AB75823F847610FE6CED3ED2 /* Pods-WordTail-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-WordTail-tvOS/Pods-WordTail-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		AE02AF08C7B135FC540EDBA2 /* libPods-WordTail-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WordTail-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06B017C231F049C006686DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8E756D1F8864CB7B03F5B4F /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		BC9801FC3A634C988CE11D9C /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
-		BD19A295D147759AD7D86BF5 /* libPods-WordTail-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WordTail-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1A68C361DD37C03D5D9F22E /* Pods-WordTailTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTailTests.debug.xcconfig"; path = "Target Support Files/Pods-WordTailTests/Pods-WordTailTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C1CF6FC2AED64690863C3604 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		C3662EC040FE28C04AA16E4C /* Pods-WordTail-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-WordTail-tvOSTests/Pods-WordTail-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C41B29E9F01C485BBD99C8AC /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		CECA29B1DC72D3A6C49504B8 /* Pods-WordTail-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-WordTail-tvOSTests/Pods-WordTail-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		CF7B74BAC91F477F813E43E9 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		D09A60503EC1B268EEEBEA66 /* Pods-WordTail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordTail.release.xcconfig"; path = "Target Support Files/Pods-WordTail/Pods-WordTail.release.xcconfig"; sourceTree = "<group>"; };
-		D0EC22E5D5AAAD78CFF1B35B /* libPods-WordTail.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WordTail.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D57F5F1CB37C46BAB328B804 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		D66FFF10EA444A3387F41969 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		DBC5FA48C09D4EC095AD43B5 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEF61525EA95C305C7A10C3B /* libPods-WordTailTests.a in Frameworks */,
+				FFE86AF6F13C685281B11643 /* libPods-WordTailTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20A21798B2D6F1EE96DF18BE /* libPods-WordTail.a in Frameworks */,
+				E6B427316B7CCE587A83107C /* libPods-WordTail.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3969F6072AB56D99BF2E7CB /* libPods-WordTail-tvOS.a in Frameworks */,
+				41C737C371D3786EC6034807 /* libPods-WordTail-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F89EA0EF9FAB472FE7020F90 /* libPods-WordTail-tvOSTests.a in Frameworks */,
+				36DA6EDACDA331E3B2B96FE4 /* libPods-WordTail-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,10 +178,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				D0EC22E5D5AAAD78CFF1B35B /* libPods-WordTail.a */,
-				99FE526F18889A41089C62C9 /* libPods-WordTail-tvOS.a */,
-				BD19A295D147759AD7D86BF5 /* libPods-WordTail-tvOSTests.a */,
-				827880D4EA003871778B5B4C /* libPods-WordTailTests.a */,
+				0A7540D46265F4CEC062AC7A /* libPods-WordTail.a */,
+				AE02AF08C7B135FC540EDBA2 /* libPods-WordTail-tvOS.a */,
+				212D691CFCDB2515291558CA /* libPods-WordTail-tvOSTests.a */,
+				38918694FA19F9D169A14A9B /* libPods-WordTailTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -264,14 +264,14 @@
 		EE1313748F64AA25F2A4A495 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2CF4298382A73C0BE6091145 /* Pods-WordTail.debug.xcconfig */,
-				D09A60503EC1B268EEEBEA66 /* Pods-WordTail.release.xcconfig */,
-				40D228951E6AE2926A0DAE3B /* Pods-WordTail-tvOS.debug.xcconfig */,
-				477F63B2161A35391EF32BF9 /* Pods-WordTail-tvOS.release.xcconfig */,
-				2309CD1CC381C5D170BC1908 /* Pods-WordTail-tvOSTests.debug.xcconfig */,
-				882A904907F2A9320D04D798 /* Pods-WordTail-tvOSTests.release.xcconfig */,
-				6CB0D8961BAEF1F9C7F9EBAC /* Pods-WordTailTests.debug.xcconfig */,
-				2EB43DD29C009CE8EF43E595 /* Pods-WordTailTests.release.xcconfig */,
+				6620B1CAD7371856D96ACEA6 /* Pods-WordTail.debug.xcconfig */,
+				3222254939F6FA65210AEE5C /* Pods-WordTail.release.xcconfig */,
+				AB75823F847610FE6CED3ED2 /* Pods-WordTail-tvOS.debug.xcconfig */,
+				781E1FA4D406DD7F7DBE526A /* Pods-WordTail-tvOS.release.xcconfig */,
+				C3662EC040FE28C04AA16E4C /* Pods-WordTail-tvOSTests.debug.xcconfig */,
+				CECA29B1DC72D3A6C49504B8 /* Pods-WordTail-tvOSTests.release.xcconfig */,
+				C1A68C361DD37C03D5D9F22E /* Pods-WordTailTests.debug.xcconfig */,
+				095EC7369F77502A4A671CBC /* Pods-WordTailTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -283,7 +283,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "WordTailTests" */;
 			buildPhases = (
-				06E51B4FE7BBF4D3332FB9A0 /* [CP] Check Pods Manifest.lock */,
+				63F061B60C9B9829CFD4DBDB /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -302,13 +302,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "WordTail" */;
 			buildPhases = (
-				14A996FCD8D530630072C8D3 /* [CP] Check Pods Manifest.lock */,
+				D10CD733943A0DB6389D7C82 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				DE4789B7E9ECA7095100D65F /* [CP] Copy Pods Resources */,
+				46E114525589AA08D29E4597 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -323,7 +323,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WordTail-tvOS" */;
 			buildPhases = (
-				6972AAA8ED0C62F0C501DC95 /* [CP] Check Pods Manifest.lock */,
+				AFAE90060F2A645B26233909 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -343,7 +343,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WordTail-tvOSTests" */;
 			buildPhases = (
-				6E423C53C973B6E49926524C /* [CP] Check Pods Manifest.lock */,
+				8576CB30B6CB8C3CA7F319CE /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -454,50 +454,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		06E51B4FE7BBF4D3332FB9A0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WordTailTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		14A996FCD8D530630072C8D3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WordTail-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -512,51 +468,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		6972AAA8ED0C62F0C501DC95 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WordTail-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6E423C53C973B6E49926524C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WordTail-tvOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DE4789B7E9ECA7095100D65F /* [CP] Copy Pods Resources */ = {
+		46E114525589AA08D29E4597 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -606,6 +518,94 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WordTail/Pods-WordTail-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63F061B60C9B9829CFD4DBDB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WordTailTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8576CB30B6CB8C3CA7F319CE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WordTail-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AFAE90060F2A645B26233909 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WordTail-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D10CD733943A0DB6389D7C82 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WordTail-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -713,7 +713,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6CB0D8961BAEF1F9C7F9EBAC /* Pods-WordTailTests.debug.xcconfig */;
+			baseConfigurationReference = C1A68C361DD37C03D5D9F22E /* Pods-WordTailTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -736,7 +736,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2EB43DD29C009CE8EF43E595 /* Pods-WordTailTests.release.xcconfig */;
+			baseConfigurationReference = 095EC7369F77502A4A671CBC /* Pods-WordTailTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -756,7 +756,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2CF4298382A73C0BE6091145 /* Pods-WordTail.debug.xcconfig */;
+			baseConfigurationReference = 6620B1CAD7371856D96ACEA6 /* Pods-WordTail.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -776,7 +776,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D09A60503EC1B268EEEBEA66 /* Pods-WordTail.release.xcconfig */;
+			baseConfigurationReference = 3222254939F6FA65210AEE5C /* Pods-WordTail.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -795,7 +795,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40D228951E6AE2926A0DAE3B /* Pods-WordTail-tvOS.debug.xcconfig */;
+			baseConfigurationReference = AB75823F847610FE6CED3ED2 /* Pods-WordTail-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -823,7 +823,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 477F63B2161A35391EF32BF9 /* Pods-WordTail-tvOS.release.xcconfig */;
+			baseConfigurationReference = 781E1FA4D406DD7F7DBE526A /* Pods-WordTail-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -851,7 +851,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2309CD1CC381C5D170BC1908 /* Pods-WordTail-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = C3662EC040FE28C04AA16E4C /* Pods-WordTail-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -878,7 +878,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 882A904907F2A9320D04D798 /* Pods-WordTail-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = CECA29B1DC72D3A6C49504B8 /* Pods-WordTail-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
