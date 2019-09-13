@@ -3,8 +3,9 @@ import { View, SegmentedControlIOS, FlatList } from 'react-native'
 import Logout from '../components/auth/logout/Logout'
 import { CenterView, SafeWrapper, PaddingView } from '../components/UI/Containers/Containers'
 import firebase from 'react-native-firebase'
-import { Avatar, Input, Icon, withTheme } from 'react-native-elements'
+import { Avatar, Input, Icon, withTheme, CheckBox } from 'react-native-elements'
 import TextField from '../components/UI/controls/inputs//floating/FloatingInput';
+import { themes } from '../core/Themes'
 
 const ProfilePage = ({ navigation, theme }) => {
     const [user, setUser] = useState({});
@@ -34,7 +35,7 @@ const ProfilePage = ({ navigation, theme }) => {
                 {segmentIndex === 0
                     ?
                     <>
-                        <CenterView style={{paddingTop: 10}}>
+                        <CenterView style={{ paddingTop: 10 }}>
                             <Avatar
                                 size='large'
                                 rounded
@@ -63,7 +64,19 @@ const ProfilePage = ({ navigation, theme }) => {
                     </>
                     : <>
                         <FlatList
-
+                            data={themes}
+                            renderItem={({ item }) => <CheckBox
+                                containerStyle={{
+                                    backgroundColor: item.colors.primary
+                                }}
+                                textStyle={{
+                                    color: item.colors.info
+                                }}
+                                title={item.key}
+                                checked={true}
+                                checkedColor={item.colors.info}
+                            />}
+                            keyExtractor={item => item.key}
                         />
                     </>
                 }
