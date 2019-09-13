@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { View, SegmentedControlIOS, FlatList } from 'react-native'
+import { View, SegmentedControlIOS, FlatList, Text } from 'react-native'
 import Logout from '../components/auth/logout/Logout'
 import { CenterView, SafeWrapper, PaddingView } from '../components/UI/Containers/Containers'
 import firebase from 'react-native-firebase'
-import { Avatar, Input, Icon, withTheme, CheckBox } from 'react-native-elements'
+import { Avatar, withTheme, CheckBox } from 'react-native-elements'
 import TextField from '../components/UI/controls/inputs//floating/FloatingInput';
 import { themes } from '../core/Themes'
 
@@ -13,6 +13,7 @@ const ProfilePage = ({ navigation, theme }) => {
     const [emailInputValue, setEmailInputValue] = useState('');
 
     const [segmentIndex, setSegmentIndex] = useState(0);
+    const [choosenTheme, setChoosenTheme] = useState(theme.key);
 
     useEffect(() => {
         const { currentUser } = firebase.auth();
@@ -64,6 +65,9 @@ const ProfilePage = ({ navigation, theme }) => {
                     </>
                     : <>
                         <FlatList
+                            ListHeaderComponent={<PaddingView>
+                                <Text>App appearence</Text>
+                            </PaddingView>}
                             data={themes}
                             renderItem={({ item }) => <CheckBox
                                 containerStyle={{
@@ -73,7 +77,7 @@ const ProfilePage = ({ navigation, theme }) => {
                                     color: item.colors.info
                                 }}
                                 title={item.key}
-                                checked={true}
+                                checked={item.key === choosenTheme}
                                 checkedColor={item.colors.info}
                             />}
                             keyExtractor={item => item.key}
