@@ -12,7 +12,7 @@ const AuthLoadingPage = ({ navigation }) => {
     });
     return (
         <SafeWrapper>
-            <CenterView>
+            <CenterView style={{ height: '100%' }}>
                 <ActivityIndicator size="large" color="#0000ff" />
             </CenterView>
         </SafeWrapper>

@@ -7,7 +7,7 @@ import AnonymousLogin from '../components/auth/login/AnonymousLogin';
 const Login = ({ navigation }) => {
     return (
         <SafeWrapper>
-            <CenterView>
+            <CenterView style={{ height: '100%' }}>
                 <PaddingView padding={5}>
                     <EmailLogin navigation={navigation} />
                 </PaddingView>
