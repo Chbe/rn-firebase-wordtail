@@ -11,6 +11,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 const Wrapper = styled(CenterView)`
     justify-content: space-between;
     flex-direction: column;
+    height: 100%;
 `
 
 const ActionsWrapper = styled.View`
