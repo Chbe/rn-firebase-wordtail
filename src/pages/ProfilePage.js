@@ -79,6 +79,7 @@ const ProfilePage = ({ navigation, theme }) => {
                                 title={item.key}
                                 checked={item.key === choosenTheme}
                                 checkedColor={item.colors.info}
+                                onPress={() => setChoosenTheme(item.key)}
                             />}
                             keyExtractor={item => item.key}
                         />
