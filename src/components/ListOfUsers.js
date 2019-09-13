@@ -7,20 +7,23 @@ import { FlatList } from 'react-native';
 const ListOfUsers = () => {
     const { state, actions } = useCreateGameContext();
     const [friends, setFriendsList] = useState([]);
+    const [adminPlayer, setAdminPLayer] = useState({});
 
     const toggleInvite = (user) => {
-        let tempInvites = [];
+        let invited;
         const exists = userIsInvited(user.uid);
         if (exists) {
-            tempInvites = [...state.players].filter(invitedUser => invitedUser.uid !== user.uid);
+            invited = false;
         } else {
-            tempInvites = [...state.players, { ...user, score: 0, isActive: false, accepted: false }]
+            invited = true;
         }
-        actions.setPlayers(tempInvites);
+        const newFriendsList = friends.map(friend => ({ ...friend, invited }));
+        setFriendsList(newFriendsList);
+        actions.setPlayers([...newFriendsList.filter(friend => friend.invited), adminPlayer]);
     }
 
     const userIsInvited = (uid) => {
-        return !!state.players.find(invitedUser => invitedUser.uid === uid);
+        return !!friends.find(invitedUser => invitedUser.uid === uid && invitedUser.invited);
     }
 
     const getFriends = async (userRef) => {
@@ -29,7 +32,15 @@ const ListOfUsers = () => {
         if (user.exists) {
             const userData = user.data();
             if (userData.friends) {
-                setFriendsList(userData.friends);
+                setFriendsList(userData.friends
+                    .map(friend => ({
+                        ...friend,
+                        invited: false,
+                        score: 0,
+                        isActive: false,
+                        accepted: false
+                    }))
+                );
             }
         } else {
             console.error('Couldnt get user document');
@@ -40,7 +51,7 @@ const ListOfUsers = () => {
         actions.clear();
         const { uid, displayName, email, photoURL } = firebase.auth().currentUser;
         actions.setAdmin(uid);
-        actions.setPlayers([{
+        setAdminPLayer({
             uid,
             displayName,
             email,
@@ -48,7 +59,7 @@ const ListOfUsers = () => {
             score: 0,
             isActive: false,
             accepted: true
-        }]); // Adding current user as one of game players per default
+        });
 
         const userRef = firebase.firestore()
             .collection('users')
