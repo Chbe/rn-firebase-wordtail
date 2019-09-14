@@ -60,7 +60,7 @@ const GamePage = ({ navigation }) => {
                         <Button
                             icon={
                                 <FontAwesome5
-                                    name="glasses"
+                                    name="gavel"
                                     size={15}
                                     color="white"
                                     style={{ marginRight: 5 }}
@@ -71,7 +71,7 @@ const GamePage = ({ navigation }) => {
                         <Button
                             icon={
                                 <FontAwesome5
-                                    name='eye'
+                                    name='glasses'
                                     size={15}
                                     color="white"
                                     style={{ marginRight: 5 }}
