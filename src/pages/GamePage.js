@@ -5,7 +5,7 @@ import Keyboard from '../components/game/in-game/keyboard/Keyboard'
 import styled from 'styled-components'
 import { View } from 'react-native'
 import { GameContext, GameStore, useGameContext } from '../stores/GameStore'
-import { Button, Icon } from 'react-native-elements'
+import { Button, Icon, withTheme } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const Wrapper = styled(CenterView)`
@@ -20,7 +20,7 @@ const ActionsWrapper = styled.View`
     justify-content: space-around;
 `;
 
-const GamePage = ({ navigation }) => {
+const GamePage = ({ navigation, theme }) => {
     const { state, actions } = GameStore();
 
     const [id, setId] = useState('');
@@ -39,7 +39,7 @@ const GamePage = ({ navigation }) => {
     }, [])
     return (
         <GameContext.Provider value={{ state, actions }}>
-            <SafeWrapper>
+            <SafeWrapper bg={theme.colors.shade}>
                 <Wrapper>
                     {/* TOOD: This shall be a progress bar */}
                     <View style={{ height: 30 }}></View>
@@ -47,17 +47,19 @@ const GamePage = ({ navigation }) => {
                     <LetterBox letters={letters} />
                     <ActionsWrapper>
                         <Button
+                            background={theme.colors.primary}
                             icon={
                                 <FontAwesome5
                                     name="paper-plane"
                                     size={15}
-                                    color="white"
+                                    color={"white"}
                                     style={{ marginRight: 5 }}
                                 />
                             }
                             title="Send"
                         />
                         <Button
+                            buttonStyle={{ backgroundColor: theme.colors.accent2 }}
                             icon={
                                 <FontAwesome5
                                     name="gavel"
@@ -69,6 +71,7 @@ const GamePage = ({ navigation }) => {
                             title="Bust"
                         />
                         <Button
+                            buttonStyle={{ backgroundColor: theme.colors.accent }}
                             icon={
                                 <FontAwesome5
                                     name='glasses'
@@ -89,4 +92,4 @@ const GamePage = ({ navigation }) => {
     )
 }
 
-export default GamePage
+export default withTheme(GamePage)

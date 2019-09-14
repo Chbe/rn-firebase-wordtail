@@ -89,7 +89,7 @@ const GamesList = ({ navigation, uid, theme }) => {
                     <FontAwesome5Icon
                         name="arrow-right"
                         size={15}
-                        color={theme.colors.primary}
+                        color={theme.colors.accent}
                     />}
                 leftAvatar={{
                     source: item.status === 'active'

@@ -28,7 +28,7 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import { PaddingView } from './components/UI/Containers/Containers';
 import { StatusBar } from 'react-native';
 
-const theme = getTheme('yellow');
+const theme = getTheme('light-purple');
 const defaultNavigationOptions = {
   /** a style object that will be applied to the View that wraps the header. 
      *  If you set backgroundColor on it, that will be the color of your header. */

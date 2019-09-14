@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const SectionView = styled(PaddingView)`
     flex-direction: row;
     align-items: center;
-    background-color: ${props => props.theme.colors.info};
+    background-color: ${props => props.theme.colors.accent};
 `;
 
 const SectionIcon = styled(Icon)`

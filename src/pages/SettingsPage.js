@@ -19,11 +19,11 @@ const SettingsPage = ({ theme }) => {
                         backgroundColor: item.colors.primary
                     }}
                     textStyle={{
-                        color: item.colors.info
+                        color: item.colors.lightShade
                     }}
                     title={item.key}
                     checked={item.key === choosenTheme}
-                    checkedColor={item.colors.info}
+                    checkedColor={item.colors.lightShade}
                     onPress={() => setChoosenTheme(item.key)}
                 />}
                 keyExtractor={item => item.key}

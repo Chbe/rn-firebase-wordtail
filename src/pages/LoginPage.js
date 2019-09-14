@@ -3,10 +3,11 @@ import { CenterView, PaddingView, SafeWrapper } from '../components/UI/Container
 import EmailLogin from '../components/auth/login/EmailLogin';
 import FacebookLogin from '../components/auth/login/FacebookLogin';
 import AnonymousLogin from '../components/auth/login/AnonymousLogin';
+import { withTheme } from 'react-native-elements';
 
-const Login = ({ navigation }) => {
+const Login = ({ navigation, theme }) => {
     return (
-        <SafeWrapper>
+        <SafeWrapper bg={theme.colors.shade}>
             <CenterView style={{ height: '100%' }}>
                 <PaddingView padding={5}>
                     <EmailLogin navigation={navigation} />
@@ -22,4 +23,4 @@ const Login = ({ navigation }) => {
     )
 }
 
-export default Login
+export default withTheme(Login)

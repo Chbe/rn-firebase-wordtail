@@ -46,5 +46,39 @@
         "padding": "12px",
         "borderRadius": 10,
         "fontSize": 18
+    },
+    {
+        "key": "light-purple",
+        "barStyle": "light-content",
+        "colors": {
+            "primary": "#5946BB",
+            "accent": "#7C8BE5",
+            "accent2": "#458ED7",
+            "shade": "#FBFAF8",
+            "shade2": "#14143A",
+            "success": "#509070",
+            "warning": "#cd7f38",
+            "danger": "#f44336"
+        },
+        "padding": "12px",
+        "borderRadius": 10,
+        "fontSize": 18
+    },
+    {
+        "key": "dark-purple",
+        "barStyle": "light-content",
+        "colors": {
+            "primary": "#5946BB",
+            "accent": "#458ED7",
+            "accent2": "#7C8BE5",
+            "shade": "#14143A",
+            "shade2": "#FBFAF8",
+            "success": "#509070",
+            "warning": "#cd7f38",
+            "danger": "#f44336"
+        },
+        "padding": "12px",
+        "borderRadius": 10,
+        "fontSize": 18
     }
 ]

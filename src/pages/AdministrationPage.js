@@ -9,7 +9,7 @@ const AdministrationPage = ({ navigation, theme }) => {
     const [segmentIndex, setSegmentIndex] = useState(0);
 
     return (
-        <SafeWrapper>
+        <SafeWrapper bg={theme.colors.shade}>
             <PaddingView>
                 <SegmentedControlIOS
                     values={['Profile', 'App settings']}

@@ -1,10 +1,11 @@
 import React from 'react'
 import { SafeWrapper, PaddingView } from '../components/UI/Containers/Containers'
 import { Text } from 'react-native'
+import { withTheme } from 'react-native-elements'
 
-const ChatPage = () => {
+const ChatPage = ({ theme }) => {
     return (
-        <SafeWrapper>
+        <SafeWrapper bg={theme.colors.shade}>
             <PaddingView>
                 <Text>TODO Chat Page</Text>
             </PaddingView>
@@ -12,4 +13,4 @@ const ChatPage = () => {
     )
 }
 
-export default ChatPage
+export default withTheme(ChatPage)

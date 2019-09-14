@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const SafeWrapper = styled.SafeAreaView`
     flex: 1;
+    background-color: ${props => props.bg}
 `;
 export const CenterView = styled.View`
     justify-content: center;
