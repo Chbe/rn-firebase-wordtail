@@ -47,6 +47,7 @@ const GamePage = ({ navigation, theme }) => {
                     <LetterBox letters={letters} theme={theme} />
                     <ActionsWrapper>
                         <Button
+                            disabled={!state.enablePlay}
                             buttonStyle={{ backgroundColor: theme.colors.success }}
                             icon={
                                 <FontAwesome5
@@ -59,6 +60,7 @@ const GamePage = ({ navigation, theme }) => {
                             title="Send"
                         />
                         <Button
+                            disabled={!state.enablePlay}
                             buttonStyle={{ backgroundColor: theme.colors.warning }}
                             icon={
                                 <FontAwesome5
@@ -71,6 +73,7 @@ const GamePage = ({ navigation, theme }) => {
                             title="Bust"
                         />
                         <Button
+                            disabled={!state.enablePlay}
                             buttonStyle={{ backgroundColor: theme.colors.danger }}
                             icon={
                                 <FontAwesome5
