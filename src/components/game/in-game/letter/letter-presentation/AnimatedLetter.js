@@ -2,12 +2,12 @@ import React from 'react';
 import { Animated } from 'react-native';
 import { useAnimation } from './AnimatedHook';
 
-const AnimatedLetter = ({ letter, doAnimation }) => {
+const AnimatedLetter = ({ letter, doAnimation, theme }) => {
     const animation = useAnimation({ doAnimation });
     return (
         <Animated.Text
             style={{
-                color: 'grey',
+                color: theme.colors.darkShade,
                 opacity: animation,
                 fontSize: animation.interpolate({
                     inputRange: [0, 1],

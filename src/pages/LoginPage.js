@@ -7,7 +7,7 @@ import { withTheme } from 'react-native-elements';
 
 const Login = ({ navigation, theme }) => {
     return (
-        <SafeWrapper bg={theme.colors.shade}>
+        <SafeWrapper bg={theme.colors.lightShade}>
             <CenterView style={{ height: '100%' }}>
                 <PaddingView padding={5}>
                     <EmailLogin navigation={navigation} />

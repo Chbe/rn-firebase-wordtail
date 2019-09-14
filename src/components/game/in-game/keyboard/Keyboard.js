@@ -2,6 +2,7 @@ import React from 'react';
 import Key from './Key';
 import styled from 'styled-components'
 import { View } from 'react-native';
+import { withTheme } from 'react-native-elements';
 
 const Row = styled.View`
     flex-direction: row;
@@ -15,13 +16,13 @@ const lettersArr = [
     ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
 ];
 
-const Keyboard = () => {
+const Keyboard = ({ theme }) => {
     return (
         <View>
             {lettersArr.map((row, i) => {
                 return <Row key={i}>
                     {row.map(key => {
-                        return <Key key={key} name={key} />
+                        return <Key key={key} name={key} theme={theme} />
                     })}
                 </Row>
             })}
@@ -29,4 +30,4 @@ const Keyboard = () => {
     )
 }
 
-export default Keyboard
+export default withTheme(Keyboard)

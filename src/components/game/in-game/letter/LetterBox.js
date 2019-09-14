@@ -6,13 +6,14 @@ import { useGameContext } from '../../../../stores/GameStore';
 import ChoosenLetter from './letter-choice/AnimatedLetter';
 
 const Wrapper = styled(CenterView)`
-    border: 5px solid grey;
+    border: 5px solid ${props => props.color};
     border-radius: 15px;
     width: 150;
     height: 150;
 `;
 
-const LetterBox = ({ letters = [] }) => {
+const LetterBox = ({ letters = [], theme }) => {
+    console.log(theme.colors)
     const [doAnimation, setDoAnimation] = useState(false);
     const [chooseLetter, setChooseLetter] = useState(true);
     const { state, actions } = useGameContext();
@@ -56,10 +57,12 @@ const LetterBox = ({ letters = [] }) => {
         };
     }, [letters])
     return (
-        <Wrapper>
+        <Wrapper color={!chooseLetter
+            ? theme.colors.darkShade
+            : theme.colors.lightAccent}>
             {!chooseLetter
-                ? <AnimatedLetter letter={state.letter} doAnimation={doAnimation} />
-                : <ChoosenLetter letter={state.letter} />}
+                ? <AnimatedLetter theme={theme} letter={state.letter} doAnimation={doAnimation} />
+                : <ChoosenLetter theme={theme} letter={state.letter} />}
         </Wrapper>
     )
 }

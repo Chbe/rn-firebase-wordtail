@@ -15,14 +15,15 @@ const formatDate = (date) => {
 
 const TextParagraph = styled(Text)`
     margin-top: 5px;
-    color: #d2d2d2;
+    color: ${props => props.theme.colors.darkShade
+    };
     font-size: 14px;
 `;
 
-const SectionSubtitle = ({ item }) => {
+const SectionSubtitle = ({ item, theme }) => {
     return (
         <View>
-            <TextParagraph>
+            <TextParagraph status={item.status} theme={theme}>
                 {item.status === 'active'
                     ? formatDate(item.lastUpdated)
                     : 'Wating for players...'}

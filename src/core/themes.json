@@ -1,80 +1,15 @@
 [
     {
-        "key": "red",
+        "name": "Shamrock",
         "barStyle": "light-content",
         "colors": {
-            "primary": "#da2555",
-            "info": "#78909c",
-            "success": "#6ea96a",
-            "warning": "#eb9932",
-            "danger": "#f44336",
-            "light": "#fff",
-            "dark": "#000"
-        },
-        "padding": "12px",
-        "borderRadius": 10,
-        "fontSize": 18
-    },
-    {
-        "key": "blue-grey",
-        "barStyle": "light-content",
-        "colors": {
-            "primary": "#546e7a",
-            "info": "#212121",
-            "success": "#6ea96a",
-            "warning": "#eb9932",
-            "danger": "#f44336",
-            "light": "#fff",
-            "dark": "#000"
-        },
-        "padding": "12px",
-        "borderRadius": 10,
-        "fontSize": 18
-    },
-    {
-        "key": "yellow",
-        "barStyle": "dark-content",
-        "colors": {
-            "primary": "#fbc02d",
-            "info": "#90a4ae",
-            "success": "#6ea96a",
-            "warning": "#eb9932",
-            "danger": "#f44336",
-            "light": "#fff",
-            "dark": "#000"
-        },
-        "padding": "12px",
-        "borderRadius": 10,
-        "fontSize": 18
-    },
-    {
-        "key": "light-purple",
-        "barStyle": "light-content",
-        "colors": {
-            "primary": "#5946BB",
-            "accent": "#7C8BE5",
-            "accent2": "#458ED7",
-            "shade": "#FBFAF8",
-            "shade2": "#14143A",
-            "success": "#509070",
-            "warning": "#cd7f38",
-            "danger": "#f44336"
-        },
-        "padding": "12px",
-        "borderRadius": 10,
-        "fontSize": 18
-    },
-    {
-        "key": "dark-purple",
-        "barStyle": "light-content",
-        "colors": {
-            "primary": "#5946BB",
-            "accent": "#458ED7",
-            "accent2": "#7C8BE5",
-            "shade": "#14143A",
-            "shade2": "#FBFAF8",
-            "success": "#509070",
-            "warning": "#cd7f38",
+            "primary": "#31C7B1", 
+            "lightAccent": "#23A6DE",
+            "darkAccent": "#7F6AE1",
+            "lightShade": "#F9F9F9",
+            "darkShade": "#4F4750",
+            "success": "#67b177",
+            "warning": "#e5a13f",
             "danger": "#f44336"
         },
         "padding": "12px",

@@ -5,7 +5,7 @@ import { withTheme } from 'react-native-elements'
 
 const ChatPage = ({ theme }) => {
     return (
-        <SafeWrapper bg={theme.colors.shade}>
+        <SafeWrapper bg={theme.colors.lightShade}>
             <PaddingView>
                 <Text>TODO Chat Page</Text>
             </PaddingView>

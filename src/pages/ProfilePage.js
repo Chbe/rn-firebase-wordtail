@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import Logout from '../components/auth/logout/Logout'
-import { CenterView } from '../components/UI/Containers/Containers'
+import { CenterView, PaddingView } from '../components/UI/Containers/Containers'
 import firebase from 'react-native-firebase'
 import { Avatar, withTheme } from 'react-native-elements'
 import TextField from '../components/UI/controls/inputs//floating/FloatingInput';
@@ -32,20 +32,25 @@ const ProfilePage = ({ navigation, theme }) => {
                     showEditButton
                 />
             </CenterView>
-            <View>
+            <PaddingView style={{
+                margin: 10,
+                borderRadius: 10
+            }}>
                 <TextField
-                    tintColor={theme.colors.primary}
+                    baseColor={theme.colors.lightAccent}
+                    tintColor={theme.colors.lightAccent}
                     label={user.displayName ? user.displayName : 'Anonymous Name'}
                     value={displayNameInputValue}
                     onChangeText={(name) => setDisplayNameInputValue(name)}
                 />
                 <TextField
-                    tintColor={theme.colors.primary}
+                    baseColor={theme.colors.lightAccent}
+                    tintColor={theme.colors.lightAccent}
                     label={user.email ? user.email : 'Anonymous Email'}
                     value={emailInputValue}
                     onChangeText={(email) => setEmailInputValue(email)}
                 />
-            </View>
+            </PaddingView>
             <Logout navigation={navigation} />
         </View>
     )

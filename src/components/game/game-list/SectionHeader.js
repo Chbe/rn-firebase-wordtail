@@ -7,7 +7,8 @@ import styled from 'styled-components';
 const SectionView = styled(PaddingView)`
     flex-direction: row;
     align-items: center;
-    background-color: ${props => props.theme.colors.accent};
+    margin-top: 20;
+    margin-bottom: 10
 `;
 
 const SectionIcon = styled(Icon)`
@@ -25,22 +26,22 @@ const SectionHeader = ({ section: { type, data }, theme }) => {
     if (type === 'invite')
         return (
             <SectionView theme={theme}>
-                <SectionIcon color={textColor} size={24} name={'envelope'} regular />
-                <ColoredText textColor={textColor}>{length === 1 ? 'New invite' : 'New invites'}</ColoredText>
+                <SectionIcon color={theme.colors.darkShade} size={24} name={'envelope'} regular />
+                <ColoredText textColor={theme.colors.darkShade}>{length === 1 ? 'New invite' : 'New invites'}</ColoredText>
             </SectionView>
         )
     else if (type === 'active')
         return (
             <SectionView theme={theme}>
-                <SectionIcon color={textColor} size={24} name={'gamepad'} regular />
-                <ColoredText textColor={textColor}>Active or pending</ColoredText>
+                <SectionIcon color={theme.colors.darkShade} size={24} name={'gamepad'} regular />
+                <ColoredText textColor={theme.colors.darkShade}>Active or pending</ColoredText>
             </SectionView>
         )
     else if (type === 'finished')
         return (
             <SectionView theme={theme}>
-                <SectionIcon color={textColor} size={24} name={'flag-checkered'} regular />
-                <ColoredText textColor={textColor}>Finished</ColoredText>
+                <SectionIcon color={theme.colors.darkShade} size={24} name={'flag-checkered'} regular />
+                <ColoredText textColor={theme.colors.darkShade}>Finished</ColoredText>
             </SectionView>
         )
 }

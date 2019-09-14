@@ -11,7 +11,7 @@ const AuthLoadingPage = ({ navigation, theme }) => {
         navigation.navigate(user ? 'App' : 'Auth');
     });
     return (
-        <SafeWrapper bg={theme.colors.shade}>
+        <SafeWrapper bg={theme.colors.lightShade}>
             <CenterView style={{ height: '100%' }}>
                 <ActivityIndicator size="large" color="#0000ff" />
             </CenterView>

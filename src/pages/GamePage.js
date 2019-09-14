@@ -39,15 +39,15 @@ const GamePage = ({ navigation, theme }) => {
     }, [])
     return (
         <GameContext.Provider value={{ state, actions }}>
-            <SafeWrapper bg={theme.colors.shade}>
+            <SafeWrapper bg={theme.colors.lightShade}>
                 <Wrapper>
                     {/* TOOD: This shall be a progress bar */}
                     <View style={{ height: 30 }}></View>
 
-                    <LetterBox letters={letters} />
+                    <LetterBox letters={letters} theme={theme} />
                     <ActionsWrapper>
                         <Button
-                            background={theme.colors.primary}
+                            buttonStyle={{ backgroundColor: theme.colors.success }}
                             icon={
                                 <FontAwesome5
                                     name="paper-plane"
@@ -59,7 +59,7 @@ const GamePage = ({ navigation, theme }) => {
                             title="Send"
                         />
                         <Button
-                            buttonStyle={{ backgroundColor: theme.colors.accent2 }}
+                            buttonStyle={{ backgroundColor: theme.colors.warning }}
                             icon={
                                 <FontAwesome5
                                     name="gavel"
@@ -71,7 +71,7 @@ const GamePage = ({ navigation, theme }) => {
                             title="Bust"
                         />
                         <Button
-                            buttonStyle={{ backgroundColor: theme.colors.accent }}
+                            buttonStyle={{ backgroundColor: theme.colors.danger }}
                             icon={
                                 <FontAwesome5
                                     name='glasses'

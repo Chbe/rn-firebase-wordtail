@@ -82,14 +82,23 @@ const GamesList = ({ navigation, uid, theme }) => {
         <SectionList
             sections={renderSections()}
             renderItem={({ item }) => <ListItem
+                style={{ borderRadius: 5 }}
+                containerStyle={{
+                    borderRadius: 5,
+                    marginBottom: 10
+                }}
+                titleStyle={{
+                    color: theme.colors.darkShade,
+                    fontWeight: 'bold'
+                }}
                 title={item.title}
-                subtitle={<SectionSubtitle item={item} />}
+                subtitle={<SectionSubtitle item={item} theme={theme} />}
                 bottomDivider
                 chevron={
                     <FontAwesome5Icon
                         name="arrow-right"
                         size={15}
-                        color={theme.colors.accent}
+                        color={theme.colors.lightAccent}
                     />}
                 leftAvatar={{
                     source: item.status === 'active'

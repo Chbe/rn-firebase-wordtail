@@ -25,7 +25,7 @@ const CreateGamePage = ({ navigation, theme }) => {
 
     return (
         <CreateGameContext.Provider value={{ state, actions }}>
-            <SafeWrapper bg={theme.colors.shade}>
+            <SafeWrapper bg={theme.colors.lightShade}>
                 <PaddingView>
                     <View>
                         <TextField
