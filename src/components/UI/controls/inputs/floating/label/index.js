@@ -52,8 +52,6 @@ export default class Label extends PureComponent {
     };
   }
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps.focused, prevState.focused);
-
     if (nextProps.focused === prevState.focused) {
       return null
     }

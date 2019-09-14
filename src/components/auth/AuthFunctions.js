@@ -16,8 +16,6 @@ export const facebookLogin = async () => {
             return null;
         }
 
-        console.log(`Login success with permissions: ${result.grantedPermissions.toString()}`);
-
         // get the access token
         const data = await AccessToken.getCurrentAccessToken();
 
