@@ -7,6 +7,7 @@ import { View } from 'react-native'
 import { GameContext, GameStore, useGameContext } from '../stores/GameStore'
 import { Button, Icon, withTheme } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import TimeLeft from '../components/game/in-game/progress-bar/TimeLeft'
 
 const Wrapper = styled(CenterView)`
     justify-content: space-between;
@@ -22,7 +23,7 @@ const ActionsWrapper = styled.View`
 
 const GamePage = ({ navigation, theme }) => {
     const { state, actions } = GameStore();
-
+    const time = 25000;
     const [id, setId] = useState('');
     const [letters, setLetters] = useState([]);
     useEffect(() => {
@@ -41,10 +42,10 @@ const GamePage = ({ navigation, theme }) => {
         <GameContext.Provider value={{ state, actions }}>
             <SafeWrapper bg={theme.colors.lightShade}>
                 <Wrapper>
-                    {/* TOOD: This shall be a progress bar */}
-                    <View style={{ height: 30 }}></View>
+                    <TimeLeft enablePlay={state.enablePlay} theme={theme} />
 
                     <LetterBox letters={letters} theme={theme} />
+
                     <ActionsWrapper>
                         <Button
                             disabled={!state.enablePlay}
@@ -86,9 +87,11 @@ const GamePage = ({ navigation, theme }) => {
                             title="Call"
                         />
                     </ActionsWrapper>
+
                     <View>
                         <Keyboard />
                     </View>
+
                 </Wrapper>
             </SafeWrapper>
         </GameContext.Provider>

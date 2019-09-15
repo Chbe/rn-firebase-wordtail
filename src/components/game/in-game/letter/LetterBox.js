@@ -13,7 +13,6 @@ const Wrapper = styled(CenterView)`
 `;
 
 const LetterBox = ({ letters = [], theme }) => {
-    console.log(theme.colors)
     const [doAnimation, setDoAnimation] = useState(false);
     const [chooseLetter, setChooseLetter] = useState(true);
     const { state, actions } = useGameContext();
