@@ -53,8 +53,7 @@ const GamesList = ({ navigation, uid, theme }) => {
     const goToGame = (item) => {
         if (item.status === 'active' && item.activePlayer === uid) {
             navigation.navigate('Game', {
-                gameId: item.key,
-                letters: item.letters
+                game: item
             });
         }
     }

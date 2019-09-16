@@ -8,6 +8,7 @@ import { GameContext, GameStore, useGameContext } from '../stores/GameStore'
 import { Button, Icon, withTheme } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ProgressBar from '../components/game/in-game/progress-bar/ProgressBar'
+import firebase from 'react-native-firebase'
 
 const Wrapper = styled(CenterView)`
     justify-content: space-between;
@@ -24,8 +25,11 @@ const ActionsWrapper = styled.View`
 const GamePage = ({ navigation, theme }) => {
     const { state, actions } = GameStore();
     const time = 25000;
-    const [id, setId] = useState('');
-    const [letters, setLetters] = useState([]);
+    const [game, setGame] = useState({});
+
+    const firestoreRef = firebase.firestore()
+        .collection('games')
+        .doc(game.key);
 
     const handleActionBtns = (type) => {
         actions.disablePlay();
@@ -41,12 +45,18 @@ const GamePage = ({ navigation, theme }) => {
         }
     }
 
+    const firestoreUpdate = async (dataObj) => {
+        await firestoreRef.update(dataObj);
+    }
+
+    const firestoreSet = async (dataObj) => {
+        await firestoreRef.set(dataObj);
+    }
+
     useEffect(() => {
-        const idParam = navigation.getParam('gameId', '');
-        const lettersParam = navigation.getParam('letters', []);
-        setId(idParam);
-        setLetters(lettersParam);
-        if (!lettersParam) {
+        const gameParam = navigation.getParam('game', {});
+        setGame(gameParam);
+        if (!gameParam.letters) {
             actions.enablePlay();
         }
         return () => {
@@ -63,7 +73,7 @@ const GamePage = ({ navigation, theme }) => {
                 <Wrapper>
                     <ProgressBar enablePlay={state.enablePlay} theme={theme} />
 
-                    <LetterBox letters={letters} theme={theme} />
+                    <LetterBox letters={game.letters} theme={theme} />
 
                     <ActionsWrapper>
                         <Button
