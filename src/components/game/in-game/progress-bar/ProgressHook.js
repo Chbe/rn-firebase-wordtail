@@ -10,6 +10,9 @@ export const useAnimation = ({ enablePlay, endWidth, duration = 25000 }) => {
                 toValue: endWidth,
                 easing: Easing.linear
             }).start();
+        } else {
+            if (animation)
+                animation.stopAnimation();
         }
         return () => animation.stopAnimation();
     }, [enablePlay]);

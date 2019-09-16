@@ -26,6 +26,21 @@ const GamePage = ({ navigation, theme }) => {
     const time = 25000;
     const [id, setId] = useState('');
     const [letters, setLetters] = useState([]);
+
+    const handleActionBtns = (type) => {
+        actions.disablePlay();
+        if (type === 1) {
+            // Send
+
+        } else if (type === 2) {
+            // Bust
+
+        } else {
+            // Call
+
+        }
+    }
+
     useEffect(() => {
         const idParam = navigation.getParam('gameId', '');
         const lettersParam = navigation.getParam('letters', []);
@@ -38,6 +53,10 @@ const GamePage = ({ navigation, theme }) => {
 
         };
     }, [])
+
+    useEffect(() => {
+        actions.disablePlay();
+    }, [state.timesup])
     return (
         <GameContext.Provider value={{ state, actions }}>
             <SafeWrapper bg={theme.colors.lightShade}>
@@ -59,6 +78,7 @@ const GamePage = ({ navigation, theme }) => {
                                 />
                             }
                             title="Send"
+                            onPress={() => handleActionBtns(1)}
                         />
                         <Button
                             disabled={!state.enablePlay}

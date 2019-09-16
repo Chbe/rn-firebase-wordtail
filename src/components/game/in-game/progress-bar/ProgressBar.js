@@ -3,17 +3,21 @@ import { Animated, View } from 'react-native';
 import { PaddingView } from '../../../UI/Containers/Containers';
 import { useAnimation } from './ProgressHook';
 import styled from 'styled-components'
+import { useGameContext } from '../../../../stores/GameStore';
 
 const Container = styled.View`
     height: 30;
     width: 100%;
-    background-color: ${props => props.enablePlay
+    background-color: ${props => props.gameStarted
         ? props.theme.colors[props.progressColor]
         : 'transparent'};
 `;
 
 const ProgressBar = ({ enablePlay, duration = 5000, theme }) => {
+    const { actions } = useGameContext();
+
     const [endWidth, setWidth] = useState(0);
+    const [gameStarted, setGameStarted] = useState(false);
     const animation = useAnimation({ enablePlay, endWidth, duration });
 
     const [progressColor, updateColor] = useState('success');
@@ -23,19 +27,27 @@ const ProgressBar = ({ enablePlay, duration = 5000, theme }) => {
             updateColor(() => 'warning');
         else if (value >= (endWidth * .85))
             updateColor(() => 'danger');
+
+        if (value === endWidth) {
+            actions.setTimesup();
+        }
     }
 
     useEffect(() => {
         if (enablePlay) {
             animation.addListener(manageColors);
+            setGameStarted(true);
+        } else {
+            if (animation)
+                animation.removeAllListeners();
         }
         return () => animation.removeAllListeners();
     }, [enablePlay])
 
     return (
-        <PaddingView style={{width: '100%'}}>
+        <PaddingView style={{ width: '100%' }}>
             <Container
-                enablePlay={enablePlay}
+                gameStarted={gameStarted}
                 theme={theme}
                 progressColor={progressColor}
                 onLayout={(event) => {

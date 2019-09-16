@@ -2,7 +2,8 @@ import { useState, useContext, useMemo, createContext } from 'react'
 
 const initialState = {
     letter: '',
-    enablePlay: false
+    enablePlay: false,
+    timesup: false
 }
 
 const GameContext = createContext({})
@@ -37,6 +38,9 @@ const getActions = setState => ({
     },
     disablePlay: () => {
         setState(state => ({ ...state, enablePlay: false }))
+    },
+    setTimesup: () => {
+        setState(state => ({ ...state, timesup: true }))
     }
 })
 
