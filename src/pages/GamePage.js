@@ -7,7 +7,7 @@ import { View } from 'react-native'
 import { GameContext, GameStore, useGameContext } from '../stores/GameStore'
 import { Button, Icon, withTheme } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import TimeLeft from '../components/game/in-game/progress-bar/TimeLeft'
+import ProgressBar from '../components/game/in-game/progress-bar/ProgressBar'
 
 const Wrapper = styled(CenterView)`
     justify-content: space-between;
@@ -42,7 +42,7 @@ const GamePage = ({ navigation, theme }) => {
         <GameContext.Provider value={{ state, actions }}>
             <SafeWrapper bg={theme.colors.lightShade}>
                 <Wrapper>
-                    <TimeLeft enablePlay={state.enablePlay} theme={theme} />
+                    <ProgressBar enablePlay={state.enablePlay} theme={theme} />
 
                     <LetterBox letters={letters} theme={theme} />
 

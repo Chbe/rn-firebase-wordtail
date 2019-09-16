@@ -2,8 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { Animated, View } from 'react-native';
 import { PaddingView } from '../../../UI/Containers/Containers';
 import { useAnimation } from './ProgressHook';
+import styled from 'styled-components'
 
-const TimeLeft = ({ enablePlay, duration = 5000, theme }) => {
+const Container = styled.View`
+    height: 30;
+    width: 100%;
+    background-color: ${props => props.enablePlay
+        ? props.theme.colors[props.progressColor]
+        : 'transparent'};
+`;
+
+const ProgressBar = ({ enablePlay, duration = 5000, theme }) => {
     const [endWidth, setWidth] = useState(0);
     const animation = useAnimation({ enablePlay, endWidth, duration });
 
@@ -24,12 +33,11 @@ const TimeLeft = ({ enablePlay, duration = 5000, theme }) => {
     }, [enablePlay])
 
     return (
-        <PaddingView style={{ width: '100%' }}>
-            <View style={{
-                width: '100%',
-                height: 30,
-                backgroundColor: theme.colors[progressColor]
-            }}
+        <PaddingView style={{width: '100%'}}>
+            <Container
+                enablePlay={enablePlay}
+                theme={theme}
+                progressColor={progressColor}
                 onLayout={(event) => {
                     const { width } = event.nativeEvent.layout;
                     setWidth(width);
@@ -44,10 +52,10 @@ const TimeLeft = ({ enablePlay, duration = 5000, theme }) => {
                     backgroundColor: theme.colors.lightShade,
                     transform: [{ translateX: animation }]
                 }} />
-            </View>
+            </Container>
         </PaddingView>
     )
 }
 
-export default TimeLeft
+export default ProgressBar
 
