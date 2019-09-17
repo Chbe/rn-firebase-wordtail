@@ -26,6 +26,7 @@ const GamePage = ({ navigation, theme }) => {
     const { state, actions } = GameStore();
     const time = 25000;
     const [game, setGame] = useState({});
+    const [uid, setUid] = useState('');
 
     const firestoreRef = firebase.firestore()
         .collection('games')
@@ -34,14 +35,43 @@ const GamePage = ({ navigation, theme }) => {
     const handleActionBtns = (type) => {
         actions.disablePlay();
         if (type === 1) {
-            // Send
-
+            /** User clicked send */
+            if (state.letter) {
+                /** Send letter and set next 
+                 * player as next active user. */
+            } else {
+                /** Current user gets a mark and next 
+                 * player is next active user, unless there's
+                 *  only 2 players left and current 
+                 * user hits maximum nr or marks.
+                 * Then next player is game winner.
+                 */
+            }
         } else if (type === 2) {
-            // Bust
-
+            /** Word API lookup */
         } else {
-            // Call
+            /** Current user thinks previous player is bluffing. */
+        }
+    }
 
+    const bustPreviousPlayer = () => {
+        const completeWord = game.letters.join('');
+        const previousPlayerUid = getClosestActivePlayer(game.players, true, uid);
+        let setPreviousPlayerActive = false;
+        let markUser;
+        const wordDefintions = await getWordDetails(completeWord);
+
+        if (wordDefintions.success) {
+            /** completeWord is a word. Previous player gets a mark. 
+             * Current player starts new round */
+            markUser = previousPlayerUid;
+        } else {
+            /** completeWord is not a word. Current user gets two marks, 
+            'next player' is previous player unless
+            current user hits maximum nr of marks and there's
+            only 1 player left, then previous player is game winner */
+            markUser = this.props.uid;
+            setPreviousPlayerActive = true;
         }
     }
 
@@ -55,6 +85,8 @@ const GamePage = ({ navigation, theme }) => {
 
     useEffect(() => {
         const gameParam = navigation.getParam('game', {});
+        const uid = navigation.getParam('uid', '');
+        setUid(uid);
         setGame(gameParam);
         if (!gameParam.letters) {
             actions.enablePlay();
@@ -65,7 +97,16 @@ const GamePage = ({ navigation, theme }) => {
     }, [])
 
     useEffect(() => {
+        /** Event handler if time runs out */
         actions.disablePlay();
+        if (state.letter) {
+            // Send letter, 'next player' is next active user.
+        } else {
+            /** Current user gets a mark, 
+            'next player' is next active user unless
+            current user hits maximum nr of marks and there's
+            only 1 player left, then 'next player' is game winner. */
+        }
     }, [state.timesup])
     return (
         <GameContext.Provider value={{ state, actions }}>

@@ -22,7 +22,6 @@ const GamesList = ({ navigation, uid, theme }) => {
         setGames(todos);
     }
     useEffect(() => {
-        const uid = firebase.auth().currentUser.uid;
         const ref = firebase.firestore().collection('games')
             .where('playersUid',
                 'array-contains',
@@ -53,7 +52,8 @@ const GamesList = ({ navigation, uid, theme }) => {
     const goToGame = (item) => {
         if (item.status === 'active' && item.activePlayer === uid) {
             navigation.navigate('Game', {
-                game: item
+                game: item,
+                uid: uid
             });
         }
     }
