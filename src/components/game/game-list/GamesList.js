@@ -22,16 +22,20 @@ const GamesList = ({ navigation, uid, theme }) => {
         setGames(todos);
     }
     useEffect(() => {
-        const ref = firebase.firestore().collection('games')
-            .where('playersUid',
-                'array-contains',
-                uid)
-            .orderBy('status', 'asc')
-            .orderBy('lastUpdated', 'desc');
-        // .limit(5);
-        const sub = ref.onSnapshot(onCollectionUpdate)
+        let sub;
+        if (uid) {
+            const ref = firebase.firestore().collection('games')
+                .where('playersUid',
+                    'array-contains',
+                    uid)
+                .orderBy('status', 'asc')
+                .orderBy('lastUpdated', 'desc');
+            // .limit(5);
+            sub = ref.onSnapshot(onCollectionUpdate)
+        }
         return () => {
-            sub();
+            if (sub)
+                sub();
         };
     }, [uid])
 

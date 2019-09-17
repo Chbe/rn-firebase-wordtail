@@ -71,7 +71,7 @@ const GamePage = ({ navigation, theme }) => {
             'next player' is previous player unless
             current user hits maximum nr of marks and there's
             only 1 player left, then previous player is game winner */
-            markUser = this.props.uid;
+            markUser = uid;
             setPreviousPlayerActive = true;
         }
     }
