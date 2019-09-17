@@ -9,6 +9,7 @@ import { Button, Icon, withTheme } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ProgressBar from '../components/game/in-game/progress-bar/ProgressBar'
 import firebase from 'react-native-firebase'
+import { getClosestActivePlayer, getWordDetails } from '../services/game/GameService'
 
 const Wrapper = styled(CenterView)`
     justify-content: space-between;
@@ -54,9 +55,9 @@ const GamePage = ({ navigation, theme }) => {
         }
     }
 
-    const bustPreviousPlayer = () => {
+    const bustPreviousPlayer = async () => {
         const completeWord = game.letters.join('');
-        const previousPlayerUid = getClosestActivePlayer(game.players, true, uid);
+        const previousPlayerUid = getClosestActivePlayer(game.players, uid, true);
         let setPreviousPlayerActive = false;
         let markUser;
         const wordDefintions = await getWordDetails(completeWord);

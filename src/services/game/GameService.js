@@ -49,7 +49,7 @@ export const getWordDetails = async (word) => {
     }
 }
 
-export const getClosestActivePlayer = (_players, getPreviousPlayer = false, uid) => {
+export const getClosestActivePlayer = (_players, uid, getPreviousPlayer = false) => {
     // Remove scores
     const players = [..._players]
         .map(({ uid, isActive }) => { return { uid, isActive } });
