@@ -5,7 +5,7 @@ import Keyboard from '../components/game/in-game/keyboard/Keyboard'
 import styled from 'styled-components'
 import { View } from 'react-native'
 import { GameContext, GameStore, useGameContext } from '../stores/GameStore'
-import { Button, Icon, withTheme } from 'react-native-elements'
+import { Button, Icon, withTheme, Text } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ProgressBar from '../components/game/in-game/progress-bar/ProgressBar'
 import firebase from 'react-native-firebase'
@@ -50,6 +50,7 @@ const GamePage = ({ navigation, theme }) => {
             }
         } else if (type === 2) {
             /** Word API lookup */
+            bustPreviousPlayer();
         } else {
             /** Current user thinks previous player is bluffing. */
         }
@@ -144,6 +145,7 @@ const GamePage = ({ navigation, theme }) => {
                                 />
                             }
                             title="Bust"
+                            onPress={() => handleActionBtns(2)}
                         />
                         <Button
                             disabled={!state.enablePlay}
