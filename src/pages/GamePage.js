@@ -3,13 +3,14 @@ import LetterBox from '../components/game/in-game/letter/LetterBox'
 import { CenterView, SafeWrapper } from '../components/UI/Containers/Containers'
 import Keyboard from '../components/game/in-game/keyboard/Keyboard'
 import styled from 'styled-components'
-import { View } from 'react-native'
+import { View, Alert } from 'react-native'
 import { GameContext, GameStore, useGameContext } from '../stores/GameStore'
 import { Button, Icon, withTheme, Text } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ProgressBar from '../components/game/in-game/progress-bar/ProgressBar'
 import firebase from 'react-native-firebase'
 import { getClosestActivePlayer, getWordDetails } from '../services/game/GameService'
+import Modal from "react-native-modal";
 
 const Wrapper = styled(CenterView)`
     justify-content: space-between;
@@ -23,23 +24,36 @@ const ActionsWrapper = styled.View`
     justify-content: space-around;
 `;
 
+const ModalContainer = styled(CenterView)`
+    background-color: #fff;
+    padding: 22px;
+    border-radius: 4;
+    border-color: rgba(0, 0, 0, 0.1);
+`;
+
 const GamePage = ({ navigation, theme }) => {
     const { state, actions } = GameStore();
     const time = 25000;
     const [game, setGame] = useState({});
     const [uid, setUid] = useState('');
 
+    const [modalIsVisable, setModalVisable] = useState(false);
+    const [modalData, setModalData] = useState({});
+
     const firestoreRef = firebase.firestore()
         .collection('games')
         .doc(game.key);
 
-    const handleActionBtns = (type) => {
+    const handleActionBtns = async (type) => {
         actions.disablePlay();
         if (type === 1) {
             /** User clicked send */
             if (state.letter) {
                 /** Send letter and set next 
                  * player as next active user. */
+                await sendLetter();
+                alert('Letter sent!');
+                navigation.navigate('Home');
             } else {
                 /** Current user gets a mark and next 
                  * player is next active user, unless there's
@@ -50,7 +64,8 @@ const GamePage = ({ navigation, theme }) => {
             }
         } else if (type === 2) {
             /** Word API lookup */
-            bustPreviousPlayer();
+            const { dataForResultAlert } = await bustPreviousPlayer();
+
         } else {
             /** Current user thinks previous player is bluffing. */
         }
@@ -75,15 +90,40 @@ const GamePage = ({ navigation, theme }) => {
             markUser = uid;
             setPreviousPlayerActive = true;
         }
+        const dataForResultAlert = { type: 'bust', data: { wordDefintions, prevPlayerUid } };
+        return { dataForResultAlert, setPreviousPlayerActive, markUser };
     }
 
-    const firestoreUpdate = async (dataObj) => {
-        await firestoreRef.update(dataObj);
+    const sendLetter = async () => {
+        const firestoreUpdates = {};
+        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, false, uid);
+        firestoreUpdates['letters'] = !!game.letters
+            ? [...game.letters, state.letter]
+            : [state.letter];
+        await updateFirestoreData(firestoreUpdates);
     }
 
-    const firestoreSet = async (dataObj) => {
-        await firestoreRef.set(dataObj);
+    const updateFirestoreData = async (dataObj) => {
+        try {
+            await firestoreRef.update(dataObj);
+        } catch (error) {
+            console.error(error);
+        }
     }
+
+    const setFirestoreData = async (dataObj) => {
+        try {
+            await firestoreRef.set(dataObj);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const renderModalContent = () => (
+        <ModalContainer>
+            <Text>Hej</Text>
+        </ModalContainer>
+    )
 
     useEffect(() => {
         const gameParam = navigation.getParam('game', {});
@@ -113,6 +153,22 @@ const GamePage = ({ navigation, theme }) => {
     return (
         <GameContext.Provider value={{ state, actions }}>
             <SafeWrapper bg={theme.colors.lightShade}>
+                <Modal
+                    isVisible={modalIsVisable}
+                    backdropColor={theme.colors.primary}
+                    backdropOpacity={0.8}
+                    animationIn="zoomInDown"
+                    animationOut="zoomOutUp"
+                    animationInTiming={600}
+                    animationOutTiming={600}
+                    backdropTransitionInTiming={600}
+                    backdropTransitionOutTiming={600}
+                    onBackdropPress={() => setModalVisable(false)}
+                    onSwipeComplete={() => setModalVisable(false)}
+                    swipeDirection={['left', 'right']}
+                >
+                    {renderModalContent()}
+                </Modal>
                 <Wrapper>
                     <ProgressBar enablePlay={state.enablePlay} theme={theme} />
 
