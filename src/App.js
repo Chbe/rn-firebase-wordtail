@@ -20,13 +20,13 @@ import GamePage from './pages/GamePage';
 import CreateGamePage from './pages/CreateGamePage';
 import { ThemeProvider } from 'react-native-elements'
 import { getTheme } from './core/Themes'
-
-
-// test
-import ComponentsPage from './test/ComponentsPage';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import { PaddingView } from './components/UI/Containers/Containers';
 import { StatusBar } from 'react-native';
+
+// test
+import ComponentsPage from './test/ComponentsPage';
+import GenerateExampleGames from './test/GenerateExampleGames';
 
 const theme = getTheme('Shamrock');
 const defaultNavigationOptions = {

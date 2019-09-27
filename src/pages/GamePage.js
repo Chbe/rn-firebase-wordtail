@@ -102,6 +102,7 @@ const GamePage = ({ navigation, theme }) => {
     const sendLetter = async () => {
         const firestoreUpdates = {};
         firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, uid);
+        firestoreUpdates['lastUpdated'] = Date.now();
         firestoreUpdates['letters'] = !!game.letters
             ? [...game.letters, state.letter]
             : [state.letter];
@@ -135,8 +136,9 @@ const GamePage = ({ navigation, theme }) => {
         const uid = navigation.getParam('uid', '');
         setUid(uid);
         setGame(gameParam);
+
         if (!gameParam.letters) {
-            actions.enablePlay();
+            setTimeout(() => actions.enablePlay(), 1000);
         }
         return () => {
 
