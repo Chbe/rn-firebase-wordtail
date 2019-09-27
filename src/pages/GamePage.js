@@ -11,6 +11,7 @@ import ProgressBar from '../components/game/in-game/progress-bar/ProgressBar'
 import firebase from 'react-native-firebase'
 import { getClosestActivePlayer, getWordDetails } from '../services/game/GameService'
 import Modal from "react-native-modal";
+import Spinner from '../components/UI/controls/spinner/Spinner'
 
 const Wrapper = styled(CenterView)`
     justify-content: space-between;
@@ -37,6 +38,7 @@ const GamePage = ({ navigation, theme }) => {
     const [game, setGame] = useState({});
     const [uid, setUid] = useState('');
 
+    const [spinnerIsVisable, setSpinnerVisable] = useState(false);
     const [modalIsVisable, setModalVisable] = useState(false);
     const [modalData, setModalData] = useState({});
 
@@ -45,7 +47,9 @@ const GamePage = ({ navigation, theme }) => {
         .doc(game.key);
 
     const handleActionBtns = async (type) => {
+        setSpinnerVisable(true);
         actions.disablePlay();
+
         if (type === 1) {
             /** User clicked send */
             if (state.letter) {
@@ -69,6 +73,7 @@ const GamePage = ({ navigation, theme }) => {
         } else {
             /** Current user thinks previous player is bluffing. */
         }
+        // setSpinnerVisable(false);
     }
 
     const bustPreviousPlayer = async () => {
@@ -96,7 +101,7 @@ const GamePage = ({ navigation, theme }) => {
 
     const sendLetter = async () => {
         const firestoreUpdates = {};
-        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, false, uid);
+        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, uid);
         firestoreUpdates['letters'] = !!game.letters
             ? [...game.letters, state.letter]
             : [state.letter];
@@ -224,6 +229,10 @@ const GamePage = ({ navigation, theme }) => {
 
                 </Wrapper>
             </SafeWrapper>
+            <Spinner
+                animate={spinnerIsVisable}
+                onPress={() => setSpinnerVisable(false)}
+                color={theme.colors.primary} />
         </GameContext.Provider>
     )
 }
