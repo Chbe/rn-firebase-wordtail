@@ -3,15 +3,16 @@ import { CenterView, PaddingView, SafeWrapper } from '../components/UI/Container
 import EmailLogin from '../components/auth/login/EmailLogin';
 import FacebookLogin from '../components/auth/login/FacebookLogin';
 import AnonymousLogin from '../components/auth/login/AnonymousLogin';
-import { withTheme } from 'react-native-elements';
+import { withTheme, Text } from 'react-native-elements';
 
 const Login = ({ navigation, theme }) => {
     return (
         <SafeWrapper bg={theme.colors.lightShade}>
-            <CenterView style={{ height: '100%' }}>
-                <PaddingView padding={5}>
+            <CenterView style={{ height: '100%', width: '100%' }}>
+                <Text>TODO: Regular email/password login</Text>
+                {/* <PaddingView padding={5}>
                     <EmailLogin navigation={navigation} />
-                </PaddingView>
+                </PaddingView> */}
                 <PaddingView padding={5}>
                     <FacebookLogin navigation={navigation} />
                 </PaddingView>

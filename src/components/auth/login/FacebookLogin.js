@@ -1,6 +1,7 @@
 import React from 'react';
 import { facebookLogin } from '../AuthFunctions';
-import { LoginButton } from '../../UI/controls/buttons/Buttons';
+import { Button } from 'react-native-elements';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 
 const FacebookLogin = ({ navigation }) => {
     const handleLogin = async () => {
@@ -11,13 +12,16 @@ const FacebookLogin = ({ navigation }) => {
             console.warn('Login fail');
     }
     return (
-        <LoginButton
-            name="facebook"
-            backgroundColor="#3b5998"
+        <Button
+            icon={<FontAwesome5Icon
+                style={{ marginRight: 10 }}
+                color={'white'}
+                size={24}
+                name='facebook' />}
             onPress={handleLogin}
-        >
-            Continue with Facebook
-      </LoginButton>
+            buttonStyle={{ backgroundColor: '#3b5998' }}
+            title="Continue with Facebook"
+        />
     )
 }
 

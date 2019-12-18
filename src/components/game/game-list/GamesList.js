@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SectionList } from 'react-native';
+import { SectionList, Text } from 'react-native';
 import firebase from 'react-native-firebase';
 import { ListItem, Button, withTheme } from 'react-native-elements';
 import SectionHeader from './SectionHeader';
@@ -77,6 +77,9 @@ const GamesList = ({ navigation, uid, theme }) => {
         if (finishedArr.length) {
             sections.push({ type: 'finished', data: finishedArr });
         }
+        // if (!invitesArr.length && !activeArr.length && !finishedArr.length) {
+        //     sections.push({ type: 'no-games', data: [] });
+        // }
 
         return sections;
     }
@@ -84,36 +87,38 @@ const GamesList = ({ navigation, uid, theme }) => {
     return (
         <SectionList
             sections={renderSections()}
-            renderItem={({ item }) => <ListItem
-                style={{ borderRadius: 5 }}
-                containerStyle={{
-                    borderRadius: 5,
-                    marginBottom: 10
-                }}
-                titleStyle={{
-                    color: theme.colors.darkShade,
-                    fontWeight: 'bold'
-                }}
-                title={item.title}
-                subtitle={<SectionSubtitle item={item} theme={theme} />}
-                bottomDivider
-                chevron={
-                    <FontAwesome5Icon
-                        name="arrow-right"
-                        size={15}
-                        color={theme.colors.lightAccent}
-                    />}
-                leftAvatar={{
-                    source: item.status === 'active'
-                        ? { uri: item.players.find(p => p.uid === item.activePlayer).photoURL }
-                        : null,
-                    title: item.title[0]
-                }}
-                onPress={(ev) => {
-                    // TODO: save game state so game page can
-                    goToGame(item);
-                }}
-            />}
+            renderItem={({ item }) => !!item.title.length
+                ? <ListItem
+                    style={{ borderRadius: 5 }}
+                    containerStyle={{
+                        borderRadius: 5,
+                        marginBottom: 10
+                    }}
+                    titleStyle={{
+                        color: theme.colors.darkShade,
+                        fontWeight: 'bold'
+                    }}
+                    title={item.title}
+                    subtitle={<SectionSubtitle item={item} theme={theme} />}
+                    bottomDivider
+                    chevron={
+                        <FontAwesome5Icon
+                            name="arrow-right"
+                            size={15}
+                            color={theme.colors.lightAccent}
+                        />}
+                    leftAvatar={{
+                        source: item.status === 'active'
+                            ? { uri: item.players.find(p => p.uid === item.activePlayer).photoURL }
+                            : null,
+                        title: item.title[0]
+                    }}
+                    onPress={(ev) => {
+                        // TODO: save game state so game page can
+                        goToGame(item);
+                    }}
+                />
+                : <Text>Hej</Text>}
             renderSectionHeader={({ section }) => (section.data.length
                 ? <SectionHeader section={section} />
                 : null)}
