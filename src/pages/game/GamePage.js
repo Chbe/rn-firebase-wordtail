@@ -168,7 +168,6 @@ const GamePage = ({ navigation, theme }) => {
         const completeWord = game.letters.join('');
         let userToMark;
         const wordDefintions = await getWordDetails(completeWord);
-        console.log(wordDefintions);
         let nextPlayerWon;
 
         if (wordDefintions.success) {
@@ -281,7 +280,7 @@ const GamePage = ({ navigation, theme }) => {
                             onPress={() => handleGameActions(1)}
                         />
                         <Button
-                            disabled={!state.enablePlay}
+                            disabled={!state.enablePlay || !game.letters || game.letters.length < 3}
                             buttonStyle={{ backgroundColor: theme.colors.warning }}
                             icon={
                                 <FontAwesome5
