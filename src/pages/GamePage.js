@@ -35,6 +35,7 @@ const ModalContainer = styled(CenterView)`
 const GamePage = ({ navigation, theme }) => {
     const { state, actions } = GameStore();
     const time = 25000;
+    const maxMarks = 3;
     const [game, setGame] = useState({});
     const [uid, setUid] = useState('');
 
@@ -65,6 +66,15 @@ const GamePage = ({ navigation, theme }) => {
                  * user hits maximum nr or marks.
                  * Then next player is game winner.
                  */
+                const currentScore = game.players.find(p => p.uid === uid).score;
+                const nextPlayerWonGame = game.players.length === 2 && currentScore + 1 === maxMarks
+                    ? true
+                    : false;
+                if (nextPlayerWonGame) {
+                    await setGameWinner();
+                } else {
+                    await markPlayer(currentScore);
+                }
             }
         } else if (type === 2) {
             /** Word API lookup */
@@ -74,6 +84,24 @@ const GamePage = ({ navigation, theme }) => {
             /** Current user thinks previous player is bluffing. */
         }
         // setSpinnerVisable(false);
+    }
+
+    const sendLetter = async () => {
+        const firestoreUpdates = {};
+        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, uid);
+        firestoreUpdates['lastUpdated'] = Date.now();
+        firestoreUpdates['letters'] = !!game.letters
+            ? [...game.letters, state.letter]
+            : [state.letter];
+        await updateFirestoreData(firestoreUpdates);
+    }
+
+    const markPlayer = async (currentScore) => {
+        const firestoreUpdates = {};
+        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, uid);
+        firestoreUpdates['lastUpdated'] = Date.now();
+        firestoreUpdates['players'] = game.players.find(p => p.uid = uid).score = currentScore + 1;
+        await updateFirestoreData(firestoreUpdates);
     }
 
     const bustPreviousPlayer = async () => {
@@ -97,16 +125,6 @@ const GamePage = ({ navigation, theme }) => {
         }
         const dataForResultAlert = { type: 'bust', data: { wordDefintions, prevPlayerUid } };
         return { dataForResultAlert, setPreviousPlayerActive, markUser };
-    }
-
-    const sendLetter = async () => {
-        const firestoreUpdates = {};
-        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, uid);
-        firestoreUpdates['lastUpdated'] = Date.now();
-        firestoreUpdates['letters'] = !!game.letters
-            ? [...game.letters, state.letter]
-            : [state.letter];
-        await updateFirestoreData(firestoreUpdates);
     }
 
     const updateFirestoreData = async (dataObj) => {
