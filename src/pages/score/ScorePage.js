@@ -1,16 +1,16 @@
 import React from 'react'
-import { SafeWrapper, PaddingView } from '../components/UI/Containers/Containers'
+import { SafeWrapper, PaddingView } from '../../components/UI/Containers/Containers'
 import { Text } from 'react-native'
 import { withTheme } from 'react-native-elements'
 
-const ChatPage = ({ theme }) => {
+const ScorePage = ({ theme }) => {
     return (
         <SafeWrapper bg={theme.colors.lightShade}>
             <PaddingView>
-                <Text>TODO Chat Page</Text>
+                <Text>TODO Score Page</Text>
             </PaddingView>
         </SafeWrapper>
     )
 }
 
-export default withTheme(ChatPage)
+export default withTheme(ScorePage)

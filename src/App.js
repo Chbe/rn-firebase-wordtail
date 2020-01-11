@@ -11,13 +11,13 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 import { Transition } from 'react-native-reanimated';
-import AuthLoadingPage from './pages/AuthLoadingPage';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import AdministrationPage from './pages/AdministrationPage';
+import AuthLoadingPage from './pages/auth/AuthLoadingPage';
+import HomePage from './pages/home/HomePage';
+import LoginPage from './pages/login/LoginPage';
+import AdministrationPage from './pages/admin/AdministrationPage';
 import NavigationService from './services/navigation/NavigationService';
-import GamePage from './pages/GamePage';
-import CreateGamePage from './pages/CreateGamePage';
+import GamePage from './pages/game/GamePage';
+import CreateGamePage from './pages/create-game/CreateGamePage';
 import { ThemeProvider } from 'react-native-elements'
 import { getTheme } from './core/Themes'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';

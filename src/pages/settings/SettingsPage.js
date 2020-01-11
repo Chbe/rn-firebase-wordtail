@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { View, FlatList, Text } from 'react-native';
-import { PaddingView } from '../components/UI/Containers/Containers';
+import { PaddingView } from '../../components/UI/Containers/Containers';
 import { CheckBox, withTheme } from 'react-native-elements';
-import { themes } from '../core/Themes'
+import { themes } from '../../core/Themes'
 
 const SettingsPage = ({ theme }) => {
     const [choosenTheme, setChoosenTheme] = useState(theme.key);

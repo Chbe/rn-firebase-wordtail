@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import Logout from '../components/auth/logout/Logout'
-import { CenterView, PaddingView } from '../components/UI/Containers/Containers'
+import Logout from '../../components/auth/logout/Logout'
+import { CenterView, PaddingView } from '../../components/UI/Containers/Containers'
 import firebase from 'react-native-firebase'
 import { Avatar, withTheme } from 'react-native-elements'
-import TextField from '../components/UI/controls/inputs//floating/FloatingInput';
+import TextField from '../../components/UI/controls/inputs/floating/FloatingInput';
 
 
 const ProfilePage = ({ navigation, theme }) => {

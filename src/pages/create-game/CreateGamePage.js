@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { SafeWrapper, PaddingView } from '../components/UI/Containers/Containers';
-import TextField from '../components/UI/controls/inputs/floating/FloatingInput'
-import ListOfUsers from '../components/ListOfUsers'
-import { CreateGameContext, CreateGameStore, useCreateGameContext } from '../stores/CreateGameStore'
+import { SafeWrapper, PaddingView } from '../../components/UI/Containers/Containers';
+import TextField from '../../components/UI/controls/inputs/floating/FloatingInput'
+import ListOfUsers from '../../components/ListOfUsers'
+import { CreateGameContext, CreateGameStore, useCreateGameContext } from '../../stores/CreateGameStore'
 import { View } from 'react-native';
 import firebase from 'react-native-firebase';
 import { Input, Button, withTheme } from 'react-native-elements';

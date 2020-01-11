@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import LetterBox from '../components/game/in-game/letter/LetterBox'
-import { CenterView, SafeWrapper } from '../components/UI/Containers/Containers'
-import Keyboard from '../components/game/in-game/keyboard/Keyboard'
+import LetterBox from '../../components/game/in-game/letter/LetterBox'
+import { CenterView, SafeWrapper } from '../../components/UI/Containers/Containers'
+import Keyboard from '../../components/game/in-game/keyboard/Keyboard'
 import styled from 'styled-components'
 import { View, Alert } from 'react-native'
-import { GameContext, GameStore, useGameContext } from '../stores/GameStore'
+import { GameContext, GameStore, useGameContext } from '../../stores/GameStore'
 import { Button, Icon, withTheme, Text } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import ProgressBar from '../components/game/in-game/progress-bar/ProgressBar'
+import ProgressBar from '../../components/game/in-game/progress-bar/ProgressBar'
 import firebase from 'react-native-firebase'
-import { getClosestActivePlayer, getWordDetails } from '../services/game/GameService'
+import { getClosestActivePlayer, getWordDetails } from '../../services/game/GameService'
 import Modal from "react-native-modal";
-import Spinner from '../components/UI/controls/spinner/Spinner'
+import Spinner from '../../components/UI/controls/spinner/Spinner'
 
 const Wrapper = styled(CenterView)`
     justify-content: space-between;

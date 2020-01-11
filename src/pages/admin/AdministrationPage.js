@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { SafeWrapper, PaddingView } from '../components/UI/Containers/Containers'
+import { SafeWrapper, PaddingView } from '../../components/UI/Containers/Containers'
 import { SegmentedControlIOS } from 'react-native';
-import ProfilePage from './ProfilePage';
-import SettingsPage from './SettingsPage';
+import ProfilePage from '../profile/ProfilePage';
+import SettingsPage from '../settings/SettingsPage';
 import { withTheme } from 'react-native-elements';
 
 const AdministrationPage = ({ navigation, theme }) => {
