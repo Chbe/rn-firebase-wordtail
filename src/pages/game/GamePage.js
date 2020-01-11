@@ -37,7 +37,7 @@ const GamePage = ({ navigation, theme }) => {
     const time = 25000;
     const maxMarks = 3;
     const [game, setGame] = useState({});
-    const [uid, setUid] = useState('');
+    const [currentUid, setUid] = useState('');
 
     const [spinnerIsVisable, setSpinnerVisable] = useState(false);
     const [modalIsVisable, setModalVisable] = useState(false);
@@ -80,7 +80,7 @@ const GamePage = ({ navigation, theme }) => {
 
     const sendLetter = async () => {
         const firestoreUpdates = {};
-        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, uid);
+        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, currentUid);
         firestoreUpdates['lastUpdated'] = Date.now();
         firestoreUpdates['letters'] = !!game.letters
             ? [...game.letters, state.letter]
@@ -89,22 +89,37 @@ const GamePage = ({ navigation, theme }) => {
     }
 
     const playerSentNoLetter = async () => {
-        const currentScore = game.players.find(p => p.uid === uid).score;
+        const currentScore = game.players.find(p => p.uid === currentUid).score;
         const nextPlayerWonGame = game.players.length === 2 && currentScore >= maxMarks
             ? true
             : false;
         if (nextPlayerWonGame) {
-            console.log('next player won');
             await setGameWinner();
         } else {
-            console.log('player got mark. Score:', currentScore);
-            await markPlayer(uid);
+            await markPlayer(currentUid);
         }
+    }
+
+    const setGameWinner = async () => {
+        const firestoreData = {
+            "lastUpdated": Date.now(),
+            "players": game.players.map(({ displayName, photoURL, score, uid }) => {
+                if (uid === currentUid) {
+                    score += 1;
+                }
+                return { displayName, photoURL, score, uid }
+            }),
+            "playersUid": [...game.playersUid],
+            "status": "completed",
+            "title": game.title,
+            "winner": getClosestActivePlayer(game.players, currentUid)
+        };
+        await setFirestoreData(firestoreData);
     }
 
     const markPlayer = async (_uid) => {
         const firestoreUpdates = {};
-        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, uid);
+        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, currentUid);
         firestoreUpdates['lastUpdated'] = Date.now();
         firestoreUpdates['players'] = game.players.map(player => {
             if (player.uid === _uid) {
@@ -117,7 +132,7 @@ const GamePage = ({ navigation, theme }) => {
 
     const bustPreviousPlayer = async () => {
         const completeWord = game.letters.join('');
-        const previousPlayerUid = getClosestActivePlayer(game.players, uid, true);
+        const previousPlayerUid = getClosestActivePlayer(game.players, currentUid, true);
         let setPreviousPlayerActive = false;
         let markUser;
         const wordDefintions = await getWordDetails(completeWord);
@@ -131,7 +146,7 @@ const GamePage = ({ navigation, theme }) => {
             'next player' is previous player unless
             current user hits maximum nr of marks and there's
             only 1 player left, then previous player is game winner */
-            markUser = uid;
+            markUser = currentUid;
             setPreviousPlayerActive = true;
         }
         const dataForResultAlert = { type: 'bust', data: { wordDefintions, prevPlayerUid } };
@@ -149,7 +164,8 @@ const GamePage = ({ navigation, theme }) => {
 
     const setFirestoreData = async (dataObj) => {
         try {
-            await firestoreRef.set(dataObj);
+            console.log('setData:', dataObj)
+            //await firestoreRef.set(dataObj);
         } catch (error) {
             console.error(error);
         }
