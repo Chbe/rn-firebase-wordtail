@@ -66,15 +66,7 @@ const GamePage = ({ navigation, theme }) => {
                  * user hits maximum nr or marks.
                  * Then next player is game winner.
                  */
-                const currentScore = game.players.find(p => p.uid === uid).score;
-                const nextPlayerWonGame = game.players.length === 2 && currentScore + 1 === maxMarks
-                    ? true
-                    : false;
-                if (nextPlayerWonGame) {
-                    await setGameWinner();
-                } else {
-                    await markPlayer(currentScore);
-                }
+                await playerSentNoLetter();
             }
         } else if (type === 2) {
             /** Word API lookup */
@@ -96,11 +88,30 @@ const GamePage = ({ navigation, theme }) => {
         await updateFirestoreData(firestoreUpdates);
     }
 
-    const markPlayer = async (currentScore) => {
+    const playerSentNoLetter = async () => {
+        const currentScore = game.players.find(p => p.uid === uid).score;
+        const nextPlayerWonGame = game.players.length === 2 && currentScore >= maxMarks
+            ? true
+            : false;
+        if (nextPlayerWonGame) {
+            console.log('next player won');
+            await setGameWinner();
+        } else {
+            console.log('player got mark. Score:', currentScore);
+            await markPlayer(uid);
+        }
+    }
+
+    const markPlayer = async (_uid) => {
         const firestoreUpdates = {};
         firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, uid);
         firestoreUpdates['lastUpdated'] = Date.now();
-        firestoreUpdates['players'] = game.players.find(p => p.uid = uid).score = currentScore + 1;
+        firestoreUpdates['players'] = game.players.map(player => {
+            if (player.uid === _uid) {
+                player.score += 1;
+            }
+            return player;
+        });
         await updateFirestoreData(firestoreUpdates);
     }
 
@@ -129,7 +140,8 @@ const GamePage = ({ navigation, theme }) => {
 
     const updateFirestoreData = async (dataObj) => {
         try {
-            await firestoreRef.update(dataObj);
+            console.log('updateData:', dataObj)
+            //await firestoreRef.update(dataObj);
         } catch (error) {
             console.error(error);
         }
