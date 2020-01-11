@@ -35,9 +35,11 @@ const ModalContainer = styled(CenterView)`
 const GamePage = ({ navigation, theme }) => {
     const { state, actions } = GameStore();
     const time = 25000;
-    const maxMarks = 3;
+    const maxMarks = 5;
     const [game, setGame] = useState({});
     const [currentUid, setUid] = useState('');
+
+    const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
     const [spinnerIsVisable, setSpinnerVisable] = useState(false);
     const [modalIsVisable, setModalVisable] = useState(false);
@@ -65,16 +67,38 @@ const GamePage = ({ navigation, theme }) => {
                  * user hits maximum nr or marks.
                  * Then next player is game winner.
                  */
-                const nextPLayerWon = await playerSentNoLetter();
-                setModalData(nextPLayerWon
-                    ? 'You got too many marks so your oppnent won this game. Better luck next time!'
-                    : 'You got an mark. You know you can try to bluff right?');
+                if (!game.letters || !game.letters.length) {
+                    const letter = alphabet[Math.floor(Math.random() * alphabet.length)];
+                    await sendLetter(letter);
+                    setModalData(`Since you're staring this round you did'nt get a mark and we chose letter "${letter}" for you.`)
+                } else {
+                    const nextPLayerWon = await playerSentNoLetter(true);
+                    setModalData(nextPLayerWon
+                        ? 'You got too many marks so your oppnent won this game. Better luck next time!'
+                        : 'You got an mark. You know you can try to bluff right?');
+                }
 
             }
         } else if (type === 2) {
             /** Word API lookup */
-            const { dataForResultAlert } = await bustPreviousPlayer();
-
+            const { userToMark, nextPlayerWon, wordDefintions } = await bustPreviousPlayer();
+            if (userToMark === currentUid) {
+                // It wasnt a word, user gets two marks
+                if (nextPlayerWon) {
+                    // previous user won
+                    setModalData(`${wordDefintions.word} is not a word. Therefore you got two marks which means that the previous player won the game`);
+                } else {
+                    setModalData(`${wordDefintions.word} is not a word and therefore you got two marks.`);
+                }
+            } else {
+                // It was a word, previous user gets a mark
+                if (nextPlayerWon) {
+                    // current user won
+                    setModalData(`Nice move! You won the game!`);
+                } else {
+                    setModalData(`Nicely done! Previous player got a mark and you'll start the next round!`);
+                }
+            }
         } else {
             /** Current user thinks previous player is bluffing. */
         }
@@ -82,53 +106,58 @@ const GamePage = ({ navigation, theme }) => {
         setModalVisable(true);
     }
 
-    const sendLetter = async () => {
+    const sendLetter = async (letter = state.letter) => {
         const firestoreUpdates = {};
         firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, currentUid);
         firestoreUpdates['lastUpdated'] = Date.now();
         firestoreUpdates['letters'] = !!game.letters
-            ? [...game.letters, state.letter]
-            : [state.letter];
+            ? [...game.letters, letter]
+            : [letter];
         await updateFirestoreData(firestoreUpdates);
     }
 
-    const playerSentNoLetter = async () => {
-        const currentScore = game.players.find(p => p.uid === currentUid).score;
-        const nextPlayerWonGame = game.players.length === 2 && currentScore >= maxMarks
+    const playerSentNoLetter = async (markCurrentUser, nrOfMarks = 1, prevPlayerStarts) => {
+        const userTogetMark = markCurrentUser
+            ? currentUid
+            : getClosestActivePlayer(game.players, currentUid, true);
+        const currentScore = game.players.find(p => p.uid === userTogetMark).score;
+        const nextPlayerWonGame = game.players.length === 2 && (currentScore + nrOfMarks) >= maxMarks
             ? true
             : false;
         if (nextPlayerWonGame) {
-            await setGameWinner();
+            await setGameWinner(nrOfMarks, userTogetMark);
         } else {
-            await markPlayer(currentUid);
+            await markPlayer(userTogetMark, nrOfMarks, prevPlayerStarts);
         }
         return nextPlayerWonGame;
     }
 
-    const setGameWinner = async () => {
+    const setGameWinner = async (nrOfMarks, userToGetMark) => {
         const firestoreData = {
             "lastUpdated": Date.now(),
             "players": game.players.map(({ displayName, photoURL, score, uid }) => {
-                if (uid === currentUid) {
-                    score += 1;
+                if (uid === userToGetMark) {
+                    score += nrOfMarks;
                 }
                 return { displayName, photoURL, score, uid }
             }),
             "playersUid": [...game.playersUid],
             "status": "completed",
             "title": game.title,
-            "winner": getClosestActivePlayer(game.players, currentUid)
+            "winner": getClosestActivePlayer(game.players, userToGetMark)
         };
         await setFirestoreData(firestoreData);
     }
 
-    const markPlayer = async (_uid) => {
+    const markPlayer = async (uid, nrOfMarks = 1, prevPlayer = false) => {
         const firestoreUpdates = {};
-        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, currentUid);
+        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, currentUid, prevPlayer);
         firestoreUpdates['lastUpdated'] = Date.now();
         firestoreUpdates['players'] = game.players.map(player => {
-            if (player.uid === _uid) {
-                player.score += 1;
+            if (player.uid === uid) {
+                player.score += nrOfMarks;
+                if (player.score >= maxMarks)
+                    player.isActive = false;
             }
             return player;
         });
@@ -137,25 +166,27 @@ const GamePage = ({ navigation, theme }) => {
 
     const bustPreviousPlayer = async () => {
         const completeWord = game.letters.join('');
-        const previousPlayerUid = getClosestActivePlayer(game.players, currentUid, true);
-        let setPreviousPlayerActive = false;
-        let markUser;
+        let userToMark;
         const wordDefintions = await getWordDetails(completeWord);
+        console.log(wordDefintions);
+        let nextPlayerWon;
 
         if (wordDefintions.success) {
             /** completeWord is a word. Previous player gets a mark. 
-             * Current player starts new round */
-            markUser = previousPlayerUid;
+             * Current player starts new round unless
+            previous user hits maximum nr of marks and there's
+            only 1 player left, then current player is game winner */
+            userToMark = getClosestActivePlayer(game.players, currentUid, true);
+            nextPlayerWon = await playerSentNoLetter(false);
         } else {
             /** completeWord is not a word. Current user gets two marks, 
             'next player' is previous player unless
             current user hits maximum nr of marks and there's
             only 1 player left, then previous player is game winner */
-            markUser = currentUid;
-            setPreviousPlayerActive = true;
+            userToMark = currentUid;
+            nextPlayerWon = await playerSentNoLetter(true, 2, true);
         }
-        const dataForResultAlert = { type: 'bust', data: { wordDefintions, prevPlayerUid } };
-        return { dataForResultAlert, setPreviousPlayerActive, markUser };
+        return { userToMark, nextPlayerWon, wordDefintions };
     }
 
     const updateFirestoreData = async (dataObj) => {
@@ -264,7 +295,7 @@ const GamePage = ({ navigation, theme }) => {
                             onPress={() => handleGameActions(2)}
                         />
                         <Button
-                            disabled={!state.enablePlay}
+                            disabled={!state.enablePlay || !game.letters || game.letters.length < 1}
                             buttonStyle={{ backgroundColor: theme.colors.danger }}
                             icon={
                                 <FontAwesome5
