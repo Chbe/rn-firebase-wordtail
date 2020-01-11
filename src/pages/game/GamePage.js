@@ -47,7 +47,7 @@ const GamePage = ({ navigation, theme }) => {
         .collection('games')
         .doc(game.key);
 
-    const handleActionBtns = async (type) => {
+    const handleGameActions = async (type) => {
         setSpinnerVisable(true);
         actions.disablePlay();
 
@@ -57,8 +57,7 @@ const GamePage = ({ navigation, theme }) => {
                 /** Send letter and set next 
                  * player as next active user. */
                 await sendLetter();
-                alert('Letter sent!');
-                navigation.navigate('Home');
+                setModalData('Good job! Your letter has been submitted.')
             } else {
                 /** Current user gets a mark and next 
                  * player is next active user, unless there's
@@ -66,7 +65,11 @@ const GamePage = ({ navigation, theme }) => {
                  * user hits maximum nr or marks.
                  * Then next player is game winner.
                  */
-                await playerSentNoLetter();
+                const nextPLayerWon = await playerSentNoLetter();
+                setModalData(nextPLayerWon
+                    ? 'You got too many marks so your oppnent won this game. Better luck next time!'
+                    : 'You got an mark. You know you can try to bluff right?');
+
             }
         } else if (type === 2) {
             /** Word API lookup */
@@ -75,7 +78,8 @@ const GamePage = ({ navigation, theme }) => {
         } else {
             /** Current user thinks previous player is bluffing. */
         }
-        // setSpinnerVisable(false);
+        setSpinnerVisable(false);
+        setModalVisable(true);
     }
 
     const sendLetter = async () => {
@@ -98,6 +102,7 @@ const GamePage = ({ navigation, theme }) => {
         } else {
             await markPlayer(currentUid);
         }
+        return nextPlayerWonGame;
     }
 
     const setGameWinner = async () => {
@@ -173,9 +178,16 @@ const GamePage = ({ navigation, theme }) => {
 
     const renderModalContent = () => (
         <ModalContainer>
-            <Text>Hej</Text>
+            <Text>{modalData}</Text>
         </ModalContainer>
     )
+
+    const closeModalAndNavigate = () => {
+        setModalVisable(false);
+        setTimeout(() => {
+            navigation.navigate('Home');
+        }, 150);
+    }
 
     useEffect(() => {
         const gameParam = navigation.getParam('game', {});
@@ -194,13 +206,8 @@ const GamePage = ({ navigation, theme }) => {
     useEffect(() => {
         /** Event handler if time runs out */
         actions.disablePlay();
-        if (state.letter) {
-            // Send letter, 'next player' is next active user.
-        } else {
-            /** Current user gets a mark, 
-            'next player' is next active user unless
-            current user hits maximum nr of marks and there's
-            only 1 player left, then 'next player' is game winner. */
+        if (state.timesup) {
+            handleGameActions(1);
         }
     }, [state.timesup])
     return (
@@ -216,8 +223,8 @@ const GamePage = ({ navigation, theme }) => {
                     animationOutTiming={600}
                     backdropTransitionInTiming={600}
                     backdropTransitionOutTiming={600}
-                    onBackdropPress={() => setModalVisable(false)}
-                    onSwipeComplete={() => setModalVisable(false)}
+                    onBackdropPress={() => closeModalAndNavigate()}
+                    onSwipeComplete={() => closeModalAndNavigate()}
                     swipeDirection={['left', 'right']}
                 >
                     {renderModalContent()}
@@ -240,7 +247,7 @@ const GamePage = ({ navigation, theme }) => {
                                 />
                             }
                             title="Send"
-                            onPress={() => handleActionBtns(1)}
+                            onPress={() => handleGameActions(1)}
                         />
                         <Button
                             disabled={!state.enablePlay}
@@ -254,7 +261,7 @@ const GamePage = ({ navigation, theme }) => {
                                 />
                             }
                             title="Bust"
-                            onPress={() => handleActionBtns(2)}
+                            onPress={() => handleGameActions(2)}
                         />
                         <Button
                             disabled={!state.enablePlay}
