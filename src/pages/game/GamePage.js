@@ -49,61 +49,74 @@ const GamePage = ({ navigation, theme }) => {
         .collection('games')
         .doc(game.key);
 
-    const handleGameActions = async (type) => {
+    const determineGameActions = async (type) => {
         setSpinnerVisable(true);
         actions.disablePlay();
 
         if (type === 1) {
             /** User clicked send */
-            if (state.letter) {
-                /** Send letter and set next 
-                 * player as next active user. */
-                await sendLetter();
-                setModalData('Good job! Your letter has been submitted.')
-            } else {
-                /** Current user gets a mark and next 
-                 * player is next active user, unless there's
-                 *  only 2 players left and current 
-                 * user hits maximum nr or marks.
-                 * Then next player is game winner.
-                 */
-                if (!game.letters || !game.letters.length) {
-                    const letter = alphabet[Math.floor(Math.random() * alphabet.length)];
-                    await sendLetter(letter);
-                    setModalData(`Since you're staring this round you did'nt get a mark and we chose letter "${letter}" for you.`)
-                } else {
-                    const nextPLayerWon = await playerSentNoLetter(true);
-                    setModalData(nextPLayerWon
-                        ? 'You got too many marks so your oppnent won this game. Better luck next time!'
-                        : 'You got an mark. You know you can try to bluff right?');
-                }
-
-            }
+            await handleSendLetter();
         } else if (type === 2) {
             /** Word API lookup */
-            const { userToMark, nextPlayerWon, wordDefintions } = await bustPreviousPlayer();
-            if (userToMark === currentUid) {
-                // It wasnt a word, user gets two marks
-                if (nextPlayerWon) {
-                    // previous user won
-                    setModalData(`${wordDefintions.word} is not a word. Therefore you got two marks which means that the previous player won the game`);
-                } else {
-                    setModalData(`${wordDefintions.word} is not a word and therefore you got two marks.`);
-                }
-            } else {
-                // It was a word, previous user gets a mark
-                if (nextPlayerWon) {
-                    // current user won
-                    setModalData(`Nice move! You won the game!`);
-                } else {
-                    setModalData(`Nicely done! Previous player got a mark and you'll start the next round!`);
-                }
-            }
+            await handleBust();
         } else {
             /** Current user thinks previous player is bluffing. */
         }
         setSpinnerVisable(false);
         setModalVisable(true);
+    }
+
+    const handleSendLetter = async () => {
+        if (state.letter) {
+            /** Send letter and set next 
+             * player as next active user. */
+            await sendLetter();
+            setModalData('Good job! Your letter has been submitted.')
+        } else {
+            /** Current user gets a mark and next 
+             * player is next active user, unless there's
+             *  only 2 players left and current 
+             * user hits maximum nr or marks.
+             * Then next player is game winner.
+             */
+            if (!game.letters || !game.letters.length) {
+                const letter = alphabet[Math.floor(Math.random() * alphabet.length)];
+                await sendLetter(letter);
+                setModalData(`Since you're staring this round you did'nt get a mark and we chose letter "${letter}" for you.`)
+            } else {
+                const { nextPlayerWon, currentScore } = await playerSentNoLetter(true);
+                if (nextPlayerWon) {
+                    setModalData('You got too many marks so your oppnent won this game. Better luck next time!');
+                } else if (currentScore + 1 >= maxMarks) {
+                    setModalData(`You got too many marks so you're out. Better luck next time!`);
+                } else {
+                    setModalData('You got an mark. You know you can try to bluff right?');
+                }
+            }
+        }
+    }
+
+    const handleBust = async () => {
+        const { userToMark, nextPlayerWon, wordDefintions, currentScore } = await bustPreviousPlayer();
+        if (userToMark === currentUid) {
+            // It wasnt a word, user gets two marks
+            if (nextPlayerWon) {
+                // previous user won
+                setModalData(`${wordDefintions.word} is not a word. Therefore you got two marks which means that the previous player won the game`);
+            } else if (currentScore + 2 >= maxMarks) {
+                setModalData(`${wordDefintions.word} is not a word and therefore you got two marks and now you got too many marks.`);
+            } else {
+                setModalData(`${wordDefintions.word} is not a word and therefore you got two marks.`);
+            }
+        } else {
+            // It was a word, previous user gets a mark
+            if (nextPlayerWon) {
+                // current user won
+                setModalData(`Nice move! You won the game!`);
+            } else {
+                setModalData(`Nicely done! Previous player got a mark and you'll start the next round!`);
+            }
+        }
     }
 
     const sendLetter = async (letter = state.letter) => {
@@ -129,7 +142,7 @@ const GamePage = ({ navigation, theme }) => {
         } else {
             await markPlayer(userTogetMark, nrOfMarks, prevPlayerStarts);
         }
-        return nextPlayerWonGame;
+        return { nextPlayerWonGame, currentScore };
     }
 
     const setGameWinner = async (nrOfMarks, userToGetMark) => {
@@ -169,6 +182,7 @@ const GamePage = ({ navigation, theme }) => {
         let userToMark;
         const wordDefintions = await getWordDetails(completeWord);
         let nextPlayerWon;
+        let currentScore;
 
         if (wordDefintions.success) {
             /** completeWord is a word. Previous player gets a mark. 
@@ -176,16 +190,20 @@ const GamePage = ({ navigation, theme }) => {
             previous user hits maximum nr of marks and there's
             only 1 player left, then current player is game winner */
             userToMark = getClosestActivePlayer(game.players, currentUid, true);
-            nextPlayerWon = await playerSentNoLetter(false);
+            const { nextPlayerWon: npw, currentScore: cs } = await playerSentNoLetter(false);
+            nextPlayerWon = npw;
+            currentScore = cs;
         } else {
             /** completeWord is not a word. Current user gets two marks, 
             'next player' is previous player unless
             current user hits maximum nr of marks and there's
             only 1 player left, then previous player is game winner */
             userToMark = currentUid;
-            nextPlayerWon = await playerSentNoLetter(true, 2, true);
+            const { nextPlayerWon: npw, currentScore: cs } = await playerSentNoLetter(true, 2, true);
+            nextPlayerWon = npw;
+            currentScore = cs;
         }
-        return { userToMark, nextPlayerWon, wordDefintions };
+        return { userToMark, nextPlayerWon, wordDefintions, currentScore };
     }
 
     const updateFirestoreData = async (dataObj) => {
@@ -237,7 +255,7 @@ const GamePage = ({ navigation, theme }) => {
         /** Event handler if time runs out */
         actions.disablePlay();
         if (state.timesup) {
-            handleGameActions(1);
+            determineGameActions(1);
         }
     }, [state.timesup])
     return (
@@ -277,7 +295,7 @@ const GamePage = ({ navigation, theme }) => {
                                 />
                             }
                             title="Send"
-                            onPress={() => handleGameActions(1)}
+                            onPress={() => determineGameActions(1)}
                         />
                         <Button
                             disabled={!state.enablePlay || !game.letters || game.letters.length < 3}
@@ -291,7 +309,7 @@ const GamePage = ({ navigation, theme }) => {
                                 />
                             }
                             title="Bust"
-                            onPress={() => handleGameActions(2)}
+                            onPress={() => determineGameActions(2)}
                         />
                         <Button
                             disabled={!state.enablePlay || !game.letters || game.letters.length < 1}
