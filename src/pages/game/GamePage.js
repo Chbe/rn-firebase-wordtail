@@ -61,6 +61,7 @@ const GamePage = ({ navigation, theme }) => {
             await handleBust();
         } else {
             /** Current user thinks previous player is bluffing. */
+            await handleCall();
         }
         setSpinnerVisable(false);
         setModalVisable(true);
@@ -117,6 +118,10 @@ const GamePage = ({ navigation, theme }) => {
                 setModalData(`Nicely done! Previous player got a mark and you'll start the next round!`);
             }
         }
+    }
+
+    const handleCall = async () => {
+
     }
 
     const sendLetter = async (letter = state.letter) => {
