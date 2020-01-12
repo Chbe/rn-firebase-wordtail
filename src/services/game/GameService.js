@@ -113,3 +113,7 @@ export const prepareAlertForBustResult = (players, bustData, completedGame = {})
         buttons: [`${wordDefintions.success ? 'I knew it!' : 'Darn it...'}`]
     };
 }
+
+export const getDisplayNameByUid = (players, uid) => {
+    return players.find(p => p.uid === uid).displayName;
+}

@@ -9,7 +9,7 @@ import { Button, Icon, withTheme, Text } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ProgressBar from '../../components/game/in-game/progress-bar/ProgressBar'
 import firebase from 'react-native-firebase'
-import { getClosestActivePlayer, getWordDetails } from '../../services/game/GameService'
+import { getClosestActivePlayer, getWordDetails, getDisplayNameByUid } from '../../services/game/GameService'
 import Modal from "react-native-modal";
 import Spinner from '../../components/UI/controls/spinner/Spinner'
 
@@ -121,7 +121,15 @@ const GamePage = ({ navigation, theme }) => {
     }
 
     const handleCall = async () => {
-
+        const firestoreUpdates = {};
+        firestoreUpdates['activePlayer'] = getClosestActivePlayer(game.players, currentUid, true);
+        firestoreUpdates['lastUpdated'] = Date.now();
+        firestoreUpdates['status'] = 'calling';
+        firestoreUpdates['caller'] = currentUid;
+        firestoreUpdates['revealer'] = firestoreUpdates.activePlayer;
+        await updateFirestoreData(firestoreUpdates);
+        const displayName = getDisplayNameByUid(game.players, firestoreUpdates.activePlayer);
+        setModalData(`You've called previous player! Sit tight and wait for ${displayName} to answer!`);
     }
 
     const sendLetter = async (letter = state.letter) => {
@@ -317,7 +325,7 @@ const GamePage = ({ navigation, theme }) => {
                             onPress={() => determineGameActions(2)}
                         />
                         <Button
-                            disabled={!state.enablePlay || !game.letters || game.letters.length < 1}
+                            disabled={!state.enablePlay || !game.letters || game.letters.length < 2}
                             buttonStyle={{ backgroundColor: theme.colors.danger }}
                             icon={
                                 <FontAwesome5
@@ -328,6 +336,7 @@ const GamePage = ({ navigation, theme }) => {
                                 />
                             }
                             title="Call"
+                            onPress={() => determineGameActions(3)}
                         />
                     </ActionsWrapper>
 
