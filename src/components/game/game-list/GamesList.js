@@ -30,7 +30,7 @@ const GamesList = ({ navigation, uid, theme }) => {
                     uid)
                 .orderBy('status', 'asc')
                 .orderBy('lastUpdated', 'desc');
-            // .limit(5);
+            // .limit(5); TODO
             sub = ref.onSnapshot(onCollectionUpdate)
         }
         return () => {
@@ -59,6 +59,12 @@ const GamesList = ({ navigation, uid, theme }) => {
                 game: item,
                 uid: uid
             });
+        } else if (item.status === 'calling' && item.activePlayer === uid) {
+            // navigation.navigate('Game', {
+            //     game: item,
+            //     uid: uid
+            // });
+            alert('calling')
         }
     }
 
@@ -108,7 +114,7 @@ const GamesList = ({ navigation, uid, theme }) => {
                             color={theme.colors.lightAccent}
                         />}
                     leftAvatar={{
-                        source: item.status === 'active'
+                        source: item.status === 'active' || item.status === 'calling'
                             ? { uri: item.players.find(p => p.uid === item.activePlayer).photoURL }
                             : null,
                         title: item.title[0]

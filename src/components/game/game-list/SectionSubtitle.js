@@ -24,7 +24,7 @@ const SectionSubtitle = ({ item, theme }) => {
     return (
         <View>
             <TextParagraph status={item.status} theme={theme}>
-                {item.status === 'active'
+                {item.status === 'active' || item.status === 'calling'
                     ? formatDate(item.lastUpdated)
                     : 'Wating for players...'}
             </TextParagraph>
