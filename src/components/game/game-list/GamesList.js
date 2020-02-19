@@ -98,7 +98,7 @@ const GamesList = ({ navigation, uid, theme }) => {
                     style={{ borderRadius: 5 }}
                     containerStyle={{
                         borderRadius: 5,
-                        marginBottom: 10
+                        // marginBottom: 10
                     }}
                     titleStyle={{
                         color: theme.colors.darkShade,
