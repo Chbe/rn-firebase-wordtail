@@ -38,6 +38,7 @@ const GamePage = ({ navigation, theme }) => {
     const maxMarks = 5;
     const [game, setGame] = useState({});
     const [currentUid, setUid] = useState('');
+    const [calling, setCalling] = useState(false);
 
     const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
@@ -59,9 +60,15 @@ const GamePage = ({ navigation, theme }) => {
         } else if (type === 2) {
             /** Word API lookup */
             await handleBust();
-        } else {
+        } else if (type === 3) {
             /** Current user thinks previous player is bluffing. */
             await handleCall();
+        } else if (type === 4) {
+            /** Current answers the call with a word */
+            await handleSendWord();
+        } else if (type === 5) {
+            /** Current user answers the call with a surrender */
+            await handleSurrenderCall();
         }
         setSpinnerVisable(false);
         setModalVisable(true);
@@ -130,6 +137,14 @@ const GamePage = ({ navigation, theme }) => {
         await updateFirestoreData(firestoreUpdates);
         const displayName = getDisplayNameByUid(game.players, firestoreUpdates.activePlayer);
         setModalData(`You've called previous player! Sit tight and wait for ${displayName} to answer!`);
+    }
+
+    const handleSendWord = async () => {
+        setModalData(`TODO: Send word`);
+    }
+
+    const handleSurrenderCall = async () => {
+        setModalData(`TODO: Handle the surrender`);
     }
 
     const sendLetter = async (letter = state.letter) => {
@@ -253,12 +268,15 @@ const GamePage = ({ navigation, theme }) => {
     useEffect(() => {
         const gameParam = navigation.getParam('game', {});
         const uid = navigation.getParam('uid', '');
+        const calling = navigation.getParam('calling', false);
         setUid(uid);
         setGame(gameParam);
+        setCalling(calling);
 
         if (!gameParam.letters) {
             setTimeout(() => actions.enablePlay(), 1000);
         }
+
         return () => {
 
         };
@@ -293,7 +311,7 @@ const GamePage = ({ navigation, theme }) => {
                 <Wrapper>
                     <ProgressBar enablePlay={state.enablePlay} theme={theme} />
 
-                    <LetterBox letters={game.letters} theme={theme} />
+                    <LetterBox letters={game.letters} theme={theme} calling={calling} />
 
                     <ActionsWrapper>
                         <Button
@@ -308,9 +326,9 @@ const GamePage = ({ navigation, theme }) => {
                                 />
                             }
                             title="Send"
-                            onPress={() => determineGameActions(1)}
+                            onPress={() => determineGameActions(calling ? 4 : 1)}
                         />
-                        <Button
+                        {!calling && <Button
                             disabled={!state.enablePlay || !game.letters || game.letters.length < 3}
                             buttonStyle={{ backgroundColor: theme.colors.warning }}
                             icon={
@@ -323,20 +341,20 @@ const GamePage = ({ navigation, theme }) => {
                             }
                             title="Bust"
                             onPress={() => determineGameActions(2)}
-                        />
+                        />}
                         <Button
                             disabled={!state.enablePlay || !game.letters || game.letters.length < 2}
                             buttonStyle={{ backgroundColor: theme.colors.danger }}
                             icon={
                                 <FontAwesome5
-                                    name='glasses'
+                                    name={calling ? "flag" : 'glasses'}
                                     size={15}
                                     color="white"
                                     style={{ marginRight: 5 }}
                                 />
                             }
-                            title="Call"
-                            onPress={() => determineGameActions(3)}
+                            title={calling ? "Surrender" : "Call"}
+                            onPress={() => determineGameActions(calling ? 5 : 3)}
                         />
                     </ActionsWrapper>
 

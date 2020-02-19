@@ -60,11 +60,12 @@ const GamesList = ({ navigation, uid, theme }) => {
                 uid: uid
             });
         } else if (item.status === 'calling' && item.activePlayer === uid) {
-            // navigation.navigate('Game', {
-            //     game: item,
-            //     uid: uid
-            // });
-            alert('calling')
+            navigation.navigate('Game', {
+                game: item,
+                uid: uid,
+                calling: true
+            });
+            // alert('calling')
         }
     }
 

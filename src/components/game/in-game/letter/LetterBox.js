@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { CenterView } from '../../../UI/Containers/Containers';
 import { useGameContext } from '../../../../stores/GameStore';
 import ChoosenLetter from './letter-choice/AnimatedLetter';
-
+import { Text } from 'react-native-elements'
 const Wrapper = styled(CenterView)`
     border: 5px solid ${props => props.color};
     border-radius: 15px;
@@ -12,7 +12,7 @@ const Wrapper = styled(CenterView)`
     height: 150;
 `;
 
-const LetterBox = ({ letters = [], theme }) => {
+const LetterBox = ({ letters = [], theme, calling = false }) => {
     const [doAnimation, setDoAnimation] = useState(false);
     const [chooseLetter, setChooseLetter] = useState(true);
     const { state, actions } = useGameContext();
@@ -61,7 +61,9 @@ const LetterBox = ({ letters = [], theme }) => {
             : theme.colors.lightAccent}>
             {!chooseLetter
                 ? <AnimatedLetter theme={theme} letter={state.letter} doAnimation={doAnimation} />
-                : <ChoosenLetter theme={theme} letter={state.letter} />}
+                : calling
+                    ? <Text>TODO: Enable word input</Text>
+                    : <ChoosenLetter theme={theme} letter={state.letter} />}
         </Wrapper>
     )
 }
