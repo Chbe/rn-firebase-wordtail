@@ -54,8 +54,6 @@ const GamePage = ({ navigation, theme }) => {
         setSpinnerVisable(true);
         actions.disablePlay();
 
-        console.log(type)
-
         if (type === 1) {
             /** User clicked send */
             await handleSendLetter();
@@ -147,7 +145,9 @@ const GamePage = ({ navigation, theme }) => {
     }
 
     const handleSurrenderCall = async () => {
-        setModalData(`TODO: Handle the surrender`);
+        /** Current user typed something not valid */
+        const { nextPlayerWon, currentScore } = await playerSentNoLetter(true, 2, true);
+        await setModalDataForBlankSubmits(nextPlayerWon, currentScore);
     }
 
     const sendLetter = async (letter = state.letter) => {
@@ -222,7 +222,7 @@ const GamePage = ({ navigation, theme }) => {
         console.log('validateWordAndCalcMarks')
         const completeWord = calling ? state.completeWord : game.letters.join('');
         let userToMark;
-        const wordDefintions = await getWordDetails(complete);
+        const wordDefintions = await getWordDetails(completeWord);
         let nextPlayerWon;
         let currentScore;
 
@@ -300,7 +300,7 @@ const GamePage = ({ navigation, theme }) => {
         /** Event handler if time runs out */
         actions.disablePlay();
         if (state.timesup) {
-            determineGameActions(1);
+            determineGameActions(calling ? 5 : 1);
         }
     }, [state.timesup])
     return (
@@ -373,7 +373,7 @@ const GamePage = ({ navigation, theme }) => {
                     </ActionsWrapper>
 
                     <View>
-                        <Keyboard />
+                        {!calling && <Keyboard />}
                     </View>
 
                 </Wrapper>
