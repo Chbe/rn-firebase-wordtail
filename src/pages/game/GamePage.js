@@ -92,8 +92,8 @@ const GamePage = ({ navigation, theme }) => {
                 await sendLetter(letter);
                 setModalData(`Since you're staring this round you did'nt get a mark and we chose letter "${letter}" for you.`)
             } else {
-                const { nextPlayerWon, currentScore } = await playerSentNoLetter(true);
-                await setModalDataForBlankSubmits(nextPlayerWon, currentScore);
+                const { nextPlayerWonGame, currentScore } = await playerSentNoLetter(true);
+                await setModalDataForBlankSubmits(nextPlayerWonGame, currentScore);
             }
         }
     }
@@ -139,15 +139,15 @@ const GamePage = ({ navigation, theme }) => {
             await handleBust();
         } else {
             /** Current user typed something not valid */
-            const { nextPlayerWon, currentScore } = await playerSentNoLetter(true, 2, true);
-            await setModalDataForBlankSubmits(nextPlayerWon, currentScore);
+            const { nextPlayerWonGame, currentScore } = await playerSentNoLetter(true, 2, true);
+            await setModalDataForBlankSubmits(nextPlayerWonGame, currentScore);
         }
     }
 
     const handleSurrenderCall = async () => {
         /** Current user typed something not valid */
-        const { nextPlayerWon, currentScore } = await playerSentNoLetter(true, 2, true);
-        await setModalDataForBlankSubmits(nextPlayerWon, currentScore);
+        const { nextPlayerWonGame, currentScore } = await playerSentNoLetter(true, 2, true);
+        await setModalDataForBlankSubmits(nextPlayerWonGame, currentScore);
     }
 
     const sendLetter = async (letter = state.letter) => {
@@ -168,11 +168,13 @@ const GamePage = ({ navigation, theme }) => {
         const nextPlayerWonGame = game.players.length === 2 && (currentScore + nrOfMarks) >= maxMarks
             ? true
             : false;
+
         if (nextPlayerWonGame) {
             await setGameWinner(nrOfMarks, userTogetMark);
         } else {
             await markPlayer(userTogetMark, nrOfMarks, prevPlayerStarts);
         }
+        
         return { nextPlayerWonGame, currentScore };
     }
 
@@ -219,7 +221,6 @@ const GamePage = ({ navigation, theme }) => {
     }
 
     const validateWordAndCalcMarks = async () => {
-        console.log('validateWordAndCalcMarks')
         const completeWord = calling ? state.completeWord : game.letters.join('');
         let userToMark;
         const wordDefintions = await getWordDetails(completeWord);
@@ -232,7 +233,10 @@ const GamePage = ({ navigation, theme }) => {
             previous user hits maximum nr of marks and there's
             only 1 player left, then current player is game winner */
             userToMark = getClosestActivePlayer(game.players, currentUid, true);
-            const { nextPlayerWon: npw, currentScore: cs } = await playerSentNoLetter(false);
+            const {
+                nextPlayerWonGame: npw,
+                currentScore: cs
+            } = await playerSentNoLetter(false, calling ? 2 : 1);
             nextPlayerWon = npw;
             currentScore = cs;
         } else {
@@ -245,6 +249,7 @@ const GamePage = ({ navigation, theme }) => {
             nextPlayerWon = npw;
             currentScore = cs;
         }
+
         return { userToMark, nextPlayerWon, wordDefintions, currentScore };
     }
 
