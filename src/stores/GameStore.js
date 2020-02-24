@@ -2,6 +2,7 @@ import { useState, useContext, useMemo, createContext } from 'react'
 
 const initialState = {
     letter: '',
+    completeWord: '',
     enablePlay: false,
     timesup: false
 }
@@ -32,6 +33,9 @@ const getActions = setState => ({
     },
     setLetter: (payload) => {
         setState(state => ({ ...state, letter: payload }))
+    },
+    setCompleteWord: (payload) => {
+        setState(state => ({ ...state, completeWord: payload }))
     },
     enablePlay: () => {
         setState(state => ({ ...state, enablePlay: true }))

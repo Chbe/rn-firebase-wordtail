@@ -5,6 +5,8 @@ import { CenterView } from '../../../UI/Containers/Containers';
 import { useGameContext } from '../../../../stores/GameStore';
 import ChoosenLetter from './letter-choice/AnimatedLetter';
 import { Text } from 'react-native-elements'
+import WordInput from '../word-input/WordInput';
+
 const Wrapper = styled(CenterView)`
     border: 5px solid ${props => props.color};
     border-radius: 15px;
@@ -56,15 +58,15 @@ const LetterBox = ({ letters = [], theme, calling = false }) => {
         };
     }, [letters])
     return (
-        <Wrapper color={!chooseLetter
-            ? theme.colors.darkShade
-            : theme.colors.lightAccent}>
-            {!chooseLetter
-                ? <AnimatedLetter theme={theme} letter={state.letter} doAnimation={doAnimation} />
-                : calling
-                    ? <Text>TODO: Enable word input</Text>
+        calling && state.enablePlay
+            ? <WordInput letters={letters}></WordInput>
+            : <Wrapper color={!chooseLetter
+                ? theme.colors.darkShade
+                : theme.colors.lightAccent}>
+                {!chooseLetter
+                    ? <AnimatedLetter theme={theme} letter={state.letter} doAnimation={doAnimation} />
                     : <ChoosenLetter theme={theme} letter={state.letter} />}
-        </Wrapper>
+            </Wrapper>
     )
 }
 

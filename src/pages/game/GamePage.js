@@ -54,6 +54,8 @@ const GamePage = ({ navigation, theme }) => {
         setSpinnerVisable(true);
         actions.disablePlay();
 
+        console.log(type)
+
         if (type === 1) {
             /** User clicked send */
             await handleSendLetter();
@@ -65,7 +67,7 @@ const GamePage = ({ navigation, theme }) => {
             await handleCall();
         } else if (type === 4) {
             /** Current answers the call with a word */
-            await handleSendWord();
+            await handleSendCompleteWord();
         } else if (type === 5) {
             /** Current user answers the call with a surrender */
             await handleSurrenderCall();
@@ -93,19 +95,13 @@ const GamePage = ({ navigation, theme }) => {
                 setModalData(`Since you're staring this round you did'nt get a mark and we chose letter "${letter}" for you.`)
             } else {
                 const { nextPlayerWon, currentScore } = await playerSentNoLetter(true);
-                if (nextPlayerWon) {
-                    setModalData('You got too many marks so your oppnent won this game. Better luck next time!');
-                } else if (currentScore + 1 >= maxMarks) {
-                    setModalData(`You got too many marks so you're out. Better luck next time!`);
-                } else {
-                    setModalData('You got an mark. You know you can try to bluff right?');
-                }
+                await setModalDataForBlankSubmits(nextPlayerWon, currentScore);
             }
         }
     }
 
     const handleBust = async () => {
-        const { userToMark, nextPlayerWon, wordDefintions, currentScore } = await bustPreviousPlayer();
+        const { userToMark, nextPlayerWon, wordDefintions, currentScore } = await validateWordAndCalcMarks();
         if (userToMark === currentUid) {
             // It wasnt a word, user gets two marks
             if (nextPlayerWon) {
@@ -118,7 +114,7 @@ const GamePage = ({ navigation, theme }) => {
             }
         } else {
             // It was a word, previous user gets a mark
-            if (nextPlayerWon) {
+            if (nextPlayerWon) { // TODO: hmmm?
                 // current user won
                 setModalData(`Nice move! You won the game!`);
             } else {
@@ -139,8 +135,15 @@ const GamePage = ({ navigation, theme }) => {
         setModalData(`You've called previous player! Sit tight and wait for ${displayName} to answer!`);
     }
 
-    const handleSendWord = async () => {
-        setModalData(`TODO: Send word`);
+    const handleSendCompleteWord = async () => {
+        if (state.completeWord.length && state.completeWord.startsWith(game.letters.join(''))) {
+            /** Current user typed a word */
+            await handleBust();
+        } else {
+            /** Current user typed something not valid */
+            const { nextPlayerWon, currentScore } = await playerSentNoLetter(true, 2, true);
+            await setModalDataForBlankSubmits(nextPlayerWon, currentScore);
+        }
     }
 
     const handleSurrenderCall = async () => {
@@ -171,6 +174,16 @@ const GamePage = ({ navigation, theme }) => {
             await markPlayer(userTogetMark, nrOfMarks, prevPlayerStarts);
         }
         return { nextPlayerWonGame, currentScore };
+    }
+
+    const setModalDataForBlankSubmits = async (nextPlayerWon, currentScore) => {
+        if (nextPlayerWon) {
+            setModalData('You got too many marks so your oppnent won this game. Better luck next time!');
+        } else if (currentScore + 1 >= maxMarks) {
+            setModalData(`You got too many marks so you're out. Better luck next time!`);
+        } else {
+            setModalData(calling ? 'You got two marks.' : 'You got two marks. Try to bluff next time');
+        }
     }
 
     const setGameWinner = async (nrOfMarks, userToGetMark) => {
@@ -205,10 +218,11 @@ const GamePage = ({ navigation, theme }) => {
         await updateFirestoreData(firestoreUpdates);
     }
 
-    const bustPreviousPlayer = async () => {
-        const completeWord = game.letters.join('');
+    const validateWordAndCalcMarks = async () => {
+        console.log('validateWordAndCalcMarks')
+        const completeWord = calling ? state.completeWord : game.letters.join('');
         let userToMark;
-        const wordDefintions = await getWordDetails(completeWord);
+        const wordDefintions = await getWordDetails(complete);
         let nextPlayerWon;
         let currentScore;
 
