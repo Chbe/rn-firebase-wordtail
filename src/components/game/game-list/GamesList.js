@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { SectionList, Text } from 'react-native';
+import { SectionList } from 'react-native';
 import firebase from 'react-native-firebase';
-import { ListItem, Button, withTheme } from 'react-native-elements';
+import { ListItem, Text, withTheme } from 'react-native-elements';
 import SectionHeader from './SectionHeader';
 import SectionSubtitle from './SectionSubtitle';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import { CenterView } from '../../UI/Containers/Containers';
+import NoGames from '../no-game/NoGames';
 
 const GamesList = ({ navigation, uid, theme }) => {
     const [games, setGames] = useState([]);
@@ -91,45 +93,47 @@ const GamesList = ({ navigation, uid, theme }) => {
     }
 
     return (
-        <SectionList
-            sections={renderSections()}
-            renderItem={({ item }) => !!item.title.length
-                ? <ListItem
-                    style={{ borderRadius: 5 }}
-                    containerStyle={{
-                        borderRadius: 5,
-                        // marginBottom: 10
-                    }}
-                    titleStyle={{
-                        color: theme.colors.darkShade,
-                        fontWeight: 'bold'
-                    }}
-                    title={item.title}
-                    subtitle={<SectionSubtitle item={item} theme={theme} />}
-                    bottomDivider
-                    chevron={
-                        <FontAwesome5Icon
-                            name="arrow-right"
-                            size={15}
-                            color={theme.colors.lightAccent}
-                        />}
-                    leftAvatar={{
-                        source: item.status === 'active' || item.status === 'calling'
-                            ? { uri: item.players.find(p => p.uid === item.activePlayer).photoURL }
-                            : null,
-                        title: item.title[0]
-                    }}
-                    onPress={(ev) => {
-                        // TODO: save game state so game page can
-                        goToGame(item);
-                    }}
-                />
-                : <Text>Hej</Text>}
-            renderSectionHeader={({ section }) => (section.data.length
-                ? <SectionHeader section={section} />
-                : null)}
-            keyExtractor={(item, index) => index}
-        />
+        games.length
+            ? <SectionList
+                sections={renderSections()}
+                renderItem={({ item }) => !!item.title.length
+                    ? <ListItem
+                        style={{ borderRadius: 5 }}
+                        containerStyle={{
+                            borderRadius: 5,
+                            // marginBottom: 10
+                        }}
+                        titleStyle={{
+                            color: theme.colors.darkShade,
+                            fontWeight: 'bold'
+                        }}
+                        title={item.title}
+                        subtitle={<SectionSubtitle item={item} theme={theme} />}
+                        bottomDivider
+                        chevron={
+                            <FontAwesome5Icon
+                                name="arrow-right"
+                                size={15}
+                                color={theme.colors.lightAccent}
+                            />}
+                        leftAvatar={{
+                            source: item.status === 'active' || item.status === 'calling'
+                                ? { uri: item.players.find(p => p.uid === item.activePlayer).photoURL }
+                                : null,
+                            title: item.title[0]
+                        }}
+                        onPress={(ev) => {
+                            // TODO: save game state so game page can
+                            goToGame(item);
+                        }}
+                    />
+                    : <Text>Hej</Text>}
+                renderSectionHeader={({ section }) => (section.data.length
+                    ? <SectionHeader section={section} />
+                    : null)}
+                keyExtractor={(item, index) => index}
+            />
+            : <NoGames navigation={navigation} theme={theme}></NoGames>
     )
 }
 
