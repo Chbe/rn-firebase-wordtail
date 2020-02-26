@@ -41,6 +41,7 @@ export const facebookLogin = async () => {
 
 export const anonymousLogin = async () => {
     const firebaseUserCredential = await firebase.auth().signInAnonymously();
+    // TODO: updateUserData(firebaseUserCredential.user, false, true);
     return firebaseUserCredential;
 }
 
@@ -106,16 +107,15 @@ const controlUsername = async (username) => {
         .orderBy('username', 'DESC')
         .limit(1)
         .get();
-    console.log(snapshot)
+
     if (snapshot.docs.length > 0) {
         return snapshot.docs[0].data().username;
     }
     return null;
 }
 
-const updateUserData = async (userData, generateFromEmail = false) => {
+const updateUserData = async (userData, generateFromEmail = false, anonymous = false) => {
     const userExist = await checkIfUserExists(userData.uid);
-    console.log('usersexists', userExist)
     if (!userExist) {
         const { displayName, email, photoURL, uid } = userData;
         const username = await generateFromNameOrEmail(displayName, generateFromEmail);

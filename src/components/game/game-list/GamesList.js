@@ -10,16 +10,16 @@ const GamesList = ({ navigation, uid, theme }) => {
     const [games, setGames] = useState([]);
 
     const onCollectionUpdate = (querySnapshot) => {
-        const todos = [];
+        const tempGames = [];
         querySnapshot.forEach((doc) => {
             const game = doc.data();
 
-            todos.push({
+            tempGames.push({
                 key: doc.id,
                 ...game
             });
         });
-        setGames(todos);
+        setGames(tempGames);
     }
     useEffect(() => {
         let sub;
@@ -65,7 +65,6 @@ const GamesList = ({ navigation, uid, theme }) => {
                 uid: uid,
                 calling: true
             });
-            // alert('calling')
         }
     }
 

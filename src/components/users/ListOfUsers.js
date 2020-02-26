@@ -58,8 +58,8 @@ const ListOfUsers = ({ users = [], userSearch }) => {
     }
 
     const getFriends = async (querySnapshot) => {
-        const userFriends = querySnapshot.data().friends;
-        if (userFriends) {
+        const userData = querySnapshot.data();
+        if (userData && userData.friends) {
             setFriendsList(userFriends.map(friend => ({
                 ...friend,
                 invited: false,
