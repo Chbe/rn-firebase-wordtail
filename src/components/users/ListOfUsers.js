@@ -59,17 +59,21 @@ const ListOfUsers = ({ users = [], userSearch }) => {
 
     const getFriends = async (querySnapshot) => {
         const userFriends = querySnapshot.data().friends;
-        setFriendsList(userFriends.map(friend => ({
-            ...friend,
-            invited: false,
-            score: 0,
-            isActive: false,
-            accepted: false
-        })));
+        if (userFriends) {
+            setFriendsList(userFriends.map(friend => ({
+                ...friend,
+                invited: false,
+                score: 0,
+                isActive: false,
+                accepted: false
+            })));
+        }
     }
 
     const getFriendSubtitle = () => {
-        return friends.find(f => f.uid === firebase.auth().currentUser.uid) ? 'Friends' : 'Add friend';
+        return friends.find(f => f.uid === firebase.auth().currentUser.uid)
+            ? 'Already friends'
+            : 'Add friend';
     }
 
     useEffect(() => {

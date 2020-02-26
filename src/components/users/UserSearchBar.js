@@ -24,7 +24,7 @@ const UserSearchBar = () => {
         if (searchString.length > 4) {
             setIsSearching(true);
             const querySnapshot = await usersRef
-                .where('searchDisplayName', '>=', searchString.toLowerCase())
+                .where('username', '>=', searchString.toLowerCase())
                 .get();
 
             setUsersList(querySnapshot.docs.map(user => ({

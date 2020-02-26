@@ -3,9 +3,9 @@ import { SafeWrapper, PaddingView } from '../../components/UI/Containers/Contain
 import TextField from '../../components/UI/controls/inputs/floating/FloatingInput'
 import ListOfUsers from '../../components/users/ListOfUsers'
 import { CreateGameContext, CreateGameStore, useCreateGameContext } from '../../stores/CreateGameStore'
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import firebase from 'react-native-firebase';
-import { Button, withTheme } from 'react-native-elements';
+import { Button, withTheme, Text } from 'react-native-elements';
 import UserSearchBar from '../../components/users/UserSearchBar';
 
 const CreateGamePage = ({ navigation, theme }) => {
@@ -36,7 +36,7 @@ const CreateGamePage = ({ navigation, theme }) => {
                         />
                     </View>
                     <UserSearchBar></UserSearchBar>
-                    <Text>Friends</Text>
+                    <Text h4>Friends</Text>
                     <ListOfUsers />
                     <Button
                         solid
