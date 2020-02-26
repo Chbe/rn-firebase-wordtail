@@ -14,8 +14,8 @@ const UserSearchBar = () => {
     const [users, setUsersList] = useState([]);
 
     const debounceSearch = text => {
-        setSearchTxt(text);
-        delayedQuery(text);
+        setSearchTxt(text.trim().toLowerCase());
+        delayedQuery(text.trim().toLowerCase());
     };
 
     const delayedQuery = useRef(_.debounce(text => doSearch(text), 400)).current;
@@ -24,7 +24,7 @@ const UserSearchBar = () => {
         if (searchString.length > 4) {
             setIsSearching(true);
             const querySnapshot = await usersRef
-                .where('username', '>=', searchString.toLowerCase())
+                .where('username', '>=', searchString)
                 .get();
 
             setUsersList(querySnapshot.docs.map(user => ({

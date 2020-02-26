@@ -32,7 +32,7 @@ const CreateGamePage = ({ navigation, theme }) => {
                         <TextField
                             tintColor={theme.colors.primary}
                             label='Game title'
-                            onChangeText={title => actions.setTitle(title)}
+                            onChangeText={title => actions.setTitle(title.trim())}
                         />
                     </View>
                     <UserSearchBar></UserSearchBar>

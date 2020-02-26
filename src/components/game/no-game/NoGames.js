@@ -7,7 +7,7 @@ const NoGames = ({ navigation, theme }) => {
     return (
         <CenterView style={{ height: '100%' }}>
             <Button
-                title='Create new game'
+                title='NEW GAME'
                 icon={
                     <FontAwesome5
                         color={theme.barStyle === 'light-content' ? '#fff' : '#000'}
