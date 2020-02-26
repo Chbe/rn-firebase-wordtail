@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { SafeWrapper, PaddingView } from '../../components/UI/Containers/Containers';
 import TextField from '../../components/UI/controls/inputs/floating/FloatingInput'
-import ListOfUsers from '../../components/ListOfUsers'
+import ListOfUsers from '../../components/users/ListOfUsers'
 import { CreateGameContext, CreateGameStore, useCreateGameContext } from '../../stores/CreateGameStore'
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import firebase from 'react-native-firebase';
-import { Input, Button, withTheme } from 'react-native-elements';
+import { Button, withTheme } from 'react-native-elements';
+import UserSearchBar from '../../components/users/UserSearchBar';
 
 const CreateGamePage = ({ navigation, theme }) => {
     const { state, actions } = CreateGameStore();
@@ -31,9 +32,11 @@ const CreateGamePage = ({ navigation, theme }) => {
                         <TextField
                             tintColor={theme.colors.primary}
                             label='Game title'
-                            onChangeText={(title) => actions.setTitle(title)}
+                            onChangeText={title => actions.setTitle(title)}
                         />
                     </View>
+                    <UserSearchBar></UserSearchBar>
+                    <Text>Friends</Text>
                     <ListOfUsers />
                     <Button
                         solid

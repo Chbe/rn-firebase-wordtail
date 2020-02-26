@@ -51,7 +51,9 @@ export const emailLogin = async (email, password) => {
 
 const updateUserData = (userData) => {
     const { displayName, email, photoURL, uid } = userData;
+    const searchDisplayName = displayName.toLowerCase(); 
+    // TODO: unique displaynames
     firebase.firestore().collection('users').doc(uid).set({
-        displayName, email, photoURL, uid
+        displayName, email, photoURL, uid, searchDisplayName
     }, { merge: true });
 }

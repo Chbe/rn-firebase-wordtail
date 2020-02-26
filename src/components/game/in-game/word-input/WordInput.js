@@ -28,6 +28,10 @@ const WordInput = ({ letters = '' }) => {
     return (
         <Input
             ref={input}
+            autoCapitalize="characters"
+            autoCompleteType="off"
+            autoCorrect={false}
+            enablesReturnKeyAutomatically={true}
             placeholder={`${letters.join('')}...`}
             onChangeText={text => actions.setCompleteWord(text.toUpperCase())}
         />
