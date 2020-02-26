@@ -9,8 +9,8 @@ const SectionView = styled(PaddingView)`
     align-items: center;
     margin-top: 20;
     margin-bottom: 10;
-    background-color: ${props => props.bg};
 `;
+// background-color: ${props => props.bg};
 
 const SectionIcon = styled(Icon)`
     margin-right: 10px;
